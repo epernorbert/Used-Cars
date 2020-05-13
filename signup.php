@@ -42,6 +42,7 @@ session_start();
     <input type="text" name="email" placeholder="E-mail"><br>
     <input type="text" name="uid" placeholder="Username"><br>
     <input type="password" name="pwd" placeholder="Password"><br>
+    <input type="password" name="conf_pwd" placeholder="Confirm Password"><br>
     <button type="submit" name="submit" style="width: 202px">Sign up</button>
 </form>
 </div>

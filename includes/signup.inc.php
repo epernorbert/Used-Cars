@@ -10,10 +10,11 @@ if(isset($_POST['submit'])){
     $email = mysqli_real_escape_string($conn, $_POST['email']);
     $uid = mysqli_real_escape_string($conn, $_POST['uid']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
+    $conf_pwd = mysqli_real_escape_string($conn, $_POST['conf_pwd']);
 
     //Error handlers
     //Empty fields
-    if(empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd)){
+    if(empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd) || empty($conf_pwd)){
         header("Location: ../signup.php?signup=error=emptyfield");
         exit();
     } else{
@@ -26,13 +27,19 @@ if(isset($_POST['submit'])){
             if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
                 header("Location: ../signup.php?signup=error=email");
                 exit();
-            } else {
-                $sql = "SELECT * from users WHERE user_uid='$uid'";
-                $result = mysqli_query($conn, $sql);
-                $resultCheck = mysqli_num_rows($result);
-                if($resultCheck > 0){
-                    header("Location: ../signup.php?signup=error=usertaken");
-                    exit();
+                } else {
+                    // Confirm Password
+                    if($pwd !== $conf_pwd){
+                        header("Location: ../signup.php?signup=error=password=not=match");
+                        exit();
+                } else {
+                    $sql = "SELECT * from users WHERE user_uid='$uid'";
+                    $result = mysqli_query($conn, $sql);
+                    $resultCheck = mysqli_num_rows($result);
+                    if($resultCheck > 0){
+                        header("Location: ../signup.php?signup=error=usertaken");
+                        exit();
+                    }
                 }
             }
         }
