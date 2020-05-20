@@ -10,7 +10,7 @@ include_once 'action.php';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Title</title>
+    <title>Használtautók</title>
 </head>
 <body>
 
@@ -18,15 +18,17 @@ include_once 'action.php';
 <div class="navbar">
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="#contact">Kapcsolat</a></li>
         <?php
             if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
                 echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
             } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
                 echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
+            } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
+                echo '<li class="navbar_li"><a class="navbar_a" href="add_news.php">Hír közzététele</a></li>';
             }
         ?>
     </ul>
@@ -67,7 +69,7 @@ include_once 'action.php';
 
 </div>
 
-<div class="search" align="center">
+<div class="search" align="center" id="search">
     <form action="search.php" method="POST">
         <input type="text" name="brand" placeholder="Márka" style="width: 120px"/>
         <input type="text" name="type" placeholder="Tipus" style="width: 120px"/>
@@ -138,12 +140,11 @@ include_once 'action.php';
     <h1>dasadsds</h1>
     <h1>dasadsds</h1>
     <h1>dasadsds</h1>
-
 </div>
 
 
 <div style="clear: both; margin: 5% 10% 0 10%; background: rgb(2,0,36);padding: 20px ;
-background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828, #04070d); height: 450px">
+background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828, #04070d); height: 450px" id="contact">
     <div style="float: left">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d362281.8538956186!2d20.142414908230165!3d44.81490282615904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7aa3d7b53fbd%3A0x1db8645cf2177ee4!2zQmVsZ3LDoWQ!5e0!3m2!1shu!2srs!4v1585771244197!5m2!1shu!2srs"width="600" height="450" frameborder="0" style="border:2px solid black;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>

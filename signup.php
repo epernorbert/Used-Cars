@@ -24,6 +24,8 @@ session_start();
             echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
         } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
             echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
+        } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
+            echo '<li class="navbar_li"><a class="navbar_a" href="add_news.php">Hír közzététele</a></li>';
         }
         ?>
     </ul>
