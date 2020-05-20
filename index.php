@@ -92,12 +92,12 @@ include_once 'action.php';
 
 <div class="brand" style="font-size: 20px; margin: 0 10% 5% 10%; border-bottom: 1px solid blue" >
     <ul class="brand_ul">
-        <li class="brand_li"><a class="brand_a" href="marka/audi.php" style="color: black"> Audi</a></li>
-        <li class="brand_li"><a class="brand_a" href="marka/mercedes.php" style="color: black">Mercedes</a></li>
-        <li class="brand_li"><a class="brand_a" href="marka/bmw.php" style="color: black">Bmw</a></li>
-        <li class="brand_li"><a class="brand_a" href="marka/volkswagen.php" style="color: black">Volkswagen</a></li>
-        <li class="brand_li"><a class="brand_a" href="marka/opel.php" style="color: black">Opel</a></li>
-        <li class="brand_li"><a class="brand_a" href="marka/renault.php" style="color: black">Renault</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=audi" style="color: black"> Audi</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=mercedes" style="color: black">Mercedes</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=bmw" style="color: black">Bmw</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=volkswagen" style="color: black">Volkswagen</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=opel" style="color: black">Opel</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=renault" style="color: black">Renault</a></li>
     </ul>
 </div>
 
