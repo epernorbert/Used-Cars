@@ -19,7 +19,7 @@ include_once 'action.php';
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#contact">Kapcsolat</a></li>
         <?php

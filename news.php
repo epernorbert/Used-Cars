@@ -1,10 +1,7 @@
 <?php
 
 session_start();
-
-if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SESSION['u_usertype'] == 'admin'  ){
-    header("Location: index.php?need=to=login=like=journalist");
-}
+include_once 'action.php';
 
 ?>
 <!DOCTYPE html>
@@ -12,10 +9,10 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="add_news.css">
+    <link type="text/css" rel="stylesheet" href="news.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Használtautók</title>
-    <script src="ckeditor/ckeditor.js"></script>
+    <script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
 </head>
 <body>
 
@@ -23,7 +20,7 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#contact">Kapcsolat</a></li>
         <?php
@@ -44,31 +41,16 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
     <a href="#" class="fa fa-twitter"></a>
 </div><br>
 
-<div style="margin: 0 10% 0 10%">
-    <form action="./includes/add.news.inc.php" method="post" enctype="multipart/form-data" id="news_form">
-        <input type="text" name="title" placeholder="Cím" style="width: 50%"><br><br>
-        <label for="news_form">
-            <textarea name="text" id="text" form="news_form" style="width: 100%; height: 300px; font-size: 16px;">Szöveg...</textarea><br>
-        </label>
-        <button type="submit" name="submit" style="width: 100px">Közzétesz</button>
-    </form>
-    <script>
-        var editor = CKEDITOR.replace ('text', {
-            extraPlugins: 'filebrowser',
-            filebrowserBrowseUrl: 'browser.php',
-            filebrowserUploadMethod: 'form',
-            filebrowserUploadUrl: 'upload.php'
-        });
-    </script>
+<?php
 
+    $sql = "SELECT * FROM news";
+    $result = mysqli_query($conn, $sql);
+    $resultcheck = mysqli_num_rows($result);
 
+    if( $resultcheck > 0){
+        while($row = mysqli_fetch_assoc($result)){
+            echo '<div style="margin:  0 10% 0 10%">' . $row['news_title'] . '<br>' . $row['news_text'] . '</div>';
+        }
+    }
 
-</div>
-
-
-
-
-
-
-
-
+?>

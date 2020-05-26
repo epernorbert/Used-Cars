@@ -24,7 +24,7 @@ if(!isset($_SESSION['u_uid'])){
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
         <?php
@@ -33,7 +33,7 @@ if(!isset($_SESSION['u_uid'])){
         } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
             echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
         } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
-            echo '<li class="navbar_li"><a class="navbar_a" href="#">Hír közzététele</a></li>';
+            echo '<li class="navbar_li"><a class="navbar_a" href="add_news.php">Hír közzététele</a></li>';
         }
         ?>
     </ul>

@@ -17,7 +17,7 @@ session_start();
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
         <?php
