@@ -485,7 +485,7 @@
  * Read more in the {@glink guide/dev_file_browse_upload documentation}
  * and see the {@glink examples/fileupload example}.
  *
- *		config.filebrowserUploadUrl = '/uploader/upload.php';
+ *		config.filebrowserUploadUrl = '/uploader/upload_news.php';
  *
  * **Note:** This is a configuration setting for a {@glink guide/dev_file_browse_upload file browser/uploader}.
  * To configure {@glink guide/dev_file_upload uploading dropped or pasted files} use the {@link CKEDITOR.config#uploadUrl}
@@ -536,7 +536,7 @@
  * Read more in the [documentation](#!/guide/dev_file_manager_configuration-section-adding-file-manager-scripts-for-selected-dialog-windows)
  * and see the {@glink examples/fileupload example}.
  *
- *		config.filebrowserImageUploadUrl = '/uploader/upload.php?type=Images';
+ *		config.filebrowserImageUploadUrl = '/uploader/upload_news.php?type=Images';
  *
  * **Note:** This is a configuration setting for a {@glink guide/dev_file_browse_upload file browser/uploader}.
  * To configure {@glink guide/dev_file_upload uploading dropped or pasted files} use the {@link CKEDITOR.config#uploadUrl}
@@ -555,7 +555,7 @@
  * Read more in the [documentation](#!/guide/dev_file_manager_configuration-section-adding-file-manager-scripts-for-selected-dialog-windows)
  * and see the {@glink examples/fileupload example}.
  *
- *		config.filebrowserFlashUploadUrl = '/uploader/upload.php?type=Flash';
+ *		config.filebrowserFlashUploadUrl = '/uploader/upload_news.php?type=Flash';
  *
  * @since 3.0.0
  * @cfg {String} filebrowserFlashUploadUrl='' (empty string = disabled)]

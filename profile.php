@@ -97,11 +97,6 @@ if(!isset($_SESSION['u_uid'])){
             $GLOBALS['uzemanyag'] = $row['uzemanyag'];
             $GLOBALS['kobcenti'] = $row['kobcenti'];
             $GLOBALS['loero'] = $row['loero'];
-            $GLOBALS['kep'] = $row['kep'];
-            $GLOBALS['image_2'] = $row['image_2'];
-            $GLOBALS['image_3'] = $row['image_3'];
-            $GLOBALS['image_4'] = $row['image_4'];
-            $GLOBALS['image_5'] = $row['image_5'];
         }
     }
 
@@ -163,19 +158,27 @@ if(!isset($_SESSION['u_uid'])){
             </tr>
         </table>
     </div>
-    <div id="cars" style=" margin: 0px; float: left;"></div>
-    <div style="display: inline-block; margin: 0 10px 10px 10px;"><img src=uploads/'. $GLOBALS['kep'] .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>
-    <div style="display: inline-block; margin: 0 10px 10px 10px;"><img src=uploads/'. $GLOBALS['image_2'] .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>
-    <div style="display: inline-block; margin: 0 10px 10px 10px;"><img src=uploads/'. $GLOBALS['image_3'] .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>
-    <div style="display: inline-block; margin: 0 10px 10px 10px;"><img src=uploads/'. $GLOBALS['image_4'] .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>
-    <div style="display: inline-block; margin: 0 10px 10px 10px;"><img src=uploads/'. $GLOBALS['image_5'] .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
-
+    <div id="cars" style=" margin: 0px; float: left;"></div>';
 
         }
 
     ?>
 
+<?php
 
+    if(isset($GLOBALS['car_id'])){
+        $sql_img = "select image_name from car_images where car_id='{$GLOBALS['car_id']}'";
+        $result_img = mysqli_query($conn, $sql_img);
+        $resultcheck_img = mysqli_num_rows($result_img);
+        while($row_img = mysqli_fetch_assoc($result_img)) {
+
+            echo '<div style=" display: inline-block; margin: 0 2% 0 0;"><img class="image" src=uploads/' . $row_img['image_name'] . ' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
+    }
+
+
+}
+
+?>
 
 
 

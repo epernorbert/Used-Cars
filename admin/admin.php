@@ -4,8 +4,9 @@ session_start();
 
 include '../action.php';
 
-if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user'  ){
-    header("Location: ../index.php?need=to=login=admin");
+if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SESSION['u_usertype'] == 'writer'  ){
+    header("Location: ../index.php?ERROR=need=to=login=admin");
+    exit();
 }
 
 ?>

@@ -47,7 +47,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 
 include '../action.php';
 
-$sql = "SELECT * from cars WHERE user_id='{$_GET['user_id']}'";
+$sql = "SELECT * from cars WHERE user_id='{$_GET['user_id']}';";
 
 $result = mysqli_query($conn, $sql);
 $resultcheck = mysqli_num_rows($result);
@@ -57,14 +57,19 @@ if(isset($row['marka'])){
 
     echo '<div style="margin: 0 0 0 10%">';
     echo $row['marka'] . " " . $row['tipus'] . " " . $row['uzemanyag'] . " " . $row['ar'] . "€" . " " . $row['évjárat'] . " " .
-         $row['kobcenti'] . "cm3" . " " . $row['loero'] . "hp" .
-        '<img src=../uploads/'.$row['kep'].' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >
-        <img src=../uploads/'.$row['image_2'].' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >
-        <img src=../uploads/'.$row['image_3'].' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >
-        <img src=../uploads/'.$row['image_4'].' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >
-        <img src=../uploads/'.$row['image_5'].' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >' . "<br>" ;
-        echo '<button onclick="confirm_delete()" style="background-color: red; cursor: pointer;">Hírdetés Törlés</button>';
-        echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button>';
+         $row['kobcenti'] . "cm3" . " " . $row['loero'] . "hp" . '<br><br>';
+
+    $sql_img = "select image_name from car_images where car_id='{$row['car_id']}'";
+    $result_img = mysqli_query($conn, $sql_img);
+    $resultcheck_img = mysqli_num_rows($result_img);
+    while($row_img = mysqli_fetch_assoc($result_img)) {
+
+        echo '<div style="float: left; margin-right: 2%; margin-bottom: 2%;"><img class="image" src=../uploads/' . $row_img['image_name'] . ' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
+
+    }
+
+        echo '<div style="clear: both;"><button onclick="confirm_delete()" style="background-color: red; cursor: pointer;">Hírdetés Törlés</button>';
+        echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button></div>';
     echo '</div>';
 
 } else {

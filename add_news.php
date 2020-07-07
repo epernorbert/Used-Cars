@@ -50,6 +50,7 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
         <label for="news_form">
             <textarea name="text" id="text" form="news_form" style="width: 100%; height: 300px; font-size: 16px;">Szöveg...</textarea><br>
         </label>
+        <input type="file" name="image">
         <button type="submit" name="submit" style="width: 100px">Közzétesz</button>
     </form>
     <script>
@@ -57,7 +58,7 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
             extraPlugins: 'filebrowser',
             filebrowserBrowseUrl: 'browser.php',
             filebrowserUploadMethod: 'form',
-            filebrowserUploadUrl: 'upload.php'
+            filebrowserUploadUrl: 'includes/upload_news_image.php'
         });
     </script>
 

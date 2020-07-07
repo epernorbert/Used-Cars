@@ -19,7 +19,7 @@ include_once 'action.php';
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
+        <li class="navbar_li"><a class="navbar_a" href="">Hírek</a></li>
         <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#contact">Kapcsolat</a></li>
         <?php
@@ -44,10 +44,10 @@ include_once 'action.php';
     <?php
     if(isset($_SESSION['u_id'])){
         echo '<form action="includes/logout.inc.php" method="POST">
-                        <button type="submit" name="submit" style="float:left; font-size: 15px;">Logout</button>
-                    </form>';
+                  <button type="submit" name="submit" style="float:left; font-size: 15px;">Logout</button>
+              </form>';
         echo '<div style="padding: 5px; font-size: 20px;">' . '<a href="profile.php" style="text-decoration: none; color: blue;">' . $_SESSION['u_uid'] . '</a>'  . '</div>' .
-            '<style type="text/css"> 
+                  '<style type="text/css"> 
                     .navbar_social{
                         margin: 2% 0 0 0;
                      }               
@@ -60,11 +60,10 @@ include_once 'action.php';
 
 <div class="wraper">
 
-    <div style="color: white; text-align: right; padding: 5% 10% 19% 0">
-        <p>Valami szöveg az autórol</p>
-        <p>Valami szöveg az autórol</p>
-        <p>Valami szöveg az autórol</p>
-        <p>Valami szöveg az autórol</p>
+    <div style="color: white; text-align: right; padding: 5% 10% 19% 0;">
+        <p style="text-align: ">2020 év autója</p>
+        <p>Peugeot 208</p>
+        <p>Kapható: <br>- Benzin<br>- Dízel<br>- Elektromos</p>
     </div>
 
 </div>
@@ -94,52 +93,49 @@ include_once 'action.php';
 
 <div class="brand" style="font-size: 20px; margin: 0 10% 5% 10%; border-bottom: 1px solid blue" >
     <ul class="brand_ul">
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=audi" style="color: black"> Audi</a></li>
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=mercedes" style="color: black">Mercedes</a></li>
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=bmw" style="color: black">Bmw</a></li>
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=volkswagen" style="color: black">Volkswagen</a></li>
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=opel" style="color: black">Opel</a></li>
-        <li class="brand_li"><a class="brand_a" href="brands.php?brand=renault" style="color: black">Renault</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Audi" style="color: black"> Audi</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Mercedes" style="color: black">Mercedes</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Bmw" style="color: black">Bmw</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Volkswagen" style="color: black">Volkswagen</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Opel" style="color: black">Opel</a></li>
+        <li class="brand_li"><a class="brand_a" href="brands.php?brand=Renault" style="color: black">Renault</a></li>
     </ul>
 </div>
 
 
 <div style="margin: 0 0 0 10%; width: 55%;  float: left;">
     <?php
-
-
-        $sql = "SELECT * from cars;";
+        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id GROUP BY user_id ORDER BY cars.car_id desc;";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
-
         $i=0;
-
         if($resultcheck > 0){
             while($row = mysqli_fetch_assoc($result)){
                  if( $i < 12 /*listázás szabályozása*/){
-                echo '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['kep']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
+                echo '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
                 $i++;
                 }
              }
-
         }
-
     ?>
-
-
-
 </div>
 
-<div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; float: right;">
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
-    <h1>dasadsds</h1>
+<div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; height: 540px; float: right;">
+    <?php
+
+        $sql = "select * from news";
+        $result = mysqli_query($conn, $sql);
+        $resultcheck = mysqli_num_rows($result);
+
+
+        if($resultcheck > 0){
+            while($row = mysqli_fetch_assoc($result)){
+                echo  '<div style="border: 1px solid black; display: inline-block";><a href="news.php?news_title='.$row['news_title'].'"><img src=news_image/' .$row['news_image']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px; float:left;" >' . $row['news_title'] . '</a></div>';
+            }
+        }
+
+
+    ?>
 </div>
 
 
@@ -149,11 +145,11 @@ background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828,
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d362281.8538956186!2d20.142414908230165!3d44.81490282615904!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7aa3d7b53fbd%3A0x1db8645cf2177ee4!2zQmVsZ3LDoWQ!5e0!3m2!1shu!2srs!4v1585771244197!5m2!1shu!2srs"width="600" height="450" frameborder="0" style="border:2px solid black;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
     </div>
 
-    <div style="text-align: center; padding-top: 10%">
-        <p>Kapcsolati adatok</p>
-        <p>Kapcsolati adatok</p>
-        <p>Kapcsolati adatok</p>
-        <p>Kapcsolati adatok</p>
+    <div style="text-align: center; padding-top: 10%; color: white;">
+        <p>Beograd, 1234</p>
+        <p>Tel.: 024/123-456</p>
+        <p>Email: usedcar@gmail.com</p>
+        <p>Fax: Nincs :)</p>
     </div>
 </div>
 

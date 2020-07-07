@@ -43,7 +43,8 @@ include_once 'action.php';
 
 <?php
 
-    $sql = "SELECT * FROM news";
+    $title = $_GET['news_title'];
+    $sql = "SELECT * FROM news where news_title = '$title'";
     $result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
 

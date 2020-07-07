@@ -41,19 +41,27 @@ session_start();
 
 <?php
 
-include 'action.php';
+    include 'action.php';
 
-$sql = "SELECT * from cars where car_id='{$_GET['car_id']}'";
+    $sql = "SELECT * from cars where car_id='{$_GET['car_id']}'";
 
-$result = mysqli_query($conn, $sql);
-$resultcheck = mysqli_num_rows($result);
-$row = mysqli_fetch_assoc($result);
+    $result = mysqli_query($conn, $sql);
+    $resultcheck = mysqli_num_rows($result);
+    $row = mysqli_fetch_assoc($result);
 
-echo '<div style="margin-left: 10%">' . $row['marka'] . " " . $row['tipus'] . " " . $row['uzemanyag'] . " " . $row['ar'] . "€" . " " . $row['évjárat'] . " " .
-    $row['kobcenti'] . "cm3" . " " . $row['loero'] . "hp" .
-    '<img src=uploads/'.$row['kep'].' style="display: block; object-fit: cover;/*nagyítás, egyforma képek */ width: 146px; height: 93px;"> 
-     <img src=uploads/'.$row['image_2'].' style="display: block; object-fit: cover;/*nagyítás, egyforma képek */ width: 146px; height: 93px;">
-     <img src=uploads/'.$row['image_3'].' style="display: block; object-fit: cover;/*nagyítás, egyforma képek */ width: 146px; height: 93px;">
-     <img src=uploads/'.$row['image_4'].' style="display: block; object-fit: cover;/*nagyítás, egyforma képek */ width: 146px; height: 93px;">
-     <img src=uploads/'.$row['image_5'].' style="display: block; object-fit: cover;/*nagyítás, egyforma képek */ width: 146px; height: 93px;">' . '</div>'  . "<br>" ;
+    echo '<div style="margin-left: 10%">' . $row['marka'] . " " . $row['tipus'] . " " . $row['uzemanyag'] . " " . $row['ar'] . "€" . " " . $row['évjárat'] . " " .
+        $row['kobcenti'] . "cm3" . " " . $row['loero'] . "hp" ;
 
+    $sql_img = "select image_name from car_images where car_id='{$_GET['car_id']}'";
+    $result_img = mysqli_query($conn, $sql_img);
+    $resultcheck_img = mysqli_num_rows($result_img);
+    while($row_img = mysqli_fetch_assoc($result_img)) {
+
+        echo '<img class="image" src=uploads/' .$row_img['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >';
+
+    }
+
+
+
+
+?>

@@ -67,23 +67,23 @@ if(isset($_POST['submit-search'])){
 
         $fueltype = mysqli_real_escape_string($conn, $_POST['fueltype']);
 
-        $sql = "SELECT * from cars WHERE
+        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
         (marka LIKE '$brand' OR '$brand' LIKE '') AND 
         (tipus LIKE '$type' OR '$type' LIKE '') AND 
         (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
         (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
         uzemanyag LIKE '$fueltype' AND 
         (kobcenti >= '$min_cm3' AND ( kobcenti <='$max_cm3' OR '$max_cm3' LIKE '')) AND 
-        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE ''))";
+        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE '')) GROUP BY user_id;";
 
     } else {
-        $sql = "SELECT * from cars WHERE
+        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
         (marka LIKE '$brand' OR '$brand' LIKE '') AND 
         (tipus LIKE '$type' OR '$type' LIKE '') AND 
         (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
         (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
         (kobcenti >='$min_cm3' AND ( kobcenti <='$max_cm3' OR '$max_cm3' LIKE '')) AND 
-        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE ''))";
+        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE '')) GROUP BY user_id;";
     }
 
 }
@@ -93,7 +93,7 @@ $queryResult = mysqli_num_rows($result);
 
 if($queryResult > 0){
     while($row = mysqli_fetch_assoc($result)){
-        echo '<div style="margin-left: 10%">' . '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['kep']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+        echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
     }
 } else{
     echo  '<div style="background-color: red;">

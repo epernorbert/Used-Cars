@@ -2,10 +2,13 @@
 
 session_start();
 if(!isset($_SESSION['u_uid'])){
-    header("Location: index.php?need=to=login=user");
+    header("Location: index.php?ERROR=need=to=login=user");
     exit();
 } elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
-    header("Location: index.php?you=are=admin");
+    header("Location: index.php?ERROR=you=are=admin");
+    exit();
+} elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer') {
+    header("Location: index.php?ERROR=you=are=writer");
     exit();
 }
 
@@ -58,13 +61,9 @@ if(!isset($_SESSION['u_uid'])){
             <label for="benzin">Benzin</label><br>
             <input type="number" name="cm3" placeholder="Köbcenti"><br>
             <input type="number" name="hp" placeholder="Lóerő"><br>
+            <input type="file" id="files" name="files[]" multiple><br>
         </div>
         <div style="display: inline-block">
-            <input type="file" name="file" placeholder="Kép" accept="image/*" ><br>
-            <input type="file" name="file_2" placeholder="Kép" accept="image/*" ><br>
-            <input type="file" name="file_3" placeholder="Kép" accept="image/*" ><br>
-            <input type="file" name="file_4" placeholder="Kép" accept="image/*" ><br>
-            <input type="file" name="file_5" placeholder="Kép" accept="image/*" ><br>
             <div align="center"><button style="width: 100px" type="submit" name="submit" value="upload">Feltölt</button><br></div>
         </div>
     </form>
