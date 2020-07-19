@@ -7,6 +7,14 @@ if(isset($_POST['submit'])){
     include_once '../action.php';
 
     $brand = mysqli_real_escape_string($conn, $_POST['brand']);
+    $sql_brand = "SELECT * FROM car_brands WHERE brands_id='$brand'";
+    $result_brand = mysqli_query($conn, $sql_brand);
+    $resultcheck_brand = mysqli_num_rows($result_brand);
+
+    while($row = mysqli_fetch_assoc($result_brand)){
+        $brand_name = $row['brands_name'];
+    }
+
     $type = mysqli_real_escape_string($conn, $_POST['type']);
     $year = mysqli_real_escape_string($conn, $_POST['year']);
     $price = mysqli_real_escape_string($conn, $_POST['price']);
@@ -30,7 +38,7 @@ if(isset($_POST['submit'])){
     }
 
     //Insert car into database
-    $sql = "INSERT INTO cars (user_id, marka, tipus, évjárat, ar, uzemanyag, kobcenti, loero) VALUE ('$user_id','$brand','$type','$year','$price','$fuel','$cm3','$horsepower');";
+    $sql = "INSERT INTO cars (user_id, marka, tipus, évjárat, ar, uzemanyag, kobcenti, loero) VALUE ('$user_id','$brand_name','$type','$year','$price','$fuel','$cm3','$horsepower');";
     mysqli_query($conn, $sql);
 
     $sql_car_id = "select * from users JOIN cars ON users.user_id=cars.user_id WHERE users.user_id='{$_SESSION['u_id']}'";
@@ -54,7 +62,6 @@ if(isset($_POST['submit'])){
         mysqli_query($conn, $sql_2);
 
     }
-
 
     header("Location: ../add.php?insert=succes=$brand=$type");
     exit();

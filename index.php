@@ -85,6 +85,7 @@ include_once 'action.php';
                 <option disabled selected value style="display: none">Üzemanyag</option>
                 <option value="dizel">dizel</option>
                 <option value="benzin">benzin</option>
+                <option value="elektromos">elektromos</option>
             </select>
         </label>
         <button type="submit" name="submit-search" style="width: 120px; background-color: blue; cursor: pointer;">Keresés</button>

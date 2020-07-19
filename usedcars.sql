@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Júl 06. 23:54
+-- Létrehozás ideje: 2020. Júl 19. 21:04
 -- Kiszolgáló verziója: 10.4.11-MariaDB
 -- PHP verzió: 7.2.28
 
@@ -57,6 +57,37 @@ INSERT INTO `cars` (`user_id`, `marka`, `tipus`, `évjárat`, `ar`, `uzemanyag`,
 (59, 'Volkswagen', 'Golf 4', 2003, 2900, 'Benzin', 1600, 107, 209),
 (60, 'Volkswagen', 'Passat', 2008, 5900, 'Dizel', 2000, 140, 210),
 (61, 'Volvo', 'XC90', 2006, 5100, 'Dizel', 2500, 165, 211);
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `car_brands`
+--
+
+CREATE TABLE `car_brands` (
+  `brands_id` int(11) NOT NULL,
+  `brands_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `car_brands`
+--
+
+INSERT INTO `car_brands` (`brands_id`, `brands_name`) VALUES
+(1, 'Audi'),
+(2, 'BMW'),
+(3, 'Mercedes'),
+(4, 'Seat'),
+(5, 'Volkswagen'),
+(6, 'Fiat'),
+(7, 'Opel'),
+(8, 'Renault'),
+(9, 'Citroen'),
+(10, 'Toyota'),
+(11, 'Skoda'),
+(12, 'Lancia'),
+(13, 'Volvo'),
+(14, 'Ford');
 
 -- --------------------------------------------------------
 
@@ -139,6 +170,36 @@ INSERT INTO `car_images` (`image_id`, `car_id`, `image_name`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Tábla szerkezet ehhez a táblához `car_type`
+--
+
+CREATE TABLE `car_type` (
+  `type_id` int(11) NOT NULL,
+  `brands_id` int(11) NOT NULL,
+  `type_name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `car_type`
+--
+
+INSERT INTO `car_type` (`type_id`, `brands_id`, `type_name`) VALUES
+(9, 1, 'A1'),
+(10, 1, 'A2'),
+(11, 1, 'A3'),
+(12, 1, 'A4'),
+(13, 1, 'A5'),
+(14, 1, 'A6'),
+(15, 1, 'A7'),
+(16, 2, 'X1'),
+(17, 2, 'X2'),
+(18, 2, 'X3'),
+(19, 2, 'X4'),
+(20, 2, 'X5');
+
+-- --------------------------------------------------------
+
+--
 -- Tábla szerkezet ehhez a táblához `news`
 --
 
@@ -193,7 +254,8 @@ INSERT INTO `users` (`user_id`, `user_uid`, `user_first`, `user_last`, `user_ema
 (58, 'kilencedik', 'Kilencedik', 'Kilencedik', 'kilencedik@gmail.com', '$2y$10$C8EKv5vCBOhKjU/QgQK76O2gRcYx30SxXdr8A/mwY5YOZJifX3S6G', 'user'),
 (59, 'tizedik', 'Tizedik', 'Tizedik', 'tizedik@gmail.com', '$2y$10$VhpKh.HHsbkknFL8D4LrpuvBC3j0eGqVNnDhJCHkN42SBPFeOdHtW', 'user'),
 (60, 'tizenegy', 'Tizenegy', 'Tizenegy', 'tizenegy@gmail.com', '$2y$10$sNfFeNLpWOh832g4hSF3M.yusDmqjsczeZUc9nPKRRkoJF2NgoF5C', 'user'),
-(61, 'tizenketto', 'Tizenketto', 'Tizenketto', 'tizenketto@gmail.com', '$2y$10$pd.BSUtV5hQSIK1Xdss9meYDRR74FB1eyv3pD1B54IaUP/4GrrkjO', 'user');
+(61, 'tizenketto', 'Tizenketto', 'Tizenketto', 'tizenketto@gmail.com', '$2y$10$pd.BSUtV5hQSIK1Xdss9meYDRR74FB1eyv3pD1B54IaUP/4GrrkjO', 'user'),
+(62, 'tizenharom', 'tizenharom', 'tizenharom', 'tizenharom@gmail.com', '$2y$10$m4GCuOUWhPbFvYeb/SYbpudeT/Z6b/ugKUm63gW3eKy0fVdne5IIC', 'user');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -207,11 +269,24 @@ ALTER TABLE `cars`
   ADD UNIQUE KEY `car_uniq` (`car_id`);
 
 --
+-- A tábla indexei `car_brands`
+--
+ALTER TABLE `car_brands`
+  ADD PRIMARY KEY (`brands_id`);
+
+--
 -- A tábla indexei `car_images`
 --
 ALTER TABLE `car_images`
   ADD PRIMARY KEY (`image_id`),
   ADD KEY `car_id` (`car_id`);
+
+--
+-- A tábla indexei `car_type`
+--
+ALTER TABLE `car_type`
+  ADD PRIMARY KEY (`type_id`),
+  ADD KEY `brands_id` (`brands_id`);
 
 --
 -- A tábla indexei `news`
@@ -234,13 +309,25 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=212;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+
+--
+-- AUTO_INCREMENT a táblához `car_brands`
+--
+ALTER TABLE `car_brands`
+  MODIFY `brands_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT a táblához `car_images`
 --
 ALTER TABLE `car_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1938;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1969;
+
+--
+-- AUTO_INCREMENT a táblához `car_type`
+--
+ALTER TABLE `car_type`
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT a táblához `news`
@@ -252,7 +339,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=62;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -269,6 +356,12 @@ ALTER TABLE `cars`
 --
 ALTER TABLE `car_images`
   ADD CONSTRAINT `car_images_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `car_type`
+--
+ALTER TABLE `car_type`
+  ADD CONSTRAINT `car_type_ibfk_1` FOREIGN KEY (`brands_id`) REFERENCES `car_brands` (`brands_id`);
 
 --
 -- Megkötések a táblához `news`
