@@ -148,3 +148,11 @@ button{
     padding: 3px;
     font-size: 15px;
 }
+
+.error{
+    color: red;
+}
+
+input[placeholder] {
+    text-align: center;
+}

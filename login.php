@@ -40,10 +40,51 @@ session_start();
 
 <div align="center" style="margin: 7% 0;">
 <form action="includes/login.inc.php" method="post">
-    <input type="text" name="uid" placeholder="Username/e-mail"><br>
-    <input type="password" name="pwd" placeholder="Password"><br>
-    <button type="submit" name="submit" style="cursor: pointer; width: 202px;">Login</button><br>
-    <button style="width: 202px;"> <a href="signup.php" style="text-decoration: none; color: black;">Sign up </a></button>
+
+    <?php
+    if(isset($_GET['uid'])){
+        $uid = $_GET['uid'];
+        echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" value="'.$uid.'" style="border-bottom: 2px solid #34F458;" required=""><br>';
+    } else {
+        echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" required=""><br>';
+    }
+    ?>
+
+    <input id="pwd" type="password" name="pwd" placeholder="Jelszó" required=""><br>
+    <button type="submit" name="submit" class="login-button" style="cursor: pointer; width: 202px;">Bejelentkezés</button><br>
+    <button style="width: 202px;"> <a href="signup.php" style="text-decoration: none; color: black;">Regisztráció </a></button>
+    <?php
+
+    if(isset($_GET['login'])){
+
+        $loginCheck = $_GET['login'];
+
+        if($loginCheck == 'empty'){
+            echo '<div class="error">Üres mező!</div>';
+            exit();
+        } else if($loginCheck == 'username'){
+            echo '<div class="error">Nincs ilyen felhasználó!</div>';
+            echo '<script>
+                        document.getElementById("uid").style.borderBottomColor = "#F90A0A";
+                        document.getElementById("pwd").style.borderBottomColor = "#F90A0A";
+                  </script>';
+            exit();
+        } else if($loginCheck == 'error'){
+            echo '<div class="error">Téves jelszó!</div>';
+            exit();
+        }
+    }
+
+    if(isset($_GET['signup'])){
+        $signupCheck = $_GET['signup'];
+        if($signupCheck == 'success'){
+            echo '<div style="color: green;">Sikeres regisztráció<br>Jelentkezzen be!</div>';
+        }
+
+    }
+
+
+    ?>
 </form>
 </div>
 

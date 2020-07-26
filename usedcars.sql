@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Júl 19. 21:04
+-- Létrehozás ideje: 2020. Júl 26. 19:35
 -- Kiszolgáló verziója: 10.4.11-MariaDB
 -- PHP verzió: 7.2.28
 
@@ -339,7 +339,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=63;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
 
 --
 -- Megkötések a kiírt táblákhoz
