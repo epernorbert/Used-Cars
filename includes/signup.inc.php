@@ -19,7 +19,7 @@ if(isset($_POST['submit'])){
         exit();
     } else{
         //Check if input charachers are valid
-        if(!preg_match("/^[a-zA-Z\s]*$/", $first) || !preg_match("/^[a-zA-Z\s]*$/", $last))  {
+        if(!preg_match("/^[a-zA-Z\sÁÉÍÓÖŐÚÜŰáéíóöőúüű]*$/", $first) || !preg_match("/^[a-zA-Z\sÁÉÍÓÖŐÚÜŰáéíóöőúüű]*$/", $last))  {
             header("Location: ../signup.php?signup=char");
             exit();
         } else {

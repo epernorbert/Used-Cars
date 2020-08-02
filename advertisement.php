@@ -49,17 +49,45 @@ session_start();
     $resultcheck = mysqli_num_rows($result);
     $row = mysqli_fetch_assoc($result);
 
-    echo '<div style="margin-left: 10%">' . $row['marka'] . " " . $row['tipus'] . " " . $row['uzemanyag'] . " " . $row['ar'] . "€" . " " . $row['évjárat'] . " " .
-        $row['kobcenti'] . "cm3" . " " . $row['loero'] . "hp" ;
+    echo '<div style="margin: 1% 10% 0 10%;">';
+        echo '<div style="float: left;">' .
+                $row['marka']  . " " . $row['tipus']  . " " . $row['évjárat'] . " " . $row['ar'] . " " . "€" . "<br>" .
+                $row['uzemanyag']  . "<br>" .
+                $row['kobcenti'] . " " . "Cm3" . "<br>" .
+                $row['loero'] . " " . "Le"  . "<br>" .
+                $row['body_style'] .  "<br>" .
+                $row['mileage'] . " " . "Km"  . "<br>" .
+                $row['euro']  . "<br>" .
+                $row['colour']  . "<br>" .
+                $row['transmission']  . "<br>" .
+                $row['weight'] . " " . "Kg" . "<br>" .
+                $row['identification_number']  . "<br>" .
+                $row['description'] . "<br>";
 
-    $sql_img = "select image_name from car_images where car_id='{$_GET['car_id']}'";
-    $result_img = mysqli_query($conn, $sql_img);
-    $resultcheck_img = mysqli_num_rows($result_img);
-    while($row_img = mysqli_fetch_assoc($result_img)) {
 
-        echo '<img class="image" src=uploads/' .$row_img['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >';
+            $sql_extras = "SELECT * FROM car_extras WHERE car_id='{$_GET['car_id']}'";
+            $result_extras = mysqli_query($conn, $sql_extras);
+            $resultcheck_extras = mysqli_num_rows($result_extras);
+            while($row_extras = mysqli_fetch_assoc($result_extras)){
+                echo '<div>';
+                    echo $row_extras['extras'];
+                echo '</div>';
+        }
+        echo '</div>';
 
-    }
+
+        $sql_img = "select image_name from car_images where car_id='{$_GET['car_id']}'";
+        $result_img = mysqli_query($conn, $sql_img);
+        $resultcheck_img = mysqli_num_rows($result_img);
+        while($row_img = mysqli_fetch_assoc($result_img)) {
+
+            echo '<div style="float: left;">
+                        <img class="image" src=uploads/' .$row_img['image_name']  .' 
+                        style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" >
+                  </div>';
+
+        }
+    echo '</div>';
 
 
 

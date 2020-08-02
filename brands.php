@@ -1,8 +1,9 @@
 <?php
-//these two lines are due to the back button from advertisemet.php
+/*//these two lines are due to the back button from advertisemet.php
 header('Cache-Control: no cache'); //no cache
 session_cache_limiter('private_no_expire'); // works
-//session_cache_limiter('public'); // works too
+//session_cache_limiter('public'); // works too*/
+include 'action.php';
 session_start();
 ?>
 

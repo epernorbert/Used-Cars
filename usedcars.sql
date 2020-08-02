@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Júl 26. 19:35
+-- Létrehozás ideje: 2020. Aug 02. 22:39
 -- Kiszolgáló verziója: 10.4.11-MariaDB
 -- PHP verzió: 7.2.28
 
@@ -37,6 +37,14 @@ CREATE TABLE `cars` (
   `uzemanyag` varchar(30) NOT NULL,
   `kobcenti` int(11) NOT NULL,
   `loero` int(11) NOT NULL,
+  `body_style` varchar(30) NOT NULL,
+  `mileage` int(11) NOT NULL,
+  `euro` varchar(30) NOT NULL,
+  `colour` varchar(30) NOT NULL,
+  `transmission` varchar(30) NOT NULL,
+  `weight` int(11) NOT NULL,
+  `identification_number` varchar(30) NOT NULL,
+  `description` varchar(255) NOT NULL,
   `car_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -44,19 +52,21 @@ CREATE TABLE `cars` (
 -- A tábla adatainak kiíratása `cars`
 --
 
-INSERT INTO `cars` (`user_id`, `marka`, `tipus`, `évjárat`, `ar`, `uzemanyag`, `kobcenti`, `loero`, `car_id`) VALUES
-(50, 'Opel', 'Astra H', 2008, 3900, 'Dizel', 1700, 105, 200),
-(51, 'Opel', 'Astra J', 2014, 6900, 'Benzin', 1600, 120, 201),
-(52, 'Opel', 'Astra K', 2016, 8000, 'Dizel', 2000, 140, 202),
-(53, 'Citroen', 'C4', 2009, 4500, 'Dizel', 1900, 125, 203),
-(54, 'Volkswagen', 'Passat cc', 2010, 9500, 'Benzin', 2000, 190, 204),
-(55, 'Opel', 'Corsa D', 2010, 3900, 'Benzin', 1200, 60, 205),
-(56, 'Fiat', 'Grande Punto', 2011, 4000, 'Benzin', 1300, 80, 206),
-(57, 'Ford', 'Ranger', 2006, 5000, 'Dizel', 3000, 200, 207),
-(58, 'Volkswagen', 'Golf 5', 2008, 5000, 'Dizel', 1900, 105, 208),
-(59, 'Volkswagen', 'Golf 4', 2003, 2900, 'Benzin', 1600, 107, 209),
-(60, 'Volkswagen', 'Passat', 2008, 5900, 'Dizel', 2000, 140, 210),
-(61, 'Volvo', 'XC90', 2006, 5100, 'Dizel', 2500, 165, 211);
+INSERT INTO `cars` (`user_id`, `marka`, `tipus`, `évjárat`, `ar`, `uzemanyag`, `kobcenti`, `loero`, `body_style`, `mileage`, `euro`, `colour`, `transmission`, `weight`, `identification_number`, `description`, `car_id`) VALUES
+(50, 'Opel', 'Astra H', 2008, 3500, 'Benzin', 1700, 105, 'ferdehátú', 205135, 'euro 4', 'szűrke', 'manuális - 5', 1350, 'ASD123BASD', 'Fullos autó. Modositva.\r\n', 200),
+(51, 'Opel', 'Astra J', 2014, 6900, 'Benzin', 1600, 120, 'kombi', 125895, 'Euro 5', 'Világoskék', 'manuális - 5', 1450, 'ASD489VBF', 'Fullos autó.', 201),
+(52, 'Opel', 'Astra K', 2016, 8000, 'Dizel', 2000, 140, 'kombi', 85965, 'Euro 6', 'sötétszürke', 'manuális - 6', 1490, 'BHJ158WER', 'Fullos autó.', 202),
+(53, 'Citroen', 'C4', 2009, 4500, 'Dizel', 1900, 125, 'ferdehátú', 198458, 'Euro 4', 'fekete', 'manuális - 6', 1410, 'JKL123JIO', 'Extra autó.', 203),
+(54, 'Volkswagen', 'Passat cc', 2010, 9500, 'Benzin', 2000, 190, 'Coupe', 145879, 'euro 5', 'Fehér', 'Automata - 6', 1450, 'DFS233DDD', 'Nagyon fullos autó.', 204),
+(55, 'Opel', 'Corsa D', 2010, 3900, 'Benzin', 1200, 60, 'Ferdehátú', 156789, 'euro 4', 'Kék', 'Manuális - 5', 1290, 'VGF444ASW', 'Fullos kis kék autó.', 205),
+(56, 'Fiat', 'Grande Punto', 2011, 4000, 'Benzin', 1300, 80, 'Ferdehátú', 133548, 'euro 4', 'Fehér', 'Manuális - 5', 1250, 'VVV489QWE', 'Fullos kis fehér kocsi.', 206),
+(57, 'Ford', 'Ranger', 2006, 5000, 'Dizel', 3000, 200, 'Pickup', 299845, 'euro 3', 'Fehér', 'Automata - 6', 1755, 'VGH789QWE', 'Fullos kis tereprejáros.', 207),
+(58, 'Volkswagen', 'Golf 5', 2008, 5000, 'Dizel', 1900, 105, 'Ferdehátú', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1423, 'BGH114WEQ', 'Fullos kis szürke autó.', 208),
+(59, 'Volkswagen', 'Golf 4', 2003, 2900, 'Benzin', 1600, 107, 'Ferdehátú', 356878, 'euro 3', 'Kék', 'Manuális - 5', 1390, 'BHJ115QWE', 'Fullos kis golf.', 209),
+(60, 'Volkswagen', 'Passat', 2008, 5900, 'Dizel', 2000, 140, 'Kombi', 190000, 'euro 4', 'Piros', 'Manuális - 6', 1545, 'VFG444AWE', 'Fullos kis kombi.', 210),
+(61, 'Volvo', 'XC90', 2006, 5100, 'Dizel', 2500, 165, 'Városi terepjáró', 255489, 'euro 3', 'Kék', 'Manuális - 6', 1650, 'VGZ789QWE', 'Fullos kis SUV.', 211),
+(62, 'Audi', 'A4', 2010, 9000, 'Dizel', 2000, 150, 'Sedan', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1500, 'ASD456QWE', 'Szürke autó.', 236),
+(81, 'Audi', 'A6', 2009, 9500, 'Dizel', 1950, 145, 'Sedan', 195789, 'euro 5', 'Fekete', 'Manuális - 6', 1500, 'VBG456QWE', 'Fullos fekete autó!', 234);
 
 -- --------------------------------------------------------
 
@@ -88,6 +98,32 @@ INSERT INTO `car_brands` (`brands_id`, `brands_name`) VALUES
 (12, 'Lancia'),
 (13, 'Volvo'),
 (14, 'Ford');
+
+-- --------------------------------------------------------
+
+--
+-- Tábla szerkezet ehhez a táblához `car_extras`
+--
+
+CREATE TABLE `car_extras` (
+  `extras` varchar(50) NOT NULL,
+  `car_id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- A tábla adatainak kiíratása `car_extras`
+--
+
+INSERT INTO `car_extras` (`extras`, `car_id`) VALUES
+('Tempomat', 234),
+('Klima', 234),
+('Napfénytető', 234),
+('Xenon fényszóró', 234),
+('Tolatóradar', 234),
+('Multifunkcionális kormány', 234),
+('Klima', 236),
+('Napfénytető', 236),
+('Centrálzár', 236);
 
 -- --------------------------------------------------------
 
@@ -165,7 +201,17 @@ INSERT INTO `car_images` (`image_id`, `car_id`, `image_name`) VALUES
 (1934, 211, '../uploads/5f037bba5e11b0.07860583.51a91c3849e6-1920x1080.jpg'),
 (1935, 211, '../uploads/5f037bba5f6624.31143293.80b04f190a2b-1920x1080.jpg'),
 (1936, 211, '../uploads/5f037bba60d013.70607123.1958722c6c2b-1920x1080.jpg'),
-(1937, 211, '../uploads/5f037bba6241f9.04423163.ea72b5e9ae85-1920x1080.jpg');
+(1937, 211, '../uploads/5f037bba6241f9.04423163.ea72b5e9ae85-1920x1080.jpg'),
+(1997, 234, '../uploads/5f25775c44df40.49640187.1.jpg'),
+(1998, 234, '../uploads/5f25775c47abf8.78523748.2.jpg'),
+(1999, 234, '../uploads/5f25775c497036.21540571.3.jpg'),
+(2000, 234, '../uploads/5f25775c4ab617.67118176.4.jpg'),
+(2001, 234, '../uploads/5f25775c4c4d12.71584750.5.jpg'),
+(2007, 236, '../uploads/5f2580483feb27.35219567.1.jpg'),
+(2008, 236, '../uploads/5f25804841b876.39958004.2.jpg'),
+(2009, 236, '../uploads/5f258048439739.58727311.3.jpg'),
+(2010, 236, '../uploads/5f258048459a47.79655261.4.jpg'),
+(2011, 236, '../uploads/5f25804847bc51.27014457.5.jpg');
 
 -- --------------------------------------------------------
 
@@ -184,18 +230,145 @@ CREATE TABLE `car_type` (
 --
 
 INSERT INTO `car_type` (`type_id`, `brands_id`, `type_name`) VALUES
-(9, 1, 'A1'),
-(10, 1, 'A2'),
-(11, 1, 'A3'),
-(12, 1, 'A4'),
-(13, 1, 'A5'),
-(14, 1, 'A6'),
-(15, 1, 'A7'),
-(16, 2, 'X1'),
-(17, 2, 'X2'),
-(18, 2, 'X3'),
-(19, 2, 'X4'),
-(20, 2, 'X5');
+(235, 1, 'A1'),
+(236, 1, 'A2'),
+(237, 1, 'A3'),
+(238, 1, 'A4'),
+(239, 1, 'A5'),
+(240, 1, 'A6'),
+(241, 1, 'A7'),
+(242, 1, 'A8'),
+(243, 1, 'Q3'),
+(244, 1, 'Q5'),
+(245, 2, 'M3'),
+(246, 2, 'M4'),
+(247, 2, 'M5'),
+(248, 2, 'X1'),
+(249, 2, 'X2'),
+(250, 2, 'X3'),
+(251, 2, 'X4'),
+(252, 2, 'X5'),
+(253, 2, 'X6'),
+(254, 2, 'X7'),
+(255, 9, 'C1'),
+(256, 9, 'C2'),
+(257, 9, 'C3'),
+(258, 9, 'C4'),
+(259, 9, 'C5'),
+(260, 9, 'C6'),
+(261, 9, 'C8'),
+(262, 9, 'Xsara'),
+(263, 9, 'CX'),
+(264, 9, 'C15'),
+(265, 6, '500'),
+(266, 6, '500L'),
+(267, 6, 'Brava'),
+(268, 6, 'Bravo'),
+(269, 6, 'Croma'),
+(270, 6, 'EVO'),
+(271, 6, 'Grande Punto'),
+(272, 6, 'Multipla'),
+(273, 6, 'Punto'),
+(274, 6, 'Tipo'),
+(275, 14, 'B-Max'),
+(276, 14, 'C-Max'),
+(277, 14, 'Escort'),
+(278, 14, 'Fiesta'),
+(279, 14, 'Ka'),
+(280, 14, 'Mustang'),
+(281, 14, 'Puma'),
+(282, 14, 'Sierra'),
+(283, 14, 'Ranger'),
+(284, 14, 'Fusion'),
+(285, 3, 'A 220'),
+(286, 3, 'A 250'),
+(287, 3, 'B 180'),
+(288, 3, 'B 200'),
+(289, 3, 'C 400'),
+(290, 3, 'C 350'),
+(291, 3, 'C 55 AMG'),
+(292, 3, 'CLA 180'),
+(293, 3, 'CLA 200'),
+(294, 3, 'GLE 400'),
+(295, 4, 'Altea'),
+(296, 4, 'Altea'),
+(297, 4, 'Alte XL'),
+(298, 4, 'Arona'),
+(299, 4, 'Arosa'),
+(300, 4, 'Ibiza'),
+(301, 4, 'Inca'),
+(302, 4, 'Leon'),
+(303, 4, 'Toledo'),
+(304, 4, 'Exeo'),
+(305, 5, 'Passat'),
+(306, 5, 'Passat CC'),
+(307, 5, 'Golf 1'),
+(308, 5, 'Golf 2'),
+(309, 5, 'Golf 3'),
+(310, 5, 'Golf 4'),
+(311, 5, 'Golf 5'),
+(312, 5, 'Golf 6'),
+(313, 5, 'Golf 7'),
+(314, 5, 'Tiguan'),
+(315, 7, 'Astra F'),
+(316, 7, 'Astra G'),
+(317, 7, 'Astra H'),
+(318, 7, 'Astra J'),
+(319, 7, 'Astra K'),
+(320, 7, 'Calibra'),
+(321, 7, 'Corsa C'),
+(322, 7, 'Corsa D'),
+(323, 7, 'Corsa E'),
+(324, 7, 'Corsa F'),
+(325, 8, 'Clio'),
+(326, 8, 'Espace'),
+(327, 8, 'Express'),
+(328, 8, 'Fluence'),
+(329, 8, 'Kangoo'),
+(330, 8, 'Laguna'),
+(331, 8, 'Megane'),
+(332, 8, 'Talisman'),
+(333, 8, 'Thalia'),
+(334, 8, 'Twingo'),
+(335, 10, 'Auris'),
+(336, 10, 'Avensis'),
+(337, 10, 'Aygo'),
+(338, 10, 'Celica'),
+(339, 10, 'Corolla'),
+(340, 10, 'iQ'),
+(341, 10, 'Prius'),
+(342, 10, 'Supra'),
+(343, 10, 'Yaris'),
+(344, 11, 'Citigo'),
+(345, 11, 'Fabia'),
+(346, 11, 'Favorit'),
+(347, 11, 'Felicia'),
+(348, 11, 'Kodiaq'),
+(349, 11, 'Octavia'),
+(350, 11, 'Rapid'),
+(351, 11, 'Karoq'),
+(352, 11, 'Praktik'),
+(353, 11, 'Roomster'),
+(354, 12, 'Debra'),
+(355, 12, 'Delta'),
+(356, 12, 'Kappa'),
+(357, 12, 'Lybra'),
+(358, 12, 'Musa'),
+(359, 12, 'Phedra'),
+(360, 12, 'Thema'),
+(361, 12, 'Thesis'),
+(362, 12, 'Ypsilon'),
+(363, 12, 'Zeta'),
+(364, 13, 'C30'),
+(365, 13, 'C70'),
+(366, 13, 'S40'),
+(367, 13, 'S60'),
+(368, 13, 'S70'),
+(369, 13, 'S80'),
+(370, 13, 'S90'),
+(371, 13, 'V40'),
+(372, 13, 'V50'),
+(373, 13, 'V60');
 
 -- --------------------------------------------------------
 
@@ -255,7 +428,9 @@ INSERT INTO `users` (`user_id`, `user_uid`, `user_first`, `user_last`, `user_ema
 (59, 'tizedik', 'Tizedik', 'Tizedik', 'tizedik@gmail.com', '$2y$10$VhpKh.HHsbkknFL8D4LrpuvBC3j0eGqVNnDhJCHkN42SBPFeOdHtW', 'user'),
 (60, 'tizenegy', 'Tizenegy', 'Tizenegy', 'tizenegy@gmail.com', '$2y$10$sNfFeNLpWOh832g4hSF3M.yusDmqjsczeZUc9nPKRRkoJF2NgoF5C', 'user'),
 (61, 'tizenketto', 'Tizenketto', 'Tizenketto', 'tizenketto@gmail.com', '$2y$10$pd.BSUtV5hQSIK1Xdss9meYDRR74FB1eyv3pD1B54IaUP/4GrrkjO', 'user'),
-(62, 'tizenharom', 'tizenharom', 'tizenharom', 'tizenharom@gmail.com', '$2y$10$m4GCuOUWhPbFvYeb/SYbpudeT/Z6b/ugKUm63gW3eKy0fVdne5IIC', 'user');
+(62, 'tizenharom', 'tizenharom', 'tizenharom', 'tizenharom@gmail.com', '$2y$10$m4GCuOUWhPbFvYeb/SYbpudeT/Z6b/ugKUm63gW3eKy0fVdne5IIC', 'user'),
+(81, 'tizenot', 'Tizenot', 'Tizenot', 'tizenot@gmail.com', '$2y$10$UFALZ9g01AKaTwAuRl80o.apXy9Y/foYG9mimZIfv3QqhijLmx3ua', 'user'),
+(82, 'tizenhat', 'Tizenhat', 'Tizenhatt', 'tizenhar@gmail.com', '$2y$10$anJyoDHD8B7ufixkfp.VwOYWiILHTZBeR9N5iv3vM5NyvdJmFAA62', 'user');
 
 --
 -- Indexek a kiírt táblákhoz
@@ -273,6 +448,12 @@ ALTER TABLE `cars`
 --
 ALTER TABLE `car_brands`
   ADD PRIMARY KEY (`brands_id`);
+
+--
+-- A tábla indexei `car_extras`
+--
+ALTER TABLE `car_extras`
+  ADD KEY `car_id` (`car_id`);
 
 --
 -- A tábla indexei `car_images`
@@ -309,7 +490,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=225;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=238;
 
 --
 -- AUTO_INCREMENT a táblához `car_brands`
@@ -321,25 +502,25 @@ ALTER TABLE `car_brands`
 -- AUTO_INCREMENT a táblához `car_images`
 --
 ALTER TABLE `car_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1969;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2017;
 
 --
 -- AUTO_INCREMENT a táblához `car_type`
 --
 ALTER TABLE `car_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
 
 --
 -- AUTO_INCREMENT a táblához `news`
 --
 ALTER TABLE `news`
-  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `news_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=78;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- Megkötések a kiírt táblákhoz
@@ -350,6 +531,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `cars`
   ADD CONSTRAINT `cars_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `users` (`user_id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Megkötések a táblához `car_extras`
+--
+ALTER TABLE `car_extras`
+  ADD CONSTRAINT `car_extras_ibfk_1` FOREIGN KEY (`car_id`) REFERENCES `cars` (`car_id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Megkötések a táblához `car_images`

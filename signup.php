@@ -144,7 +144,7 @@ session_start();
 
 
             function check_fname() {
-                var pattern = /^[a-zA-Z]*$/;
+                var pattern = /^[a-zA-Z\sÁÉÍÓÖŐÚÜŰáéíóöőúüű]*$/;
                 var fname = $("#first").val();
                 if (pattern.test(fname) && fname !== '') {
                     if(fname.length > 20){
@@ -170,7 +170,7 @@ session_start();
             }
 
             function check_lname() {
-                var pattern = /^[a-zA-Z]*$/;
+                var pattern = /^[a-zA-Z\sÁÉÍÓÖŐÚÜŰáéíóöőúüű]*$/;
                 var lname = $("#last").val()
                 if (pattern.test(lname) && lname !== '') {
                     if(lname.length > 20){

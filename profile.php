@@ -97,6 +97,14 @@ if(!isset($_SESSION['u_uid'])){
             $GLOBALS['uzemanyag'] = $row['uzemanyag'];
             $GLOBALS['kobcenti'] = $row['kobcenti'];
             $GLOBALS['loero'] = $row['loero'];
+            $GLOBALS['body_style'] = $row['body_style'];
+            $GLOBALS['mileage'] = $row['mileage'];
+            $GLOBALS['euro'] = $row['euro'];
+            $GLOBALS['colour'] = $row['colour'];
+            $GLOBALS['transmission'] = $row['transmission'];
+            $GLOBALS['weight'] = $row['weight'];
+            $GLOBALS['identification_number'] = $row['identification_number'];
+            $GLOBALS['description'] = $row['description'];
         }
     }
 
@@ -110,7 +118,69 @@ if(!isset($_SESSION['u_uid'])){
     </script>
     <script>
         function cars(){
-            document.getElementById("cars").innerHTML = "<form action='includes/update.car.inc.php' method='post' > <input type='text' name='marka' value='<?php echo $GLOBALS['marka']; ?>'> <br> <input type='text' name='tipus' value='<?php echo $GLOBALS['tipus']; ?>'> <br> <input type='number' name='évjárat' value='<?php echo $GLOBALS['évjárat']; ?>'> <br> <input type='number' name='ar' value='<?php echo $GLOBALS['ar']; ?>'> <br><br> <input type='number' name='kobcenti' value='<?php echo $GLOBALS['kobcenti']; ?>'> <br> <input type='number' name='loero' value='<?php echo $GLOBALS['loero']; ?>'> <br> <button type='submit' name='submit' value='save'> mentés </form>";
+            document.getElementById("cars").innerHTML =
+                "<form action='includes/update.car.inc.php' method='post' > <br> " +
+                    "<input type='number' name='évjárat' value='<?php echo $GLOBALS['évjárat']; ?>'> <br> " +
+                    "<input type='number' name='ar' value='<?php echo $GLOBALS['ar']; ?>'> <br>" +
+                    "<select name='fuel_type' id='fuel_type'>" +
+                        "<option value='<?php echo $GLOBALS['uzemanyag']; ?>' ><?php echo $GLOBALS['uzemanyag']; ?></option>" +
+                        "<option value='Benzin'>Benzin</option>" +
+                        "<option value='Dizel'>Dizel</option>" +
+                        "<option value='Elektromos'>Elektromos</option>" +
+                    "</select><br>" +
+                    "<input type='number' name='kobcenti' value='<?php echo $GLOBALS['kobcenti']; ?>'> <br> " +
+                    "<input type='number' name='loero' value='<?php echo $GLOBALS['loero']; ?>'> <br> " +
+                    "<select name='body_style' id='body_style'>" +
+                       "<option value='<?php echo $GLOBALS['body_style']; ?>' ><?php echo $GLOBALS['body_style']; ?></option>" +
+                       "<option value='Ferdehátú'>Ferdehátú</option>" +
+                       "<option value='Kombi'>Kombi</option>" +
+                       "<option value='Pickup'>Pickup</option>" +
+                       "<option value='Sedan'>Sedan</option>" +
+                       "<option value='Terepjáró'>Terepjáró</option>" +
+                       "<option value='Városi terepjáró'>Városi terepjáró</option>" +
+                       "<option value='Coupe'>Coupe</option>" +
+                    "</select><br>" +
+                    "<input type='number' name='mileage' value='<?php echo $GLOBALS['mileage']; ?>'> <br>" +
+                    "<select name='euro' id='euro'>" +
+                        "<option value='<?php echo $GLOBALS['euro']; ?>' ><?php echo $GLOBALS['euro']; ?></option>" +
+                        "<option value='euro 1'>Euro 1</option>" +
+                        "<option value='euro 2'>Euro 2</option>" +
+                        "<option value='euro 3'>Euro 3</option>" +
+                        "<option value='euro 4'>Euro 4</option>" +
+                        "<option value='euro 5'>Euro 5</option>" +
+                        "<option value='euro 6'>Euro 6</option>" +
+                    "</select><br>" +
+                    "<select name='colour' id='colour'>" +
+                        "<option value='<?php echo $GLOBALS['colour']; ?>' ><?php echo $GLOBALS['colour']; ?></option>" +
+                        "<option value='Fehér'>Fehér</option>" +
+                        "<option value='Szürke'>Szürke</option>" +
+                        "<option value='Fekete'>Fekete</option>" +
+                        "<option value='Kék'>Kék</option>" +
+                        "<option value='Lila'>Lila</option>" +
+                        "<option value='Bíbor'>Bíbor</option>" +
+                        "<option value='Piros'>Piros</option>" +
+                        "<option value='Rózsaszín'>Rózsaszín</option>" +
+                        "<option value='Barna'>Barna</option>" +
+                        "<option value='Narancssárga'>Narancssárga</option>" +
+                        "<option value='Sárga'>Sárga</option>" +
+                        "<option value='Zöld'>Zöld</option>" +
+                    "</select><br>" +
+                "<select name='transmission' id='transmission'>" +
+                    "<option value='<?php echo $GLOBALS['transmission']; ?>' ><?php echo $GLOBALS['transmission']; ?></option>" +
+                    "<option value='Manuális - 4'>Manuális - 4</option>" +
+                    "<option value='Manuális - 5'>Manuális - 5</option>" +
+                    "<option value='Manuális - 6'>Manuális - 6</option>" +
+                    "<option value='Manuális - 7'>Manuális - 7</option>" +
+                    "<option value='Automata - 4'>Automata - 4</option>" +
+                    "<option value='Automata - 5'>Automata - 5</option>" +
+                    "<option value='Automata - 6'>Automata - 6</option>" +
+                    "<option value='Automata - 7'>Automata - 7</option>" +
+                "</select><br>" +
+                    "<input type='number' name='weight' value='<?php echo $GLOBALS['weight']; ?>'> <br>" +
+                    "<input type='text' name='identification_number' value='<?php echo $GLOBALS['identification_number']; ?>'> <br>" +
+                    "<textarea rows='10' cols='22' name='description'><?php echo $GLOBALS['description']; ?></textarea> <br>" +
+                    "<button type='submit' name='submit' value='save'> mentés " +
+                "</form>";
         }
     </script>
 
@@ -153,12 +223,44 @@ if(!isset($_SESSION['u_uid'])){
                 <td>'.$GLOBALS['loero'].'</td>
             </tr>
             <tr>
+                <td>Kivitel: </td>
+                <td>'.$GLOBALS['body_style'].'</td>
+            </tr>
+            <tr>
+                <td>Kilóméter óra állása: </td>
+                <td>'.$GLOBALS['mileage'].'</td>
+            </tr>
+            <tr>
+                <td>Környezetvédelmi osztály: </td>
+                <td>'.$GLOBALS['euro'].'</td>
+            </tr>
+            <tr>
+                <td>Szín: </td>
+                <td>'.$GLOBALS['colour'].'</td>
+            </tr>
+            <tr>
+                <td>Sebességváltó típusa: </td>
+                <td>'.$GLOBALS['transmission'].'</td>
+            </tr>
+            <tr>
+                <td>Saját tömeg: </td>
+                <td>'.$GLOBALS['weight'].'</td>
+            </tr>
+            <tr>
+                <td>Alvázszám: </td>
+                <td>'.$GLOBALS['identification_number'].'</td>
+            </tr>
+            <tr>
+                <td>Rövid leírás: </td>
+                <td>'.$GLOBALS['description'].'</td>
+            </tr>
+            <tr>
                 <td><button onclick="cars()">módosít</button></td>
                 <td><button onclick="confirm_delete()" style="background-color: red">hírdetés törlése</button></td>
             </tr>
         </table>
     </div>
-    <div id="cars" style=" margin: 0px; float: left;"></div>';
+    <div id="cars" style=" margin: 33px 0 0 0; float: left;"></div>';
 
         }
 
@@ -172,7 +274,7 @@ if(!isset($_SESSION['u_uid'])){
         $resultcheck_img = mysqli_num_rows($result_img);
         while($row_img = mysqli_fetch_assoc($result_img)) {
 
-            echo '<div style=" display: inline-block; margin: 0 2% 0 0;"><img class="image" src=uploads/' . $row_img['image_name'] . ' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
+            echo '<div style=" display: inline-block; margin: 0 0 0 2%;"><img class="image" src=uploads/' . $row_img['image_name'] . ' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
     }
 
 
