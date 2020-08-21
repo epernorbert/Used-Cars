@@ -7,9 +7,10 @@ include_once 'action.php';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <link type="text/css" rel="stylesheet" href="index.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <title>Használtautók</title>
 </head>
 <body>
@@ -58,6 +59,26 @@ include_once 'action.php';
 </div>
 
 
+
+
+
+
+
+<?php
+function load_brands(){
+    include 'action.php';
+    $output = '';
+    $sql = "SELECT * FROM car_brands ORDER BY brands_name";
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($result)){
+        $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+    }
+
+    return $output;
+}
+?>
+
+
 <div class="wraper">
 
     <div style="color: white; text-align: right; padding: 5% 10% 19% 0;">
@@ -69,28 +90,63 @@ include_once 'action.php';
 </div>
 
 <div class="search" align="center" id="search">
-    <form action="search.php" method="POST">
-        <input type="text" name="brand" placeholder="Márka" style="width: 120px"/>
-        <input type="text" name="type" placeholder="Tipus" style="width: 120px"/>
-        <input type="number" name="min_price" placeholder="min ár" style="width: 120px">
-        <input type="number" name="max_price" placeholder="max ár" style="width: 120px">
-        <input type="number" name="date_start" placeholder="évjárat(tól)" style="width: 120px;">
-        <input type="number" name="date_end"  placeholder="évjárat(ig)" style="width: 120px;">
-        <input type="number" name="min_cm3" placeholder="min cm3" style="width: 120px">
-        <input type="number" name="max_cm3" placeholder="max cm3" style="width: 120px">
-        <input type="number" name="min_hp" placeholder="min le" style="width: 120px">
-        <input type="number" name="max_hp" placeholder="max le" style="width: 120px">
-        <label>
-            <select id="fueltype" name="fueltype" style="width: 125px">Üzemanyag:
-                <option disabled selected value style="display: none">Üzemanyag</option>
-                <option value="dizel">dizel</option>
-                <option value="benzin">benzin</option>
-                <option value="elektromos">elektromos</option>
-            </select>
-        </label>
-        <button type="submit" name="submit-search" style="width: 120px; background-color: blue; cursor: pointer;">Keresés</button>
+
+    <form action="search.php" method="POST" style="margin: 0;">
+        <div>
+         <table>
+             <tr>
+                <td>
+                    <select name="brand" id="brand" style="width: 128px;">
+                       <option value="">Márka</option>
+                           <?php echo load_brands(); ?>
+                    </select>
+                </td>
+                <td>
+                    <select name="type" id="type" style="width: 128px;">
+                        <option value="">Típus</option>
+                    </select>
+                </td>
+                <td><input type="number" name="max_price" placeholder="max ár" style="width: 120px"></td>
+                <td><input type="number" name="date_start" placeholder="évjárat(tól)" style="width: 120px;"></td>
+                <td>
+                    <label>
+                        <select id="fueltype" name="fueltype" style="width: 128px; height: 29px;">Üzemanyag:
+                            <option disabled selected value style="display: none">Üzemanyag</option>
+                            <option value="dizel">dizel</option>
+                            <option value="benzin">benzin</option>
+                            <option value="elektromos">elektromos</option>
+                        </select>
+                    </label>
+                </td>
+                <td>
+                    <button type="submit" name="submit-search" style="width: 127px; height: 28px; background-color: blue; cursor: pointer;">Keresés</button>
+                </td>
+             </tr>
+         </table>  
+         </div> 
+        <div id="advanced"></div>
     </form>
+    
+    <button onclick="advanced_search()" style="cursor: pointer;">Részletes keresés</button>
+    
 </div>
+
+<script type="text/javascript">
+    function advanced_search(){
+        document.getElementById("advanced").innerHTML = 
+        "<table>"+
+            "<tr>"+
+                "<td><input type='number' name='max_hp' placeholder='max le' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_hp' placeholder='min le' style='width: 120px;'></td>"+
+                "<td><input type='number' name='max_cm3' placeholder='max cm3' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_cm3' placeholder='min cm3' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_price' placeholder='min ár' style='width: 120px;'></td>"+
+                "<td><input type='number' name='date_end' placeholder='évjárat(ig)' style='width: 120px;'></td>"+
+            "<tr>"+
+        "</table>"
+
+    }
+</script>
 
 <div class="brand" style="font-size: 20px; margin: 0 10% 5% 10%; border-bottom: 1px solid blue" >
     <ul class="brand_ul">
@@ -106,7 +162,7 @@ include_once 'action.php';
 
 <div style="margin: 0 0 0 10%; width: 55%;  float: left;">
     <?php
-        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id GROUP BY user_id ORDER BY cars.car_id desc;";
+        $sql = "SELECT c.marka, c.tipus, c.évjárat, c.ar, ci.image_name, c.car_id, ci.car_id from cars c JOIN car_images ci ON c.car_id=ci.car_id GROUP BY user_id ORDER BY c.car_id desc;";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
         $i=0;
@@ -124,7 +180,7 @@ include_once 'action.php';
 <div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; height: 540px; float: right;">
     <?php
 
-        $sql = "select * from news";
+        $sql = "select news_image, news_title from news";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
 
@@ -154,8 +210,22 @@ background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828,
     </div>
 </div>
 
-
-
-
 </body>
 </html>
+
+<script>
+    $(document).ready(function(){
+        $('#brand').change(function(){
+            var brands_id = $(this).val();
+            $.ajax({
+                url:"fetch_type.php",
+                method:"POST",
+                data:{brandsId:brands_id},
+                dataType:"text",
+                success:function(data){
+                    $('#type').html(data);
+                }
+            });
+        });
+    });
+</script>

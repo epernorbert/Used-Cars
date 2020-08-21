@@ -1,8 +1,8 @@
 <?php
-/*//these two lines are due to the back button from advertisemet.php
+//these two lines are due to the back button from advertisemet.php
 header('Cache-Control: no cache'); //no cache
 session_cache_limiter('private_no_expire'); // works
-//session_cache_limiter('public'); // works too*/
+//session_cache_limiter('public'); // works too
 session_start();
 ?>
 
@@ -52,15 +52,58 @@ include 'action.php';
 if(isset($_POST['submit-search'])){
     $brand = mysqli_real_escape_string($conn, $_POST['brand']);
     $type = mysqli_real_escape_string($conn, $_POST['type']);
-    $min_price = mysqli_real_escape_string($conn, $_POST['min_price']);
     $max_price = mysqli_real_escape_string($conn, $_POST['max_price']);
     $date_start = mysqli_real_escape_string($conn, $_POST['date_start']);
-    $date_end = mysqli_real_escape_string($conn, $_POST['date_end']);
-    $min_cm3 = mysqli_real_escape_string($conn, $_POST['min_cm3']);
-    $max_cm3 = mysqli_real_escape_string($conn, $_POST['max_cm3']);
-    $min_hp = mysqli_real_escape_string($conn, $_POST['min_hp']);
-    $max_hp = mysqli_real_escape_string($conn, $_POST['max_hp']);
 
+
+    // impode - array to string conversation. Ha NULL akkor hivát jelez, azért kell az IF.
+    if($brand > 0){
+        $sql_brand = "SELECT brands_name FROM car_brands WHERE brands_id = '$brand'";
+        $result_brand = mysqli_query($conn, $sql_brand);
+        $query_brand = mysqli_num_rows($result_brand);
+        $brand_name_array = mysqli_fetch_assoc($result_brand);
+        $brand_name = implode($brand_name_array);
+    } else {
+        $brand_name = "";
+    }
+    
+
+    
+    if(isset($_POST['date_end'])){
+        $date_end = mysqli_real_escape_string($conn, $_POST['date_end']);
+    } else {
+        $date_end = "";
+    }
+
+    if(isset($_POST['min_price'])){
+        $min_price = mysqli_real_escape_string($conn, $_POST['min_price']);
+    } else {
+        $min_price = "";
+    }
+
+    if(isset($_POST['min_cm3'])){
+        $min_cm3 = mysqli_real_escape_string($conn, $_POST['min_cm3']);
+    } else {
+        $min_cm3 = "";
+    }
+
+    if(isset($_POST['max_cm3'])){
+        $max_cm3 = mysqli_real_escape_string($conn, $_POST['max_cm3']);
+    } else {
+        $max_cm3 = "";
+    }
+
+    if(isset($_POST['max_hp'])){
+        $max_hp = mysqli_real_escape_string($conn, $_POST['max_hp']);
+    } else {
+        $max_hp = "";
+    }
+
+    if(isset($_POST['min_hp'])){
+        $min_hp = mysqli_real_escape_string($conn, $_POST['min_hp']);
+    } else {
+        $min_hp="";
+    }
 
 
     if(isset($_POST['fueltype'])){
@@ -68,7 +111,7 @@ if(isset($_POST['submit-search'])){
         $fueltype = mysqli_real_escape_string($conn, $_POST['fueltype']);
 
         $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
-        (marka LIKE '$brand' OR '$brand' LIKE '') AND 
+        (marka LIKE '$brand_name' OR '$brand_name' LIKE '') AND 
         (tipus LIKE '$type' OR '$type' LIKE '') AND 
         (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
         (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
@@ -78,7 +121,7 @@ if(isset($_POST['submit-search'])){
 
     } else {
         $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
-        (marka LIKE '$brand' OR '$brand' LIKE '') AND 
+        (marka LIKE '$brand_name' OR '$brand_name' LIKE '') AND 
         (tipus LIKE '$type' OR '$type' LIKE '') AND 
         (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
         (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
