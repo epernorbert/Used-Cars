@@ -41,8 +41,9 @@ if(isset($_POST['submit'])){
 
     //Error handlers
     //Empty fields
-    if(empty($brand) || empty($type) || empty($year) || empty($price) || empty($fuel) || empty($cm3) || empty($horsepower)|| empty($body_style)|| empty($mileage)|| empty($euro)|| empty($colour)|| empty($transmission)|| empty($weight)|| empty($identification_number)|| empty($description)){
+    if(empty($brand) || empty($type) || empty($year) || empty($price) || empty($fuel) || empty($cm3) || empty($horsepower)|| empty($body_style)|| empty($mileage)|| empty($euro)|| empty($colour)|| empty($transmission)|| empty($weight)){
         header("Location: ../add.php?empty=fields");
+
         exit();
     }
 
@@ -60,11 +61,15 @@ if(isset($_POST['submit'])){
 
     foreach ($_FILES['files']['tmp_name'] as $key => $image){
         $imageName = $_FILES['files']['name'][$key];
+        //delete whitespace from image name
+        $imageName = str_replace(' ','', $imageName);
         $imageTmpName = $_FILES['files']['tmp_name'][$key];
 
+        //uniq name
         $fileNameNew = uniqid('', true).".".$imageName;
         $fileDestination = '../uploads/'.$fileNameNew;
 
+        //file destination with new uniq name
         $result = move_uploaded_file($imageTmpName, $fileDestination);
 
         $sql_2 = "INSERT INTO car_images(car_id, image_name) VALUE ('$car_id', '$fileDestination');";
