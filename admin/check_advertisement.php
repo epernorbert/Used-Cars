@@ -102,107 +102,133 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 
         echo '<div id="update"></div>';
 
+        if($GLOBALS['user_usertype'] === 'writer'){
 
-        //Car data
-        $sql = "SELECT * from cars WHERE user_id='{$_GET['user_id']}';";
-        $result = mysqli_query($conn, $sql);
-        $resultcheck = mysqli_num_rows($result);
-        $row = mysqli_fetch_assoc($result);
+            //news
+            $sql_news = "SELECT n.news_image, n.news_title, u.user_id FROM news n JOIN users u ON n.user_id=u.user_id WHERE u.user_id = '{$_GET['user_id']}'";
+            $result_news = mysqli_query($conn, $sql_news);
+            $resultcheck_news = mysqli_num_rows($result_news);
 
-        if(isset($row['marka'])){
 
-            echo '<div style="clear: both; float: left;">';
+            if($resultcheck_news > 0){
+                while($row_news = mysqli_fetch_assoc($result_news)){
+                    echo  '<div style="border: 1px solid black; display: inline-block";>
+                                <a href="../news.php?news_title='.$row_news['news_title'].'"><img src=../news_image/' .$row_news['news_image']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px; float:left;" >' . $row_news['news_title'] . 
+                                '</a>' .
+                          '</div>';
+                }
 
-                echo '<table style="float: left; margin: 0 4% 2% 0;">
-            <tr>
-                <td>Márka: </td>
-                <td>'.$row['marka'].'</td>
-            </tr>
-            <tr>
-                <td>Típus: </td>
-                <td>'.$row['tipus'].'</td>
-            </tr>
-            <tr>
-                <td>Évjárat: </td>
-                <td>'.$row['évjárat'].'</td>
-            </tr>
-            <tr>
-                <td>Ár: </td>
-                <td>'.$row['ar'].'</td>
-            </tr>
-            <tr>
-                <td>Üzemanyag: </td>
-                <td>'.$row['uzemanyag'].'</td>
-            </tr>
-            <tr>
-                <td>Köbceni: </td>
-                <td>'.$row['kobcenti'].'</td>
-            </tr>
-            <tr>
-                <td>Lóerő: </td>
-                <td>'.$row['loero'].'</td>
-            </tr>
-            <tr>
-                <td>Kivitel: </td>
-                <td>'.$row['body_style'].'</td>
-            </tr>
-            <tr>
-                <td>Kilóméter óra állása: </td>
-                <td>'.$row['mileage'].'</td>
-            </tr>
-            <tr>
-                <td>Környezetvédelmi osztály: </td>
-                <td>'.$row['euro'].'</td>
-            </tr>
-            <tr>
-                <td>Szín: </td>
-                <td>'.$row['colour'].'</td>
-            </tr>
-            <tr>
-                <td>Sebességváltó típusa: </td>
-                <td>'.$row['transmission'].'</td>
-            </tr>
-            <tr>
-                <td>Saját tömeg: </td>
-                <td>'.$row['weight'].'</td>
-            </tr>
-            <tr>
-                <td>Alvázszám: </td>
-                <td>'.$row['identification_number'].'</td>
-            </tr>
-            <tr>
-                <td>Rövid leírás: </td>
-                <td>'.$row['description'].'</td>
-            </tr>
-        </table>';
+            }
 
-                    //Car images
-                    $sql_img = "select image_name from car_images where car_id='{$row['car_id']}'";
-                    $result_img = mysqli_query($conn, $sql_img);
-                    $resultcheck_img = mysqli_num_rows($result_img);
 
-                        while($row_img = mysqli_fetch_assoc($result_img)) {
-                            echo '<div style="float:left; margin: 0 2% 2% 0;"> 
-                                     <img class="image" src=../uploads/' . $row_img['image_name'] . ' 
-                                     style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;">
+        } elseif($GLOBALS['user_usertype'] === 'user') {
+
+            //Car data
+            $sql = "SELECT * from cars WHERE user_id='{$_GET['user_id']}';";
+            $result = mysqli_query($conn, $sql);
+            $resultcheck = mysqli_num_rows($result);
+            $row = mysqli_fetch_assoc($result);
+
+            if(isset($row['marka'])){
+
+                echo '<div style="clear: both; float: left;">';
+
+                    echo '<table style="float: left; margin: 0 4% 2% 0;">
+                <tr>
+                    <td>Márka: </td>
+                    <td>'.$row['marka'].'</td>
+                </tr>
+                <tr>
+                    <td>Típus: </td>
+                    <td>'.$row['tipus'].'</td>
+                </tr>
+                <tr>
+                    <td>Évjárat: </td>
+                    <td>'.$row['évjárat'].'</td>
+                </tr>
+                <tr>
+                    <td>Ár: </td>
+                    <td>'.$row['ar'].'</td>
+                </tr>
+                <tr>
+                    <td>Üzemanyag: </td>
+                    <td>'.$row['uzemanyag'].'</td>
+                </tr>
+                <tr>
+                    <td>Köbceni: </td>
+                    <td>'.$row['kobcenti'].'</td>
+                </tr>
+                <tr>
+                    <td>Lóerő: </td>
+                    <td>'.$row['loero'].'</td>
+                </tr>
+                <tr>
+                    <td>Kivitel: </td>
+                    <td>'.$row['body_style'].'</td>
+                </tr>
+                <tr>
+                    <td>Kilóméter óra állása: </td>
+                    <td>'.$row['mileage'].'</td>
+                </tr>
+                <tr>
+                    <td>Környezetvédelmi osztály: </td>
+                    <td>'.$row['euro'].'</td>
+                </tr>
+                <tr>
+                    <td>Szín: </td>
+                    <td>'.$row['colour'].'</td>
+                </tr>
+                <tr>
+                    <td>Sebességváltó típusa: </td>
+                    <td>'.$row['transmission'].'</td>
+                </tr>
+                <tr>
+                    <td>Saját tömeg: </td>
+                    <td>'.$row['weight'].'</td>
+                </tr>
+                <tr>
+                    <td>Alvázszám: </td>
+                    <td>'.$row['identification_number'].'</td>
+                </tr>
+                <tr>
+                    <td>Rövid leírás: </td>
+                    <td>'.$row['description'].'</td>
+                </tr>
+            </table>';
+
+                        //Car images
+                        $sql_img = "select image_name from car_images where car_id='{$row['car_id']}'";
+                        $result_img = mysqli_query($conn, $sql_img);
+                        $resultcheck_img = mysqli_num_rows($result_img);
+
+                            while($row_img = mysqli_fetch_assoc($result_img)) {
+                                echo '<div style="float:left; margin: 0 2% 2% 0;"> 
+                                         <img class="image" src=../uploads/' . $row_img['image_name'] . ' 
+                                         style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;">
+                                      </div>';
+                            }
+
+                            echo '<div style="clear: both; margin-bottom: 1%;">
+                                      <button onclick="confirm_delete()" style="background-color: red; cursor: pointer;">Hírdetés Törlés</button>';
+                                       echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button>
                                   </div>';
-                        }
 
-                        echo '<div style="clear: both; margin-bottom: 1%;">
-                                  <button onclick="confirm_delete()" style="background-color: red; cursor: pointer;">Hírdetés Törlés</button>';
-                                   echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button>
-                              </div>';
+                echo '</div>';
 
-            echo '</div>';
+            } else {
+                echo '<div>';
+                     echo "Nincs hírdetés!";
+                     echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button>';
+                echo '</div>';
+            }
 
-        } else {
-            echo '<div>';
-                 echo "Nincs hírdetés!";
-                 echo '<button onclick="confirm_delete_car()" style="background-color: red; cursor: pointer; margin-left: 50px">Profil törlése</button>';
-            echo '</div>';
+        echo '</div>';
         }
 
-    echo '</div>';
+        
+
+
+        
 
 ?>
 
@@ -218,7 +244,6 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
             "<button class='user-input' type='submit' name='submit'>Mentés<br>" +
             "</form>";
     }
-
 
     function confirm_delete() {
         var r = confirm("Biztos törli a hírdetést?");

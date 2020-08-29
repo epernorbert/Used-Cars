@@ -70,6 +70,10 @@ if(!isset($_SESSION['u_uid'])){
                 <td><?php echo $_SESSION['u_email']?></td>
             </tr>
             <tr>
+                <td>Telefonszám: </td>
+                <td><?php echo $_SESSION['u_telephone']?></td>
+            </tr>
+            <tr>
                 <td>
                     <button onclick="change()">modosit</button>
                 </td>
@@ -113,7 +117,7 @@ if(!isset($_SESSION['u_uid'])){
 
     <script>
         function change() {
-            document.getElementById("form").innerHTML = "<form action='includes/update.inc.php' method='post' ><br>  <input type='text' name='u_first' value='<?php echo $_SESSION['u_first']; ?>'><br> <input type='text' name='u_last' value='<?php echo $_SESSION['u_last']; ?>'><br> <input type='text' name='u_email' value='<?php echo $_SESSION['u_email']; ?>'><br> <button type='submit' name='submit' value='save'>mentés </form>";
+            document.getElementById("form").innerHTML = "<form action='includes/update.inc.php' method='post' ><br>  <input type='text' name='u_first' value='<?php echo $_SESSION['u_first']; ?>'><br> <input type='text' name='u_last' value='<?php echo $_SESSION['u_last']; ?>'><br> <input type='text' name='u_email' value='<?php echo $_SESSION['u_email']; ?>'><br> <input type='number' name='u_telephone'  value='<?php echo $_SESSION['u_telephone']; ?>'><br> <button type='submit' name='submit' value='save'>mentés </form>";
         }
     </script>
     <script>
@@ -273,7 +277,6 @@ if(!isset($_SESSION['u_uid'])){
         $result_img = mysqli_query($conn, $sql_img);
         $resultcheck_img = mysqli_num_rows($result_img);
         while($row_img = mysqli_fetch_assoc($result_img)) {
-
             echo '<div style=" display: inline-block; margin: 0 0 0 2%;"><img class="image" src=uploads/' . $row_img['image_name'] . ' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;"></div>';
     }
 
@@ -281,9 +284,6 @@ if(!isset($_SESSION['u_uid'])){
 }
 
 ?>
-
-
-
 
 
 </div>

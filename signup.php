@@ -101,10 +101,24 @@ session_start();
     <div id="pwd_error"></div>
     <input type="password" name="conf_pwd" id="conf_pwd" placeholder="Jelszó ismét" required=""><br>
     <div id="conf_pwd_error"></div>
+    <input type="number" name="telephone" id="telephone" placeholder="Telefonszám" required="" oninput="telephone_check()"><br>
+    <div id="telephone_error"></div>
     <button type="submit" name="submit" id="submit" style="width: 202px;cursor: pointer;">Regisztráció</button>
 </form>
 
     <script type="text/javascript">
+
+        function telephone_check(){
+            var telephone = document.getElementById("telephone").value;
+            var regex = /^[0-9]/;
+            if(!regex.test(telephone)){
+                document.getElementById("telephone").value = '';
+            } else if(telephone.length > 10){
+                var limit = telephone.slice(0, 10);
+                document.getElementById("telephone").value = limit;
+            }
+        }
+
 
         $(function () {
 
@@ -113,6 +127,7 @@ session_start();
             $("#email_error").hide();
             $("#pwd_error").hide();
             $("#conf_pwd_error").hide();
+            $("#telephone_error").hide();
 
 
             var error_fname = false;
@@ -120,6 +135,7 @@ session_start();
             var error_email = false;
             var error_password = false;
             var error_confirm_password = false;
+            var error_telephone = false;
 
 
             $("#first").focusout(function(){
@@ -140,6 +156,10 @@ session_start();
 
             $("#conf_pwd").focusout(function() {
                 check_confirm_password();
+            });
+
+            $("#telephone").focusout(function() {
+                check_telephone();
             });
 
 
@@ -248,7 +268,7 @@ session_start();
                 } else {
                     $("#pwd_error").html("");
                     $("#pwd_error").hide();
-                    $("#conf_pwd_error").html("A jelszavak nem egyeznek!");
+                    $("#conf_pwd_error").html("A jelszavak nem egyeznek!").css("color", "#F90A0A");
                     $("#conf_pwd_error").show();
                     $("#pwd").css("border-bottom","2px solid #F90A0A");
                     $("#conf_pwd").css("border-bottom","2px solid #F90A0A");
@@ -285,6 +305,19 @@ session_start();
                 }
             }
 
+            function check_telephone(){
+                var telephone = $("#telephone").val();
+                if(telephone.length < 6){
+                    $("#telephone").css("border-bottom","2px solid #F90A0A");
+                    $("#telephone_error").html("Minimum 6 karakter!").css("color", "#F90A0A");
+                    $("#telephone_error").show();
+                    error_telephone = true;
+                } else {
+                    $("#telephone").css("border-bottom","2px solid #34F458");
+                    $("#telephone_error").html("");
+                }
+            }
+
 
 
             $("#form").submit(function() {
@@ -293,14 +326,16 @@ session_start();
                 error_email = false;
                 error_password = false;
                 error_confirm_password = false;
+                error_telephone = false;
 
                 check_fname();
                 check_lname();
                 check_email();
                 check_password();
                 check_confirm_password();
+                check_telephone();
 
-                if (error_fname === false && error_lname === false && error_email === false && error_password === false && error_confirm_password === false) {
+                if (error_fname === false && error_lname === false && error_email === false && error_password === false && error_confirm_password === false && error_telephone === false) {
                     return true;
                 } else {
                     alert("Kérem megfelelő adatokkal töltse ki a mezőket!");
