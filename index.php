@@ -106,8 +106,8 @@ function load_brands(){
                         <option value="">Típus</option>
                     </select>
                 </td>
-                <td><input type="number" name="max_price" placeholder="max ár" style="width: 120px"></td>
-                <td><input type="number" name="date_start" placeholder="évjárat(tól)" style="width: 120px;"></td>
+                <td><input type="number" name="max_price" placeholder="max ár" id="max_price" onkeypress="return event.charCode >= 48" oninput="check_max_price()" min="1" style="width: 120px"></td>
+                <td><input type="number" name="date_start" placeholder="évjárat(tól)" id="date_start" onkeypress="return event.charCode >= 48" oninput="check_min_year()" style="width: 120px;"></td>
                 <td>
                     <label>
                         <select id="fueltype" name="fueltype" style="width: 128px; height: 29px;">Üzemanyag:
@@ -132,24 +132,51 @@ function load_brands(){
 </div>
 
 <script type="text/javascript">
+    
+    //Check input fields in SEARCH
+    function check_min_year(){
+        var date_start = document.getElementById("date_start").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(date_start)){
+            document.getElementById("date_start").value = '';
+        } else if(date_start.length > 4){
+            var limit = date_start.slice(0, 4);
+            document.getElementById("date_start").value = limit;
+        }
+    }
+
+    function check_max_price(){
+        var max_price = document.getElementById("max_price").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(max_price)){
+            document.getElementById("max_price").value = '';
+        } else if(max_price.length > 10){
+            var limit = max_price.slice(0, 10);
+            document.getElementById("max_price").value = limit;
+        }
+    }
+
+</script>
+
+<script type="text/javascript">
     function advanced_search(){
         document.getElementById("advanced").innerHTML = 
         "<table>"+
             "<tr>"+
                 "<td><input type='number' name='max_hp' placeholder='max le' style='width: 120px;'></td>"+
                 "<td><input type='number' name='min_hp' placeholder='min le' style='width: 120px;'></td>"+
-                "<td><input type='number' name='max_cm3' placeholder='max cm3' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_cm3' placeholder='min cm3' style='width: 120px;'></td>"+
                 "<td><input type='number' name='min_price' placeholder='min ár' style='width: 120px;'></td>"+
                 "<td><input type='number' name='date_end' placeholder='évjárat(ig)' style='width: 120px;'></td>"+
+                "<td><input type='number' name='max_cm3' placeholder='max cm3' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_cm3' placeholder='min cm3' style='width: 120px;'></td>"+                                
             "<tr>"+
         "</table>"
 
     }
 </script>
-
-<div class="brand" style="font-size: 20px; margin: 0 10% 5% 10%; border-bottom: 1px solid blue" >
-    <ul class="brand_ul">
+<div class="top_brands">Népszerű márkák</div>
+<div class="brand" style="font-size: 20px; margin: 0 10% 4% 10%; border-bottom: 1px solid blue; border-top: 1px solid blue;">
+    <ul class="brand_ul">    
         <li class="brand_li"><a class="brand_a" href="brands.php?brand=audi" style="color: black"> Audi</a></li>
         <li class="brand_li"><a class="brand_a" href="brands.php?brand=mercedes" style="color: black">Mercedes</a></li>
         <li class="brand_li"><a class="brand_a" href="brands.php?brand=bmw" style="color: black">Bmw</a></li>
@@ -177,17 +204,26 @@ function load_brands(){
     ?>
 </div>
 
-<div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; height: 540px; float: right;">
+<div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; height: 538px; float: right;">
     <?php
 
-        $sql = "select news_image, news_title from news";
+        $sql = "SELECT news_image, news_title FROM news";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
+        $newsDisplay = 0;
 
 
         if($resultcheck > 0){
             while($row = mysqli_fetch_assoc($result)){
-                echo  '<div style="border: 1px solid black; display: inline-block";><a href="news.php?news_title='.$row['news_title'].'"><img src=news_image/' .$row['news_image']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px; float:left;" >' . $row['news_title'] . '</a></div>';
+                if($newsDisplay < 5 /*control how many news display*/){
+                    echo  '<div class="news" style="border: 1px solid black; margin-top: 3px; display: inline-block; background-color:white;";>' . 
+                            '<a href="news.php?news_title='.$row['news_title'].'" class="newsLink" >' .
+                                '<img src=news_image/' .$row['news_image']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 165px; height: 102px; float:left;" >' . 
+                               '<div>' . $row['news_title'] . '</div>' . 
+                            '</a>' .
+                       '</div>';
+                       $newsDisplay++;
+                }
             }
         }
 

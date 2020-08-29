@@ -168,7 +168,7 @@ body {
 
 
 .search{
-    margin: 5% 10% 0 10%;
+    margin: 5% 10% 4% 10%;
     padding: 15px;
     background: #565057;;
     box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
@@ -220,7 +220,20 @@ input::-webkit-inner-spin-button {
     transform: scale(1.05);
 }
 
+.top_brands{    
+    background-color: blue;
+    color:white;
+    display: inline;
+    margin-left: 10%; 
+    position: relative;
+    bottom: 6px;
+    /*padding: 15px 20px;*/
+    padding: 7px;
+    letter-spacing: 0.15em;
+    font-size: 20px;    
+    text-align: center;
 
+}
 
 .brand_ul {
     margin: 30px auto 0;
@@ -241,7 +254,6 @@ input::-webkit-inner-spin-button {
     text-transform: uppercase;
     text-decoration: none;
     letter-spacing: 0.15em;
-
     display: inline-block;
     padding: 15px 20px;
     position: relative;
@@ -257,6 +269,28 @@ input::-webkit-inner-spin-button {
     transform: scale(1);
     filter: blur(0px);
     opacity: 1;
+}
+
+a.newsLink {
+  color: blue;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.newsLink:hover {
+  text-decoration: underline;
+}
+
+a.newsLink:active {
+  color: black;
+}
+
+.news{
+    transition: 0.5s;
+}
+
+.news:hover{
+    transform: scale(1.1);
 }
 
 
