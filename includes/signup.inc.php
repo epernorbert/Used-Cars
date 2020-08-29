@@ -11,10 +11,11 @@ if(isset($_POST['submit'])){
     $uid = mysqli_real_escape_string($conn, $_POST['uid']);
     $pwd = mysqli_real_escape_string($conn, $_POST['pwd']);
     $conf_pwd = mysqli_real_escape_string($conn, $_POST['conf_pwd']);
+    $telephone = mysqli_real_escape_string($conn, $_POST['telephone']);
 
     //Error handlers
     //Empty fields
-    if(empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd) || empty($conf_pwd)){
+    if(empty($first) || empty($last) || empty($email) || empty($uid) || empty($pwd) || empty($conf_pwd) || empty($telephone)){
         header("Location: ../signup.php?signup=empty");
         exit();
     } else{
@@ -49,7 +50,7 @@ if(isset($_POST['submit'])){
     $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
 
     //Insert the user into the database
-    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd) VALUE ('$first','$last','$email','$uid','$hashedPwd');";
+    $sql = "INSERT INTO users (user_first, user_last, user_email, user_uid, user_pwd, user_telephone) VALUE ('$first','$last','$email','$uid','$hashedPwd', '$telephone');";
 
     mysqli_query($conn, $sql);
     header("Location: ../login.php?signup=success");
