@@ -78,16 +78,43 @@ function load_brands(){
 }
 ?>
 
+    <div class="slidershow middle">
 
-<div class="wraper">
+         <div class="slides">
+                <input type="radio" name="r" id="r1" checked>
+                <input type="radio" name="r" id="r2">
+                <input type="radio" name="r" id="r3">
+                <input type="radio" name="r" id="r4">
+                <input type="radio" name="r" id="r5">
+            <div class="slide s1">
+                <img src="peugeot_208/blue_side.jpg" alt="">
+            </div>
+            <div class="slide">
+                <img src="peugeot_208/blue_front.jpg" alt="">
+            </div>
+            <div class="slide">
+                  <img src="peugeot_208/blue_back.jpg" alt="">
+            </div>
+            <div class="slide">
+                  <img src="peugeot_208/yellow_side.jpg" alt="">
+            </div>
+            <div class="slide">
+                 <img src="peugeot_208/yellow_back.jpg" alt="">
+            </div>
+        </div>
 
-    <div style="color: white; text-align: right; padding: 5% 10% 19% 0;">
-        <p style="text-align: ">2020 év autója</p>
-        <p>Peugeot 208</p>
-        <p>Kapható: <br>- Benzin<br>- Dízel<br>- Elektromos</p>
+         <div class="navigation">
+            <label for="r1" class="bar"></label>
+            <label for="r2" class="bar"></label>
+            <label for="r3" class="bar"></label>
+            <label for="r4" class="bar"></label>
+            <label for="r5" class="bar"></label>
+         </div>
     </div>
 
-</div>
+
+
+
 
 <div class="search" align="center" id="search">
 
