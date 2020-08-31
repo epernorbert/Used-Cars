@@ -136,9 +136,13 @@ $queryResult = mysqli_num_rows($result);
 
 if($queryResult > 0){
     while($row = mysqli_fetch_assoc($result)){
-        echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+        if($row['uzemanyag'] == 'Elektromos'){
+            echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left; background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+         } else {
+             echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+        }
     }
-} else{
+} else {
     echo  '<div style="background-color: red;">
                  <script>                                                  
                           alert("A keresésnek nincs eredménye!");

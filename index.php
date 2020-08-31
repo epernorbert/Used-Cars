@@ -45,7 +45,7 @@ include_once 'action.php';
     <?php
     if(isset($_SESSION['u_id'])){
         echo '<form action="includes/logout.inc.php" method="POST">
-                  <button type="submit" name="submit" style="float:left; font-size: 15px;">Logout</button>
+                  <button type="submit" name="submit" style="float:left; font-size: 15px; cursor:pointer;">Logout</button>
               </form>';
         echo '<div style="padding: 5px; font-size: 20px;">' . '<a href="profile.php" style="text-decoration: none; color: blue;">' . $_SESSION['u_uid'] . '</a>'  . '</div>' .
                   '<style type="text/css"> 
@@ -57,11 +57,6 @@ include_once 'action.php';
 
     ?>
 </div>
-
-
-
-
-
 
 
 <?php
@@ -78,42 +73,39 @@ function load_brands(){
 }
 ?>
 
-    <div class="slidershow middle">
 
-         <div class="slides">
-                <input type="radio" name="r" id="r1" checked>
-                <input type="radio" name="r" id="r2">
-                <input type="radio" name="r" id="r3">
-                <input type="radio" name="r" id="r4">
-                <input type="radio" name="r" id="r5">
-            <div class="slide s1">
-                <img src="peugeot_208/blue_side.jpg" alt="">
-            </div>
-            <div class="slide">
-                <img src="peugeot_208/blue_front.jpg" alt="">
-            </div>
-            <div class="slide">
-                  <img src="peugeot_208/blue_back.jpg" alt="">
-            </div>
-            <div class="slide">
-                  <img src="peugeot_208/yellow_side.jpg" alt="">
-            </div>
-            <div class="slide">
-                 <img src="peugeot_208/yellow_back.jpg" alt="">
-            </div>
+ <div class="slidershow middle">
+  <div class="slides">
+            <input type="radio" name="r" id="r1" checked>
+            <input type="radio" name="r" id="r2">
+            <input type="radio" name="r" id="r3">
+            <input type="radio" name="r" id="r4">
+            <input type="radio" name="r" id="r5">
+        <div class="slide s1">
+            <img src="peugeot_208/blue_side.jpg" alt="">
         </div>
-
-         <div class="navigation">
-            <label for="r1" class="bar"></label>
-            <label for="r2" class="bar"></label>
-            <label for="r3" class="bar"></label>
-            <label for="r4" class="bar"></label>
-            <label for="r5" class="bar"></label>
-         </div>
+        <div class="slide">
+            <img src="peugeot_208/blue_front.jpg" alt="">
+        </div>
+        <div class="slide">
+              <img src="peugeot_208/blue_back.jpg" alt="">
+        </div>
+        <div class="slide">
+              <img src="peugeot_208/yellow_side.jpg" alt="">
+        </div>
+        <div class="slide">
+             <img src="peugeot_208/yellow_back.jpg" alt="">
+        </div>
     </div>
 
-
-
+     <div class="navigation">
+        <label for="r1" class="bar"></label>
+        <label for="r2" class="bar"></label>
+        <label for="r3" class="bar"></label>
+        <label for="r4" class="bar"></label>
+        <label for="r5" class="bar"></label>
+     </div>
+</div>
 
 
 <div class="search" align="center" id="search">
@@ -161,6 +153,7 @@ function load_brands(){
 <script type="text/javascript">
     
     //Check input fields in SEARCH
+
     function check_min_year(){
         var date_start = document.getElementById("date_start").value;
         var regex = /^[1-9]/;
@@ -183,6 +176,73 @@ function load_brands(){
         }
     }
 
+    function check_max_hp() {
+            var max_hp = document.getElementById("max_hp").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(max_hp)){
+            document.getElementById("max_hp").value = '';
+        } else if(max_hp.length > 4){
+            var limit = max_hp.slice(0, 4);
+            document.getElementById("max_hp").value = limit;
+        }
+    }
+
+    function check_min_hp(){
+        var min_hp = document.getElementById("min_hp").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(min_hp)){
+            document.getElementById("min_hp").value = '';
+        } else if(min_hp.length > 4){
+            var limit = min_hp.slice(0, 4);
+            document.getElementById("min_hp").value = limit;
+        }
+    }
+
+    function check_min_price(){
+        var min_price = document.getElementById("min_price").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(min_price)){
+            document.getElementById("min_price").value = '';
+        } else if(min_price.length > 10){
+            var limit = min_price.slice(0, 10);
+            document.getElementById("min_price").value = limit;
+        }
+    }
+
+    function check_date_end(){
+        var date_end = document.getElementById("date_end").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(date_end)){
+            document.getElementById("date_end").value = '';
+        } else if(date_end.length > 4){
+            var limit = date_end.slice(0, 4);
+            document.getElementById("date_end").value = limit;
+        }
+    }
+
+    function check_max_cm3(){
+        var max_cm3 = document.getElementById("max_cm3").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(max_cm3)){
+            document.getElementById("max_cm3").value = '';
+        } else if(max_cm3.length > 4){
+            var limit = max_cm3.slice(0, 4);
+            document.getElementById("max_cm3").value = limit;
+        }
+    }
+
+    function check_min_cm3(){
+        var min_cm3 = document.getElementById("min_cm3").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(min_cm3)){
+            document.getElementById("min_cm3").value = '';
+        } else if(min_cm3.length > 4){
+            var limit = min_cm3.slice(0, 4);
+            document.getElementById("min_cm3").value = limit;
+        }
+    }
+
+
 </script>
 
 <script type="text/javascript">
@@ -190,17 +250,20 @@ function load_brands(){
         document.getElementById("advanced").innerHTML = 
         "<table>"+
             "<tr>"+
-                "<td><input type='number' name='max_hp' placeholder='max le' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_hp' placeholder='min le' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_price' placeholder='min ár' style='width: 120px;'></td>"+
-                "<td><input type='number' name='date_end' placeholder='évjárat(ig)' style='width: 120px;'></td>"+
-                "<td><input type='number' name='max_cm3' placeholder='max cm3' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_cm3' placeholder='min cm3' style='width: 120px;'></td>"+                                
+                "<td><input type='number' name='max_hp' id='max_hp' placeholder='max le' onkeypress='return event.charCode >= 48' oninput='check_max_hp()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_hp' id='min_hp' placeholder='min le' onkeypress='return event.charCode >= 48' oninput='check_min_hp()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_price' id='min_price' placeholder='min ár' onkeypress='return event.charCode >= 48' oninput='check_min_price()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='date_end' id='date_end' placeholder='évjárat(ig)' onkeypress='return event.charCode >= 48' oninput='check_date_end()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='max_cm3' id='max_cm3' placeholder='max cm3' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_cm3' id='min_cm3' placeholder='min cm3' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()' style='width: 120px;'></td>"+                                
             "<tr>"+
         "</table>"
 
     }
+
 </script>
+
+
 <div class="top_brands">Népszerű márkák</div>
 <div class="brand" style="font-size: 20px; margin: 0 10% 4% 10%; border-bottom: 1px solid blue; border-top: 1px solid blue;">
     <ul class="brand_ul">    
@@ -216,15 +279,20 @@ function load_brands(){
 
 <div style="margin: 0 0 0 10%; width: 55%;  float: left;">
     <?php
-        $sql = "SELECT c.marka, c.tipus, c.évjárat, c.ar, ci.image_name, c.car_id, ci.car_id from cars c JOIN car_images ci ON c.car_id=ci.car_id GROUP BY user_id ORDER BY c.car_id desc;";
+        $sql = "SELECT c.marka, c.tipus, c.évjárat, c.ar, c.uzemanyag, ci.image_name, c.car_id, ci.car_id from cars c JOIN car_images ci ON c.car_id=ci.car_id GROUP BY user_id ORDER BY c.car_id desc;";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
         $i=0;
         if($resultcheck > 0){
             while($row = mysqli_fetch_assoc($result)){
                  if( $i < 12 /*listázás szabályozása*/){
-                echo '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
-                $i++;
+                    if($row['uzemanyag'] == 'Elektromos'){
+                        echo '<div class="index_db" style="background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
+                            $i++;  
+                    } else {
+                        echo '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
+                        $i++;
+                    }
                 }
              }
         }
