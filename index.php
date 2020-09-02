@@ -250,12 +250,12 @@ function load_brands(){
         document.getElementById("advanced").innerHTML = 
         "<table>"+
             "<tr>"+
-                "<td><input type='number' name='max_hp' id='max_hp' placeholder='max le' onkeypress='return event.charCode >= 48' oninput='check_max_hp()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_hp' id='min_hp' placeholder='min le' onkeypress='return event.charCode >= 48' oninput='check_min_hp()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='max_hp' id='max_hp' placeholder='max lóerő' onkeypress='return event.charCode >= 48' oninput='check_max_hp()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_hp' id='min_hp' placeholder='min lóerő' onkeypress='return event.charCode >= 48' oninput='check_min_hp()' style='width: 120px;'></td>"+
                 "<td><input type='number' name='min_price' id='min_price' placeholder='min ár' onkeypress='return event.charCode >= 48' oninput='check_min_price()' style='width: 120px;'></td>"+
                 "<td><input type='number' name='date_end' id='date_end' placeholder='évjárat(ig)' onkeypress='return event.charCode >= 48' oninput='check_date_end()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='max_cm3' id='max_cm3' placeholder='max cm3' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_cm3' id='min_cm3' placeholder='min cm3' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()' style='width: 120px;'></td>"+                                
+                "<td><input type='number' name='max_cm3' id='max_cm3' placeholder='max köbcenti' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()' style='width: 120px;'></td>"+
+                "<td><input type='number' name='min_cm3' id='min_cm3' placeholder='min köbcenti' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()' style='width: 120px;'></td>"+                                
             "<tr>"+
         "</table>"
 
@@ -287,7 +287,7 @@ function load_brands(){
             while($row = mysqli_fetch_assoc($result)){
                  if( $i < 12 /*listázás szabályozása*/){
                     if($row['uzemanyag'] == 'Elektromos'){
-                        echo '<div class="index_db" style="background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
+                        echo '<div class="index_db" style="background-color: #a3d698;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';
                             $i++;  
                     } else {
                         echo '<div class="index_db">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>';

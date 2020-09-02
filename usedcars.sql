@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Gép: 127.0.0.1
--- Létrehozás ideje: 2020. Aug 29. 17:27
+-- Létrehozás ideje: 2020. Sze 02. 19:27
 -- Kiszolgáló verziója: 10.4.11-MariaDB
 -- PHP verzió: 7.2.28
 
@@ -53,20 +53,22 @@ CREATE TABLE `cars` (
 --
 
 INSERT INTO `cars` (`user_id`, `marka`, `tipus`, `évjárat`, `ar`, `uzemanyag`, `kobcenti`, `loero`, `body_style`, `mileage`, `euro`, `colour`, `transmission`, `weight`, `identification_number`, `description`, `car_id`) VALUES
-(50, 'Opel', 'Astra H', 2008, 3500, 'Benzin', 1700, 105, 'ferdehátú', 205135, 'euro 4', 'szűrke', 'manuális - 5', 1350, 'ASD123BASD', 'Fullos autó. Modositva.\r\n', 200),
-(51, 'Opel', 'Astra J', 2014, 6900, 'Benzin', 1600, 120, 'kombi', 125895, 'Euro 5', 'Világoskék', 'manuális - 5', 1450, 'ASD489VBF', 'Fullos autó.', 201),
-(52, 'Opel', 'Astra K', 2016, 8000, 'Dizel', 2000, 140, 'kombi', 85965, 'Euro 6', 'sötétszürke', 'manuális - 6', 1490, 'BHJ158WER', 'Fullos autó.', 202),
-(53, 'Citroen', 'C4', 2009, 4500, 'Dizel', 1900, 125, 'ferdehátú', 198458, 'Euro 4', 'fekete', 'manuális - 6', 1410, 'JKL123JIO', 'Extra autó.', 203),
-(54, 'Volkswagen', 'Passat cc', 2010, 9500, 'Benzin', 2000, 190, 'Coupe', 145879, 'euro 5', 'Fehér', 'Automata - 6', 1450, 'DFS233DDD', 'Nagyon fullos autó.', 204),
-(55, 'Opel', 'Corsa D', 2010, 3900, 'Benzin', 1200, 60, 'Ferdehátú', 156789, 'euro 4', 'Kék', 'Manuális - 5', 1290, 'VGF444ASW', 'Fullos kis kék autó.', 205),
-(56, 'Fiat', 'Grande Punto', 2011, 4000, 'Benzin', 1300, 80, 'Ferdehátú', 133548, 'euro 4', 'Fehér', 'Manuális - 5', 1250, 'VVV489QWE', 'Fullos kis fehér kocsi.', 206),
-(57, 'Ford', 'Ranger', 2006, 5000, 'Dizel', 3000, 200, 'Pickup', 299845, 'euro 3', 'Fehér', 'Automata - 6', 1755, 'VGH789QWE', 'Fullos kis tereprejáros.', 207),
-(58, 'Volkswagen', 'Golf 5', 2008, 5000, 'Dizel', 1900, 105, 'Ferdehátú', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1423, 'BGH114WEQ', 'Fullos kis szürke autó.', 208),
-(59, 'Volkswagen', 'Golf 4', 2003, 2900, 'Benzin', 1600, 107, 'Ferdehátú', 356878, 'euro 3', 'Kék', 'Manuális - 5', 1390, 'BHJ115QWE', 'Fullos kis golf.', 209),
-(60, 'Volkswagen', 'Passat', 2008, 5900, 'Dizel', 2000, 140, 'Kombi', 190000, 'euro 4', 'Piros', 'Manuális - 6', 1545, 'VFG444AWE', 'Fullos kis kombi.', 210),
-(61, 'Volvo', 'XC90', 2006, 5100, 'Dizel', 2500, 165, 'Városi terepjáró', 255489, 'euro 3', 'Kék', 'Manuális - 6', 1650, 'VGZ789QWE', 'Fullos kis SUV.', 211),
-(62, 'Audi', 'A4', 2010, 9000, 'Dizel', 2000, 150, 'Sedan', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1500, 'ASD456QWE', 'Szürke autó.', 236),
-(81, 'Audi', 'A6', 2010, 9500, 'Dizel', 1950, 145, 'Sedan', 195789, 'euro 5', 'Fekete', 'Manuális - 6', 1500, 'VBG456QWE', 'Fullos fekete autó!', 234);
+(50, 'Opel', 'Astra H', 2007, 3200, 'Benzin', 1600, 120, 'Ferdehátú', 250000, 'euro 4', 'Szürke', 'Manuális - 5', 1390, '35438765374834876', 'Rövid leírás. Rövid leírás. Rövid leírás. Rövid leírás.', 289),
+(51, 'Opel', 'Astra J', 2010, 4800, 'Benzin', 1600, 110, 'Kombi', 150000, 'euro 5', 'Kék', 'Manuális - 6', 1500, '12356985477854785', 'Rövid leírás.Rövid leírás.', 291),
+(52, 'Opel', 'Astra K', 2015, 8000, 'Dizel', 1700, 135, 'Kombi', 99000, 'euro 6', 'Szürke', 'Manuális - 6', 1560, '21321321321321312', 'Rövid leírás', 295),
+(53, 'Citroen', 'C4', 2009, 4500, 'Dizel', 1900, 125, 'ferdehátú', 198458, 'Euro 4', 'fekete', 'manuális - 6', 1410, 'JKL123JIO15847854', 'Extra autó.', 203),
+(54, 'Volkswagen', 'Passat cc', 2010, 9500, 'Benzin', 2000, 190, 'Coupe', 145879, 'euro 5', 'Fehér', 'Automata - 6', 1450, 'DFS233DDD12587458', 'Nagyon fullos autó.', 204),
+(55, 'Opel', 'Corsa D', 2010, 3900, 'Benzin', 1200, 60, 'Ferdehátú', 156789, 'euro 4', 'Kék', 'Manuális - 5', 1290, 'VGF444ASW44587785', 'Fullos kis kék autó.', 205),
+(56, 'Fiat', 'Grande Punto', 2011, 4000, 'Benzin', 1300, 80, 'Ferdehátú', 133548, 'euro 4', 'Fehér', 'Manuális - 5', 1250, 'VVV489QWE55555555', 'Fullos kis fehér kocsi.', 206),
+(57, 'Ford', 'Ranger', 2006, 5000, 'Dizel', 3000, 200, 'Pickup', 299845, 'euro 3', 'Fehér', 'Automata - 6', 1755, 'VGH789QWEhhgtzgfd', 'Fullos kis tereprejáros.', 207),
+(58, 'BMW', 'I3', 2014, 14000, 'Elektromos', 1, 95, 'Ferdehátú', 90000, 'euro 6', 'Szürke', 'Automata - 4', 1500, '32132121532SADSAD', 'Jó kis zöld autó.', 208),
+(59, 'Volkswagen', 'Golf 4', 2003, 2900, 'Benzin', 1600, 107, 'Ferdehátú', 356878, 'euro 3', 'Kék', 'Manuális - 5', 1390, 'BHJ115QWE12487458', 'Fullos kis golf.', 209),
+(60, 'Volkswagen', 'Passat', 2008, 5900, 'Dizel', 2000, 140, 'Kombi', 190000, 'euro 4', 'Piros', 'Manuális - 6', 1545, 'VFG444AWE12459784', 'Fullos kis kombi.', 210),
+(61, 'Volvo', 'XC90', 2006, 5100, 'Dizel', 2500, 165, 'Városi terepjáró', 255489, 'euro 3', 'Kék', 'Manuális - 6', 1650, 'VGZ789QWE45874587', 'Fullos kis SUV.', 211),
+(62, 'Audi', 'A4', 2010, 9000, 'Dizel', 2000, 150, 'Sedan', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1500, 'ASD456QWE45789451', 'Szürke autó.', 236),
+(81, 'Audi', 'A6', 2010, 9500, 'Dizel', 1950, 145, 'Sedan', 195789, 'euro 5', 'Fekete', 'Manuális - 6', 1500, 'VBG456QWEftwdfr23', 'Fullos fekete autó!', 234),
+(82, 'Volkswagen', 'Golf 5', 2008, 5000, 'Dizel', 1900, 105, 'Ferdehátú', 256879, 'euro 4', 'Szürke', 'Manuális - 6', 1423, '', 'Fullos kis szürke autó.', 285),
+(83, 'Volkswagen', 'Golf 7', 2016, 18000, 'Elektromos', 1, 135, 'Ferdehátú', 30000, 'euro 6', 'Fehér', 'Automata - 7', 1680, '38296583567438653', 'Nagyon jó kis zöld autó   . Elvisz A-ból B-be full ingyen. Na jó azért nem, mert az elektromos áramot is meg kell termelni. Random. Random. Random. Random. Random. Random. Random. Random. Random. ', 297);
 
 -- --------------------------------------------------------
 
@@ -123,7 +125,23 @@ INSERT INTO `car_extras` (`extras`, `car_id`) VALUES
 ('Multifunkcionális kormány', 234),
 ('Klima', 236),
 ('Napfénytető', 236),
-('Centrálzár', 236);
+('Centrálzár', 236),
+('Riasztó', 208),
+('Led Fényszóró', 208),
+('Xenon fényszóró', 208),
+('Tolatóradar', 208),
+('Multifunkcionális kormány', 208),
+('Kartámasz', 208),
+('Tempomat', 297),
+('Klima', 297),
+('Napfénytető', 297),
+('Centrálzár', 297),
+('Riasztó', 297),
+('Led Fényszóró', 297),
+('Xenon fényszóró', 297),
+('Tolatóradar', 297),
+('Multifunkcionális kormány', 297),
+('Kartámasz', 297);
 
 -- --------------------------------------------------------
 
@@ -142,21 +160,6 @@ CREATE TABLE `car_images` (
 --
 
 INSERT INTO `car_images` (`image_id`, `car_id`, `image_name`) VALUES
-(1878, 200, '../uploads/5f03786a9cfab4.36419294.astra_h1.jpg'),
-(1879, 200, '../uploads/5f03786a9e8cb6.38699758.astra_h2.jpg'),
-(1880, 200, '../uploads/5f03786a9fe6a4.20121920.astra_h3.jpg'),
-(1881, 200, '../uploads/5f03786aa14b30.70837491.astra_h4.jpg'),
-(1882, 200, '../uploads/5f03786aa28928.02888569.astra_h5.jpg'),
-(1883, 201, '../uploads/5f0378ec1e8f51.31896134.1.jpg'),
-(1884, 201, '../uploads/5f0378ec205219.25171880.2.jpg'),
-(1885, 201, '../uploads/5f0378ec218f67.60700273.3.jpg'),
-(1886, 201, '../uploads/5f0378ec235688.04063348.4.jpg'),
-(1887, 201, '../uploads/5f0378ec24a763.55531488.5.jpg'),
-(1888, 202, '../uploads/5f0379392f11b5.27035074.3a3f31da6a5f-1920x1080.jpg'),
-(1889, 202, '../uploads/5f0379393125d0.23943926.7a5e4260ac6e-1920x1080.jpg'),
-(1890, 202, '../uploads/5f03793932de03.88665737.ac8b3df886fc-1920x1080.jpg'),
-(1891, 202, '../uploads/5f03793934c977.26467200.b28fc15a1160-1920x1080.jpg'),
-(1892, 202, '../uploads/5f0379393684f8.91321209.ecf9473e597a-1920x1080.jpg'),
 (1893, 203, '../uploads/5f037984abc4c4.72419687.1bf842afb478-1920x1080.jpg'),
 (1894, 203, '../uploads/5f037984ae28c9.69129931.653b82a68d3b-1920x1080.jpg'),
 (1895, 203, '../uploads/5f037984afe707.22325191.e6db92228474-1920x1080.jpg'),
@@ -182,11 +185,11 @@ INSERT INTO `car_images` (`image_id`, `car_id`, `image_name`) VALUES
 (1915, 207, '../uploads/5f037aaea8e075.71744253.28d3572b4ebb-1920x1080.jpg'),
 (1916, 207, '../uploads/5f037aaeaa2752.80025236.d5c6e9c80285-1920x1080.jpg'),
 (1917, 207, '../uploads/5f037aaeabcaa8.35933918.fcc9beef27af-1920x1080.jpg'),
-(1918, 208, '../uploads/5f037aeb7bb4f4.84888099.07fa6a1a05ee-1920x1080.jpg'),
-(1919, 208, '../uploads/5f037aeb7d3f08.12285268.95f69f335972-1920x1080.jpg'),
-(1920, 208, '../uploads/5f037aeb7ef181.70060495.725a0cd790c2-1920x1080.jpg'),
-(1921, 208, '../uploads/5f037aeb8086f3.34964540.b7b0430ab663-1920x1080.jpg'),
-(1922, 208, '../uploads/5f037aeb8205f2.81365015.b37b12028b60-1920x1080.jpg'),
+(1918, 285, '../uploads/5f037aeb7bb4f4.84888099.07fa6a1a05ee-1920x1080.jpg'),
+(1919, 285, '../uploads/5f037aeb7d3f08.12285268.95f69f335972-1920x1080.jpg'),
+(1920, 285, '../uploads/5f037aeb7ef181.70060495.725a0cd790c2-1920x1080.jpg'),
+(1921, 285, '../uploads/5f037aeb8086f3.34964540.b7b0430ab663-1920x1080.jpg'),
+(1922, 285, '../uploads/5f037aeb8205f2.81365015.b37b12028b60-1920x1080.jpg'),
 (1923, 209, '../uploads/5f037b2a62bbc0.33565021.5d1a23392cdb-800x600.jpg'),
 (1924, 209, '../uploads/5f037b2a641e52.14071366.9137f6f110a7-800x600.jpg'),
 (1925, 209, '../uploads/5f037b2a6558d8.55210676.b4a0aeba987d-800x600.jpg'),
@@ -211,7 +214,36 @@ INSERT INTO `car_images` (`image_id`, `car_id`, `image_name`) VALUES
 (2008, 236, '../uploads/5f25804841b876.39958004.2.jpg'),
 (2009, 236, '../uploads/5f258048439739.58727311.3.jpg'),
 (2010, 236, '../uploads/5f258048459a47.79655261.4.jpg'),
-(2011, 236, '../uploads/5f25804847bc51.27014457.5.jpg');
+(2011, 236, '../uploads/5f25804847bc51.27014457.5.jpg'),
+(2143, 208, '../uploads/5f4d39a5c2f374.01672968.1.jpg'),
+(2144, 208, '../uploads/5f4d39a5c46336.04514254.2.jpg'),
+(2145, 208, '../uploads/5f4d39a5c61e48.72458835.3.jpg'),
+(2146, 208, '../uploads/5f4d39a5c78897.12276246.4.jpg'),
+(2147, 208, '../uploads/5f4d39a5c8ea56.92692362.5.jpg'),
+(2157, 289, '../uploads/5f4e47a7e34314.65424912.astra_h1.jpg'),
+(2158, 289, '../uploads/5f4e47a7e4c6e2.72596294.astra_h2.jpg'),
+(2159, 289, '../uploads/5f4e47a7e61e58.57872329.astra_h3.jpg'),
+(2160, 289, '../uploads/5f4e47a7e749a6.05575329.astra_h4.jpg'),
+(2161, 289, '../uploads/5f4e47a7e88e21.38511714.astra_h5.jpg'),
+(2167, 291, '../uploads/5f4e49072a8ee1.08217821.1.jpg'),
+(2168, 291, '../uploads/5f4e49072beff8.35286965.2.jpg'),
+(2169, 291, '../uploads/5f4e49072d94c0.78539322.3.jpg'),
+(2170, 291, '../uploads/5f4e49072f2b71.21342088.4.jpg'),
+(2171, 291, '../uploads/5f4e490730cee7.83475157.5.jpg'),
+(2179, 295, '../uploads/5f4e4db2291108.10532822.3a3f31da6a5f-1920x1080.jpg'),
+(2180, 295, '../uploads/5f4e4db22a4f91.63183891.7a5e4260ac6e-1920x1080.jpg'),
+(2181, 295, '../uploads/5f4e4db22b8932.58104870.ac8b3df886fc-1920x1080.jpg'),
+(2182, 295, '../uploads/5f4e4db22cc5b0.88482317.b28fc15a1160-1920x1080.jpg'),
+(2183, 295, '../uploads/5f4e4db22e21b6.91568596.ecf9473e597a-1920x1080.jpg'),
+(2193, 297, '../uploads/5f4e4e45672674.41950342.1.jpg'),
+(2194, 297, '../uploads/5f4e4e4568f878.87827243.2.jpg'),
+(2195, 297, '../uploads/5f4e4e456a5cb3.63448030.3.jpg'),
+(2196, 297, '../uploads/5f4e4e456baee2.92738636.4.jpg'),
+(2197, 297, '../uploads/5f4e4e456d38e2.53089839.5.jpg'),
+(2198, 297, '../uploads/5f4e4e456e6c15.00649254.6.jpg'),
+(2199, 297, '../uploads/5f4e4e456fb617.54799794.7.jpg'),
+(2200, 297, '../uploads/5f4e4e45715078.11182700.8.jpg'),
+(2201, 297, '../uploads/5f4e4e4572be76.79091361.9.jpg');
 
 -- --------------------------------------------------------
 
@@ -368,7 +400,8 @@ INSERT INTO `car_type` (`type_id`, `brands_id`, `type_name`) VALUES
 (370, 13, 'S90'),
 (371, 13, 'V40'),
 (372, 13, 'V50'),
-(373, 13, 'V60');
+(373, 13, 'V60'),
+(374, 2, 'I3');
 
 -- --------------------------------------------------------
 
@@ -440,7 +473,8 @@ INSERT INTO `users` (`user_id`, `user_uid`, `user_first`, `user_last`, `user_ema
 (86, 'masodikUjsagiro', 'masodikUjsagiro', 'masodikUjsagiro', 'masodikUjsagiro@gmail.com', '$2y$10$Hm8282gQP6XzLuCrVVvlFOMZQe.IFPtYfuKx6NTJgPrGCTlyYF0gS', 'writer', 213123),
 (87, 'harmadikUjsagiro', 'harmadikUjsagiro', 'harmadikUjsagiro', 'harmadikUjsagiro@gmail.com', '$2y$10$SxJSk..62xXHqdyssivAVunIyd65IEGK0dvURv3cDrju.uBrnPiTS', 'writer', 43543543),
 (88, 'negyedikUjsagiro', 'negyedikUjsagiro', 'negyedikUjsagiro', 'negyedikUjsagiro@gmail.com', '$2y$10$5FF5CVmBIHL7nNH7ZQ7IrOJyWf9D2S95LVO3S.Ep3wWx/eGSDO.PO', 'writer', 345435435),
-(89, 'otodikUjsagiro', 'otodikUjsagiro', 'otodikUjsagiro', 'otodikUjsagiro@gmail.com', '$2y$10$hkANOERfPxJXDdcVv3QUD.byn1bBrHvN747OA9cnyauRAVs9q8Pwi', 'writer', 2147483647);
+(89, 'otodikUjsagiro', 'otodikUjsagiro', 'otodikUjsagiro', 'otodikUjsagiro@gmail.com', '$2y$10$hkANOERfPxJXDdcVv3QUD.byn1bBrHvN747OA9cnyauRAVs9q8Pwi', 'writer', 2147483647),
+(90, 'tizennyolc', 'Tizennyolc', 'Tizennyolc', 'tizennyolc@gmail.com', '$2y$10$Q9RF9gQ8e0fYQwbbMnnZO.9jA8Zq4J7TmmNE5Aeaz9WHNHs6EejoW', 'user', 1561561561);
 
 --
 -- Indexek a kiírt táblákhoz
@@ -500,7 +534,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT a táblához `cars`
 --
 ALTER TABLE `cars`
-  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=285;
+  MODIFY `car_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=298;
 
 --
 -- AUTO_INCREMENT a táblához `car_brands`
@@ -512,13 +546,13 @@ ALTER TABLE `car_brands`
 -- AUTO_INCREMENT a táblához `car_images`
 --
 ALTER TABLE `car_images`
-  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2143;
+  MODIFY `image_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2202;
 
 --
 -- AUTO_INCREMENT a táblához `car_type`
 --
 ALTER TABLE `car_type`
-  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=374;
+  MODIFY `type_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=375;
 
 --
 -- AUTO_INCREMENT a táblához `news`
@@ -530,7 +564,7 @@ ALTER TABLE `news`
 -- AUTO_INCREMENT a táblához `users`
 --
 ALTER TABLE `users`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=90;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- Megkötések a kiírt táblákhoz

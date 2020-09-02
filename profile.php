@@ -120,20 +120,21 @@ if(!isset($_SESSION['u_uid'])){
             document.getElementById("form").innerHTML = "<form action='includes/update.inc.php' method='post' ><br>  <input type='text' name='u_first' value='<?php echo $_SESSION['u_first']; ?>'><br> <input type='text' name='u_last' value='<?php echo $_SESSION['u_last']; ?>'><br> <input type='text' name='u_email' value='<?php echo $_SESSION['u_email']; ?>'><br> <input type='number' name='u_telephone'  value='<?php echo $_SESSION['u_telephone']; ?>'><br> <button type='submit' name='submit' value='save'>mentés </form>";
         }
     </script>
+
     <script>
         function cars(){
             document.getElementById("cars").innerHTML =
                 "<form action='includes/update.car.inc.php' method='post' > <br> " +
-                    "<input type='number' name='évjárat' value='<?php echo $GLOBALS['évjárat']; ?>'> <br> " +
-                    "<input type='number' name='ar' value='<?php echo $GLOBALS['ar']; ?>'> <br>" +
+                    "<input type='number' name='évjárat' id='year' oninput='year_input()' value='<?php echo $GLOBALS['évjárat']; ?>'> <br> " +
+                    "<input type='number' name='ar' id='price' oninput='price_input()' value='<?php echo $GLOBALS['ar']; ?>'> <br>" +
                     "<select name='fuel_type' id='fuel_type'>" +
                         "<option value='<?php echo $GLOBALS['uzemanyag']; ?>' ><?php echo $GLOBALS['uzemanyag']; ?></option>" +
                         "<option value='Benzin'>Benzin</option>" +
                         "<option value='Dizel'>Dizel</option>" +
                         "<option value='Elektromos'>Elektromos</option>" +
                     "</select><br>" +
-                    "<input type='number' name='kobcenti' value='<?php echo $GLOBALS['kobcenti']; ?>'> <br> " +
-                    "<input type='number' name='loero' value='<?php echo $GLOBALS['loero']; ?>'> <br> " +
+                    "<input type='number' name='kobcenti' id='cm3' oninput='cm3_input()' value='<?php echo $GLOBALS['kobcenti']; ?>'> <br> " +
+                    "<input type='number' name='loero' id='hp' oninput='hp_input()' value='<?php echo $GLOBALS['loero']; ?>'> <br> " +
                     "<select name='body_style' id='body_style'>" +
                        "<option value='<?php echo $GLOBALS['body_style']; ?>' ><?php echo $GLOBALS['body_style']; ?></option>" +
                        "<option value='Ferdehátú'>Ferdehátú</option>" +
@@ -144,7 +145,7 @@ if(!isset($_SESSION['u_uid'])){
                        "<option value='Városi terepjáró'>Városi terepjáró</option>" +
                        "<option value='Coupe'>Coupe</option>" +
                     "</select><br>" +
-                    "<input type='number' name='mileage' value='<?php echo $GLOBALS['mileage']; ?>'> <br>" +
+                    "<input type='number' name='mileage' id='mileage' oninput='mileage_input()' value='<?php echo $GLOBALS['mileage']; ?>'> <br>" +
                     "<select name='euro' id='euro'>" +
                         "<option value='<?php echo $GLOBALS['euro']; ?>' ><?php echo $GLOBALS['euro']; ?></option>" +
                         "<option value='euro 1'>Euro 1</option>" +
@@ -180,12 +181,104 @@ if(!isset($_SESSION['u_uid'])){
                     "<option value='Automata - 6'>Automata - 6</option>" +
                     "<option value='Automata - 7'>Automata - 7</option>" +
                 "</select><br>" +
-                    "<input type='number' name='weight' value='<?php echo $GLOBALS['weight']; ?>'> <br>" +
-                    "<input type='text' name='identification_number' value='<?php echo $GLOBALS['identification_number']; ?>'> <br>" +
-                    "<textarea rows='10' cols='22' name='description'><?php echo $GLOBALS['description']; ?></textarea> <br>" +
+                    "<input type='number' name='weight' id='weight' oninput='weight_input()' value='<?php echo $GLOBALS['weight']; ?>'> <br>" +
+                    "<input type='text' name='identification_number' id='identification_number' oninput='identification_number_input()' value='<?php echo $GLOBALS['identification_number']; ?>'> <br>" +
+                    "<textarea rows='10' cols='22' name='description' id='description' onkeydown='if(event.keyCode == 13) return false;'  oninput='description_input()' ><?php echo $GLOBALS['description']; ?></textarea> <br>" +
                     "<button type='submit' name='submit' value='save'> mentés " +
                 "</form>";
         }
+    </script>
+
+    <script type="text/javascript">
+        function description_input(){
+            var description = document.getElementById("description").value;
+            var regex = /^[0-9a-zA-ZÁÉÍÓÖŐÚÜŰáéíóöőúüű,.-\s\(\)]*$/;
+            if(!regex.test(description)){
+                document.getElementById("description").value = description.slice(0, description.length-1)                    
+            } else if(description.length > 200){
+                var limit = description.slice(0, 200);
+                document.getElementById("description").value = limit;
+            }
+        }
+
+        function year_input(){
+            var year = document.getElementById("year").value;
+            var regex = /^[1-9]{1,4}/;
+            if(!regex.test(year)){
+                document.getElementById("year").value = '';
+            } else if(year.length > 4){
+                var limit = year.slice(0, 4);
+                document.getElementById("year").value = limit;
+            }
+        }
+
+        function price_input(){
+            var price = document.getElementById("price").value;
+            var regex = /^[1-9]/;
+            if(!regex.test(price)){
+                document.getElementById("price").value = '';
+            } else if(price.length > 10){
+                var limit = price.slice(0, 10);
+                document.getElementById("price").value = limit;
+            }
+        }
+
+        function cm3_input(){
+        var cm3 = document.getElementById("cm3").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(cm3)){
+            document.getElementById("cm3").value = '';
+        } else if(cm3.length > 4){
+            var limit = cm3.slice(0, 4);
+            document.getElementById("cm3").value = limit;
+        }
+    }
+
+
+    function hp_input(){
+        var hp = document.getElementById("hp").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(hp)){
+            document.getElementById("hp").value = '';
+        } else if(hp.length > 4){
+            var limit = hp.slice(0, 4);
+            document.getElementById("hp").value = limit;
+        }
+    }
+
+    function mileage_input(){
+        var mileage = document.getElementById("mileage").value;
+        var regex = /^[1-9]/;
+        if(!regex.test(mileage)){
+            document.getElementById("mileage").value = '';
+        } else if(mileage.length > 7){
+            var limit = mileage.slice(0, 7);
+            document.getElementById("mileage").value = limit;
+        }
+    }
+
+    function weight_input(){
+        var weight = document.getElementById("weight").value;
+        var regex = /^[1-9-]/;
+        if(!regex.test(weight)){
+            document.getElementById("weight").value = '';
+        } else if(weight.length > 4){
+            var limit = weight.slice(0, 4);
+            document.getElementById("weight").value = limit;
+        }
+    }
+
+    function identification_number_input(){
+        var id_number = document.getElementById("identification_number").value;
+        var regex = /^[0-9a-zA-Z]*$/;
+        if(!regex.test(id_number)){
+            document.getElementById("identification_number").value = '';
+        } else if(id_number.length > 17){
+            var limit = id_number.slice(0, 17);
+            document.getElementById("identification_number").value = limit;
+        }
+    }
+
     </script>
 
     <?php
@@ -196,7 +289,7 @@ if(!isset($_SESSION['u_uid'])){
                   <h3>Hírdetés:</h3>
               </div>
               
-              <div style="clear: both; float: left; margin: 0 2% 0 10%">
+              <div style="clear: both; float: left; margin: 0 2% 0 10%; background-color: red; width: 40%;">
         <table>
             <tr>
                 <td>Márka: </td>

@@ -167,6 +167,7 @@ function load_brands(){
                 <option value='Narancssárga'>Narancssárga</option>
                 <option value='Sárga'>Sárga</option>
                 <option value='Zöld'>Zöld</option>
+                <option value='Kék'>Kék</option>
                 </select><br>
             <select name='transmission' id='transmission'>
                 <option value=''  hidden="">Sebességváltó</option>
@@ -181,7 +182,7 @@ function load_brands(){
                 </select><br>
             <input type='number' name='weight' id="weight" placeholder="Súly (Kg)" required="" oninput="weight_input()"><br>
             <input type='text' name='identification_number' id="id_number" placeholder="Alvázszám" oninput="id_number_input()"><br>
-            <textarea rows='10' cols='22' name='description' id="description" oninput="description_input()">Rövid leírás</textarea><br>
+            <textarea rows='10' cols='22' name='description' id="description" onkeydown='if(event.keyCode == 13) return false;' oninput="description_input()">Rövid leírás</textarea><br>
             <div><button style="width: 100px" type="submit" name="submit" id="submit" value="upload">Feltölt</button><br></div>
         </div>
         <div>
@@ -373,93 +374,7 @@ function load_brands(){
             $("#id_number").focusout(function() {
                 check_id_number();
             });        
-
-
-            
-            //Image validation
-            /**************************************************************************************************/
-            /**************************************************************************************************/
-
-
-            /*(function($) {
-                $.fn.checkFileType = function(options) {
-                    var defaults = {
-                        allowedExtensions: [],
-                        success: function() {},
-                        error: function() {}
-                    };
-                    options = $.extend(defaults, options);
-
-                    return this.each(function() {
-
-                        $(this).on('change', function() {
-                            var value = $(this).val(),
-                                file = value.toLowerCase(),
-                                extension = file.substring(file.lastIndexOf('.') + 1);
-
-                            if ($.inArray(extension, options.allowedExtensions) == -1) {
-                                options.error();
-                                $(this).focus();
-                            } else {
-                                options.success();
-
-                            }
-
-                        });
-
-                    });
-                };
-
-            })(jQuery);
-
-            $(function() {
-                $('#files').checkFileType({
-                    allowedExtensions: ['jpg', 'jpeg'],
-                    success: function() {
-                        error_image = false;
-                        alert('Success');
-                    },
-                    error: function() {
-                        error_image = true;
-                        alert('Error');
-                    }
-                });
-
-            });*/
-
-            
-
-
-            /*$('#files').change(function(){
-                var files = $(this)[0].files;
-                if(files.length > 10){
-                    alert("you can select max 10 files.");
-                }else{
-                    alert("correct, you have selected less than 10 files");                    
-                }               
-            });*/
-
-
-            
-
-           
-
-
-            /*var files = document.getElementsByName('files[]'); 
-            for (var i = 0, j = files.length; i < j; i++) {
-                var file = files[i];
-                // do stuff with your file
-                console.log(files);
-            }*/
-
-
-            
         
-
-            /**************************************************************************************************/
-            /**************************************************************************************************/
-
-
 
             
             function check_brand(){
