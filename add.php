@@ -44,6 +44,9 @@ function load_brands(){
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <!-- form validate use -->
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+    <!-- file upload text hide -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -69,134 +72,163 @@ function load_brands(){
     <a href="#" class="fa fa-twitter"></a>
 </div><br>
 
-<div style="margin: 2% 10% 0 10%">
-    <h1>Hírdetés feladása</h1>
+<div style="position: absolute; left: 0px; top: 135px; z-index: -1; width: 100%; height: 300px; background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828, #04070d); "></div>
+
+<div style="margin: 0 10% 0 10%">    
     <form action="includes/add.inc.php" method="post" enctype="multipart/form-data" name="vform" id="vform">
-        <div style="float:left">
-            <select name="brand" id="brand">
-                <option value="" hidden="">Márka</option>
-                <?php echo load_brands(); ?>
-            </select><br>
-            <select name="type" id="type">
-                <option value="">Típus</option>
-            </select><br>
-            <input type="number" name="year" id="year" placeholder="Évjárat" required="" oninput="year_input()"><br>
-            <input type="number" name="price" id="price" placeholder="Ár (€)" required="" oninput="price_input()"><br>
-            <select name='fuel' id='fuel'>
-                <option value='' hidden="">üzemanyag típusa</option>
-                <option value='Dizel'>Dizel</option>
-                <option value='Benzin'>Benzin</option>
-                <option value='Elektromos'>Elektromos</option>
-            </select><br>
-            <input type="number" name="cm3" id="cm3" placeholder="Köbcenti" required="" oninput="cm3_input()"><br>
-            <input type="number" name="hp" id="hp" placeholder="Lóerő" required="" oninput="hp_input()"><br>
-            <input type="file" id="files" accept="image/*" name="files[]" multiple onchange="fileValidation()"><br>            
-        </div>     
+        <div id="container">
+            <div id="left" style="width: 25%">
+                <label class="star" for="brand" >*</label>
+                <select name="brand" id="brand">                    
+                    <option value="" hidden="">Márka</option>
+                    <?php echo load_brands(); ?>
+                </select><br>
+                <label class="star" for="type" >*</label> 
+                <select name="type" id="type">
+                    <option value="">Típus</option>
+                </select><br>
+                <label class="star" for="year" >*</label>
+                <input type="number" name="year" id="year" placeholder="Évjárat"   oninput="year_input()"><br>
+                <label class="star" for="price" >*</label>
+                <input type="number" name="price" id="price" placeholder="Ár (€)"  oninput="price_input()"><br>
+                <label class="star" for="fuel" >*</label>
+                <select name='fuel' id='fuel'>
+                    <option value='' hidden="">üzemanyag típusa</option>
+                    <option value='Dizel'>Dizel</option>
+                    <option value='Benzin'>Benzin</option>
+                    <option value='Elektromos'>Elektromos</option>
+                </select><br>
+                <label class="star" for="cm3" >*</label>
+                <input type="number" name="cm3" id="cm3" placeholder="Köbcenti"  oninput="cm3_input()"><br>
+                <label class="star" for="hp" >*</label>
+                <input type="number" name="hp" id="hp" placeholder="Lóerő" oninput="hp_input()"><br>
+                <label class="star" for="body_style" >*</label>
+                <select id="body_style" name="body_style">
+                    <option value=""  hidden="">Kivitel</option>
+                    <option value='Ferdehátú'>Ferdehátú</option>
+                    <option value='Kombi'>Kombi</option>
+                    <option value='Pickup'>Pickup</option>
+                    <option value='Sedan'>Sedan</option>
+                    <option value='Terepjáró'>Terepjáró</option>
+                    <option value='Városi terepjáró'>Városi terepjáró</option>
+                    <option value='Coupe'>Coupe</option>
+                </select><br>
+                <label style="position: relative; top: 7px;" for="files">Képek feltöltése(maximum 9 file)</label><br>
+                <label class="star" for="files" >*</label>
+                <input  style="position: relative; left: 18px; " type="file" id="files" accept="image/*" name="files[]" class="hidden" multiple onchange="fileValidation()"><br>                                      
+            </div>     
 
-        <script>
-            
-            //Image error handler
+            <script>
 
-            var error_image = false;
+                //File upload text hide while empty
+                $(function () {
+                     $('input[type="file"]').change(function () {
+                          if ($(this).val() != "") {
+                                 $(this).css('color', '#333');
+                          }else{
+                                 $(this).css('color', 'transparent');
+                          }
+                     });
+                })
+                
+                //Image error handler
 
-            function isImage(image) {
-              const ext = ['.jpg', '.png'];
-              return ext.some(el => image.endsWith(el));
-            }
+                var error_image = false;
 
-            function fileValidation() {
-              let files = document.getElementById('files');
-              for (let i = 0; i < files.files.length; ++i) {
-                let fname = files.files.item(i).name;
-                if (!isImage(fname)) {
-                  error_image = true;                    
-                  alert("Csak jpg és png formátum engedélyezett!");
-                  //$("#files").css("border-bottom","2px solid #F90A0A");
-                  return false;
-                } else {
-                    error_image = false;
+                function isImage(image) {
+                  const ext = ['.jpg', '.png'];
+                  return ext.some(el => image.endsWith(el));
                 }
-              }
-            }
 
-            var error_image_number = false;
-            $('#files').change(function(){
-                var files = $(this)[0].files;
-                if(files.length > 10){
-                    error_image_number = true;
-                    alert("Maximum 9 fájl engedélyezett!.");
-                }else{
-                    error_image_number = false;                    
-                }               
-            });
-            
+                function fileValidation() {
+                  let files = document.getElementById('files');
+                  for (let i = 0; i < files.files.length; ++i) {
+                    let fname = files.files.item(i).name;
+                    if (!isImage(fname)) {
+                      error_image = true;                    
+                      alert("Csak jpg és png formátum engedélyezett!");
+                      //$("#files").css("border-bottom","2px solid #F90A0A");
+                      return false;
+                    } else {
+                        error_image = false;
+                    }
+                  }
+                }
 
-        </script>
+                var error_image_number = false;
+                $('#files').change(function(){
+                    var files = $(this)[0].files;
+                    if(files.length > 10){
+                        error_image_number = true;
+                        alert("Maximum 9 fájl engedélyezett!.");
+                    }else{
+                        error_image_number = false;                    
+                    }               
+                });
+                
 
-        <div style="display: inline-block; float: left;">
-            <select id="body_style" name="body_style">
-                <option value=""  hidden="">Kivitel</option>
-                <option value='Ferdehátú'>Ferdehátú</option>
-                <option value='Kombi'>Kombi</option>
-                <option value='Pickup'>Pickup</option>
-                <option value='Sedan'>Sedan</option>
-                <option value='Terepjáró'>Terepjáró</option>
-                <option value='Városi terepjáró'>Városi terepjáró</option>
-                <option value='Coupe'>Coupe</option>
-            </select><br>
-            <input type='number' name='mileage' id="mileage" placeholder="Kilóméteróra állás" required="" oninput="mileage_input()"><br>
-            <select name='euro' id='euro'>
-                <option value=''  hidden="">Környezetvédelmi besorolás</option>
-                <option value='euro 1'>Euro 1</option>
-                <option value='euro 2'>Euro 2</option>
-                <option value='euro 3'>Euro 3</option>
-                <option value='euro 4'>Euro 4</option>
-                <option value='euro 5'>Euro 5</option>
-                <option value='euro 6'>Euro 6</option>
-                </select><br>
-            <select name='colour' id='colour'>
-                <option value=""  hidden="">Szín</option>
-                <option value='Fehér'>Fehér</option>
-                <option value='Szürke'>Szürke</option>
-                <option value='Fekete'>Fekete</option>
-                <option value='Lila'>Lila</option>
-                <option value='Bíbor 5'>Bíbor 5</option>
-                <option value='Piros'>Piros</option>
-                <option value='Rózsaszín'>Rózsaszín</option>
-                <option value='Barna'>Barna</option>
-                <option value='Narancssárga'>Narancssárga</option>
-                <option value='Sárga'>Sárga</option>
-                <option value='Zöld'>Zöld</option>
-                <option value='Kék'>Kék</option>
-                </select><br>
-            <select name='transmission' id='transmission'>
-                <option value=''  hidden="">Sebességváltó</option>
-                <option value='Manuális - 4'>Manuális - 4</option>
-                <option value='Manuális - 5'>Manuális - 5</option>
-                <option value='Manuális - 6'>Manuális - 6</option>
-                <option value='Manuális - 7'>Manuális - 7</option>
-                <option value='Automata - 4'>Automata - 4</option>
-                <option value='Automata - 5'>Automata - 5</option>
-                <option value='Automata - 6'>Automata - 6</option>
-                <option value='Automata - 7'>Automata - 7</option>
-                </select><br>
-            <input type='number' name='weight' id="weight" placeholder="Súly (Kg)" required="" oninput="weight_input()"><br>
-            <input type='text' name='identification_number' id="id_number" placeholder="Alvázszám" oninput="id_number_input()"><br>
-            <textarea rows='10' cols='22' name='description' id="description" onkeydown='if(event.keyCode == 13) return false;' oninput="description_input()">Rövid leírás</textarea><br>
-            <div><button style="width: 100px" type="submit" name="submit" id="submit" value="upload">Feltölt</button><br></div>
-        </div>
-        <div>
-            <input type="checkbox" name="chkl[ ]" value="Tempomat">Tempomat<br />
-            <input type="checkbox" name="chkl[ ]" value="Klima">Klima<br />
-            <input type="checkbox" name="chkl[ ]" value="Napfénytető">Napfénytető<br />
-            <input type="checkbox" name="chkl[ ]" value="Centrálzár">Centrálzár<br />
-            <input type="checkbox" name="chkl[ ]" value="Riasztó">Riasztó<br />
-            <input type="checkbox" name="chkl[ ]" value="Led Fényszóró">Led Fényszóró<br />
-            <input type="checkbox" name="chkl[ ]" value="Xenon fényszóró">Xenon fényszóró<br />
-            <input type="checkbox" name="chkl[ ]" value="Tolatóradar">Tolatóradar<br />
-            <input type="checkbox" name="chkl[ ]" value="Multifunkcionális kormány">Multifunkcionális kormány<br />
-            <input type="checkbox" name="chkl[ ]" value="Kartámasz">Kartámasz<br />
-        </div>
+            </script>
+
+            <div id="center" style="width: 25%"> 
+            <label class="star" for="mileage" >*</label>          
+                <input type='number' name='mileage' id="mileage" placeholder="Kilóméteróra állás"  oninput="mileage_input()"><br>
+                <label class="star" for="euro" >*</label>
+                <select name='euro' id='euro'>
+                    <option value=''  hidden="">Környezetvédelmi besorolás</option>
+                    <option value='euro 1'>Euro 1</option>
+                    <option value='euro 2'>Euro 2</option>
+                    <option value='euro 3'>Euro 3</option>
+                    <option value='euro 4'>Euro 4</option>
+                    <option value='euro 5'>Euro 5</option>
+                    <option value='euro 6'>Euro 6</option>
+                    </select><br>
+                <label class="star" for="colour" >*</label>
+                <select name='colour' id='colour'>
+                    <option value=""  hidden="">Szín</option>
+                    <option value='Fehér'>Fehér</option>
+                    <option value='Szürke'>Szürke</option>
+                    <option value='Fekete'>Fekete</option>
+                    <option value='Lila'>Lila</option>
+                    <option value='Bíbor 5'>Bíbor 5</option>
+                    <option value='Piros'>Piros</option>
+                    <option value='Rózsaszín'>Rózsaszín</option>
+                    <option value='Barna'>Barna</option>
+                    <option value='Narancssárga'>Narancssárga</option>
+                    <option value='Sárga'>Sárga</option>
+                    <option value='Zöld'>Zöld</option>
+                    <option value='Kék'>Kék</option>
+                    </select><br>
+                <label class="star" for="transmission" >*</label>
+                <select name='transmission' id='transmission'>
+                    <option value=''  hidden="">Sebességváltó</option>
+                    <option value='Manuális - 4'>Manuális - 4</option>
+                    <option value='Manuális - 5'>Manuális - 5</option>
+                    <option value='Manuális - 6'>Manuális - 6</option>
+                    <option value='Manuális - 7'>Manuális - 7</option>
+                    <option value='Automata - 4'>Automata - 4</option>
+                    <option value='Automata - 5'>Automata - 5</option>
+                    <option value='Automata - 6'>Automata - 6</option>
+                    <option value='Automata - 7'>Automata - 7</option>
+                    </select><br>
+                <label class="star" for="weight" >*</label>    
+                <input type='number' name='weight' id="weight" placeholder="Súly (Kg)"  oninput="weight_input()"><br>
+                <input type='text' name='identification_number' id="id_number" placeholder="Alvázszám" oninput="id_number_input()" style="position: relative; right: 0px;" >                
+                <textarea  name='description' id="description" onkeydown='if(event.keyCode == 13) return false;' oninput="description_input()">Rövid leírás</textarea><br>                
+            </div>
+            <div id="right" style="width: 25%;">
+                <div><input type="checkbox" name="chkl[ ]" value="Tempomat">Tempomat</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Klima">Klima</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Napfénytető">Napfénytető</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Centrálzár">Centrálzár</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Riasztó">Riasztó</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Led Fényszóró">Led Fényszóró</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Xenon fényszóró">Xenon fényszóró</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Tolatóradar">Tolatóradar</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Multifunkcionális kormány">Multifunkcionális kormány</div>
+                <div><input type="checkbox" name="chkl[ ]" value="Kartámasz">Kartámasz</div>
+                <div><div><button style=" font-size: 17px; margin: 20px 35px; cursor: pointer; width: 202px; height: 33px;" type="submit" name="submit" id="submit" value="upload">Feltölt</button><br></div>
+            </div>
+        </div>        
     </form>
 </div>
 

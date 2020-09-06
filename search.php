@@ -1,7 +1,7 @@
 <?php
 //these two lines are due to the back button from advertisemet.php
-header('Cache-Control: no cache'); //no cache
-session_cache_limiter('private_no_expire'); // works
+//header('Cache-Control: no cache'); //no cache
+//session_cache_limiter('private_no_expire'); // works
 //session_cache_limiter('public'); // works too
 session_start();
 ?>
@@ -48,102 +48,148 @@ include 'action.php';
 ?>
 
 <?php
+    
+    // Search
+    $max_price = $_GET['max_price'];            
+    $date_start = $_GET['date_start'];            
+    $fueltype = $_GET['fueltype'];
+    $type = $_GET['type'];    
 
-if(isset($_POST['submit-search'])){
-    $brand = mysqli_real_escape_string($conn, $_POST['brand']);
-    $type = mysqli_real_escape_string($conn, $_POST['type']);
-    $max_price = mysqli_real_escape_string($conn, $_POST['max_price']);
-    $date_start = mysqli_real_escape_string($conn, $_POST['date_start']);
+    // Got brand id and I need brand name for search (fetch_type.php)
+    $brand_id = $_GET['brand'];               
+    $sql_brand = "SELECT brands_name FROM car_brands WHERE brands_id = '$brand_id'";
+    $result_brand = mysqli_query($conn, $sql_brand);    
+    $row = mysqli_fetch_assoc($result_brand);  
+    $brands_name =  $row['brands_name'];
 
-
-    // impode - array to string conversation. Ha NULL akkor hivát jelez, azért kell az IF.
-    if($brand > 0){
-        $sql_brand = "SELECT brands_name FROM car_brands WHERE brands_id = '$brand'";
-        $result_brand = mysqli_query($conn, $sql_brand);
-        $query_brand = mysqli_num_rows($result_brand);
-        $brand_name_array = mysqli_fetch_assoc($result_brand);
-        $brand_name = implode($brand_name_array);
+    // Advanced search
+    if(isset($_GET['min_price'])){
+        $min_price = $_GET['min_price'];            
     } else {
-        $brand_name = "";
+        $min_price = "";    
+    }
+
+    if(isset($_GET['max_hp'])){
+        $max_hp = $_GET['max_hp'];            
+    } else {
+        $max_hp = "";    
+    }
+
+    if(isset($_GET['min_hp'])){
+        $min_hp = $_GET['min_hp'];            
+    } else {
+        $min_hp = "";    
+    }
+
+    if(isset($_GET['date_end'])){
+        $date_end = $_GET['date_end'];            
+    } else {
+        $date_end = "";    
+    }
+
+    if(isset($_GET['max_cm3'])){
+        $max_cm3 = $_GET['max_cm3'];            
+    } else {
+        $max_cm3 = "";    
+    }
+
+    if(isset($_GET['min_cm3'])){
+        $min_cm3 = $_GET['min_cm3'];            
+    } else {
+        $min_cm3 = "";    
     }
     
+    // define how many results you want per page
+    $results_per_page = 18;
 
+    // find out the number of results stored in database
+    $sql="SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
+            (ar<='$max_price' OR '$max_price' LIKE '') AND
+            (ar>='$min_price' OR '$min_price' LIKE '') AND
+            (loero<='$max_hp' OR '$max_hp' LIKE '') AND
+            (loero>='$min_hp' OR '$min_hp' LIKE '') AND
+            (kobcenti<='$max_cm3' OR '$max_cm3' LIKE '') AND
+            (kobcenti>='$min_cm3' OR '$min_cm3' LIKE '') AND
+            (évjárat<='$date_end' OR '$date_end' LIKE '') AND
+            (évjárat>='$date_start' OR '$date_start' LIKE '') AND
+            (uzemanyag LIKE '$fueltype' OR '$fueltype' LIKE '') AND
+            (marka LIKE '$brands_name' OR '$brands_name' LIKE '') AND
+            (tipus LIKE '$type' OR '$type' LIKE '')
+            GROUP BY user_id";
+    $result = mysqli_query($conn, $sql);
+    $number_of_results = mysqli_num_rows($result);
+
+    // determine number of total pages available
+    $number_of_pages = ceil($number_of_results/$results_per_page);
+
+    // determine which page number visitor is currently on
+    if (!isset($_GET['page'])) {
+      $page = 1;
+    } else {
+      $page = $_GET['page'];
+    }
+
+    // determine the sql LIMIT starting number for the results on the displaying page
+    $this_page_first_result = ($page-1)*$results_per_page;
+
+    // retrieve selected results from database and display them on page
+    $sql="SELECT * FROM cars JOIN car_images ON cars.car_id=car_images.car_id WHERE 
+                (ar<='$max_price' OR '$max_price' LIKE '') AND
+                (ar>='$min_price' OR '$min_price' LIKE '') AND
+                (loero<='$max_hp' OR '$max_hp' LIKE '') AND
+                (loero>='$min_hp' OR '$min_hp' LIKE '') AND
+                (kobcenti<='$max_cm3' OR '$max_cm3' LIKE '') AND
+                (kobcenti>='$min_cm3' OR '$min_cm3' LIKE '') AND
+                (évjárat<='$date_end' OR '$date_end' LIKE '') AND
+                (évjárat>='$date_start' OR '$date_start' LIKE '') AND
+                (uzemanyag LIKE '$fueltype' OR '$fueltype' LIKE '') AND
+                (marka LIKE '$brands_name' OR '$brands_name' LIKE '') AND
+                (tipus LIKE '$type' OR '$type' LIKE '')
+                GROUP BY user_id
+                LIMIT " . $this_page_first_result . ',' .  $results_per_page;
+
+    $result = mysqli_query($conn, $sql);
+    $queryResult = mysqli_num_rows($result);
+
+    if($queryResult > 0){
     
-    if(isset($_POST['date_end'])){
-        $date_end = mysqli_real_escape_string($conn, $_POST['date_end']);
-    } else {
-        $date_end = "";
-    }
-
-    if(isset($_POST['min_price'])){
-        $min_price = mysqli_real_escape_string($conn, $_POST['min_price']);
-    } else {
-        $min_price = "";
-    }
-
-    if(isset($_POST['min_cm3'])){
-        $min_cm3 = mysqli_real_escape_string($conn, $_POST['min_cm3']);
-    } else {
-        $min_cm3 = "";
-    }
-
-    if(isset($_POST['max_cm3'])){
-        $max_cm3 = mysqli_real_escape_string($conn, $_POST['max_cm3']);
-    } else {
-        $max_cm3 = "";
-    }
-
-    if(isset($_POST['max_hp'])){
-        $max_hp = mysqli_real_escape_string($conn, $_POST['max_hp']);
-    } else {
-        $max_hp = "";
-    }
-
-    if(isset($_POST['min_hp'])){
-        $min_hp = mysqli_real_escape_string($conn, $_POST['min_hp']);
-    } else {
-        $min_hp="";
-    }
-
-
-    if(isset($_POST['fueltype'])){
-
-        $fueltype = mysqli_real_escape_string($conn, $_POST['fueltype']);
-
-        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
-        (marka LIKE '$brand_name' OR '$brand_name' LIKE '') AND 
-        (tipus LIKE '$type' OR '$type' LIKE '') AND 
-        (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
-        (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
-        uzemanyag LIKE '$fueltype' AND 
-        (kobcenti >= '$min_cm3' AND ( kobcenti <='$max_cm3' OR '$max_cm3' LIKE '')) AND 
-        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE '')) GROUP BY user_id;";
-
-    } else {
-        $sql = "SELECT * from cars JOIN car_images ON cars.car_id=car_images.car_id WHERE
-        (marka LIKE '$brand_name' OR '$brand_name' LIKE '') AND 
-        (tipus LIKE '$type' OR '$type' LIKE '') AND 
-        (ar >= '$min_price' AND ( ar <= '$max_price' OR '$max_price' LIKE '')) AND 
-        (évjárat >= '$date_start' AND ( évjárat <= '$date_end' OR '$date_end' LIKE '')) AND 
-        (kobcenti >='$min_cm3' AND ( kobcenti <='$max_cm3' OR '$max_cm3' LIKE '')) AND 
-        (loero >= '$min_hp' AND ( loero <= '$max_hp' OR '$max_hp' LIKE '')) GROUP BY user_id;";
-    }
-
-}
-
-$result = mysqli_query($conn, $sql);
-$queryResult = mysqli_num_rows($result);
-
-if($queryResult > 0){
+    echo '<div style="width: 100%; overflow: auto;" >';
     while($row = mysqli_fetch_assoc($result)){
-        if($row['uzemanyag'] == 'Elektromos'){
-            echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left; background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
-         } else {
-             echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+            if($row['uzemanyag'] == 'Elektromos'){
+                echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left; background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+             } else {
+                 echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+            }
         }
-    }
-} else {
-    echo  '<div style="background-color: red;">
+    echo '</div>';    
+
+    // display the links to the pages
+    echo '<div style="text-align: center; margin: 20px; 0" >';
+        $active="";
+        for ($page=1;$page<=$number_of_pages;$page++) {       
+            if($page == $_GET['page']){
+                $active='class="active"';
+            } else {
+                $active='';
+            }  
+                         
+            echo '<div class="pagination" > <a '.$active.'  href="search.php?page=' . $page . 
+                            '&max_price='.$max_price.
+                            '&date_start='.$date_start.
+                            '&fueltype='.$fueltype.
+                            '&brand='.$brand_id.
+                            '&type='.$type.
+                            '&min_price='.$min_price.
+                            '&max_hp='.$max_hp.
+                            '&min_hp='.$min_hp.
+                            '&max_cm3='.$max_cm3.
+                            '&min_cm3='.$min_cm3.
+                            '&date_end='.$date_end.'  ">' . $page . '</a>  </div>';    
+            
+        }        
+    echo '</div>';
+} else {    
+    echo  '<div>
                  <script>                                                  
                           alert("A keresésnek nincs eredménye!");
                           location.href="index.php";

@@ -38,54 +38,65 @@ session_start();
     <a href="#" class="fa fa-twitter"></a>
 </div><br>
 
-<div align="center" style="margin: 7% 0;">
-<form action="includes/login.inc.php" method="post">
 
-    <?php
-    if(isset($_GET['uid'])){
-        $uid = $_GET['uid'];
-        echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" value="'.$uid.'" style="border-bottom: 2px solid #34F458;" required=""><br>';
-    } else {
-        echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" required=""><br>';
-    }
-    ?>
+    <img src="peugeot_208/login_bg1.jpg" style="position: absolute; left: 0px; top: 129px; z-index: -1; width: 100%; filter: blur(4px);  ">
+    <div align="center" style="margin: 6% 38%;  background-color: white; display: inline-block; width: 290px;  padding: 10px 0 10px 0; ">
+    <form action="includes/login.inc.php" method="post">
 
-    <input id="pwd" type="password" name="pwd" placeholder="Jelszó" required=""><br>
-    <button type="submit" name="submit" class="login-button" style="cursor: pointer; width: 202px;">Bejelentkezés</button><br>
-    <button style="width: 202px;"> <a href="signup.php" style="text-decoration: none; color: black;">Regisztráció </a></button>
-    <?php
+        <?php
+            if(isset($_GET['uid'])){
+                $uid = $_GET['uid'];
+                echo '<div>';
+                    echo '<i class="fa fa-user icon" style="background-color: green; padding: 8px;  position: relative; left: 8px; bottom: 1px; "></i>';
+                    echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" value="'.$uid.'" style="border-bottom: 2px solid #34F458; height: 25px; position: relative; right: 3px;" required=""><br>';
+                echo '</div>';
+            } else {
+                echo '<div>';
+                  echo '<i class="fa fa-user icon" style="background-color: green; padding: 8px;  position: relative; left: 8px; bottom: 1px; "></i>';
+                  echo '<input id="uid" type="text" name="uid" placeholder="Felhasználónév" required="" style="height: 25px; position: relative; right: 3px; " ><br>';
+                echo '</div>';
+            }
+        ?>
+        
+        <div>
+            <i class="fa fa-key icon" style="background-color: green; padding: 8px; position: relative; left: 10px; bottom: 1px; "></i>
+        <input id="pwd" type="password" name="pwd" placeholder="Jelszó" required="" style="height: 25px; position: relative; right: 5px; " ><br>    
+        </div>
+        <button type="submit" name="submit" class="login-button" style="cursor: pointer; width: 85%; position: relative; right: 3px; height: 33px;">Bejelentkezés</button><br>
+        <button style="width: 85%; position: relative; right: 3px; height: 33px; "> <a href="signup.php" style="text-decoration: none; color: black;">Regisztráció </a></button>
+        
+        <?php
 
-    if(isset($_GET['login'])){
+        if(isset($_GET['login'])){
 
-        $loginCheck = $_GET['login'];
+            $loginCheck = $_GET['login'];
 
-        if($loginCheck == 'empty'){
-            echo '<div class="error">Üres mező!</div>';
-            exit();
-        } else if($loginCheck == 'username'){
-            echo '<div class="error">Nincs ilyen felhasználó!</div>';
-            echo '<script>
-                        document.getElementById("uid").style.borderBottomColor = "#F90A0A";
-                        document.getElementById("pwd").style.borderBottomColor = "#F90A0A";
-                  </script>';
-            exit();
-        } else if($loginCheck == 'error'){
-            echo '<div class="error">Téves jelszó!</div>';
-            exit();
+            if($loginCheck == 'empty'){
+                echo '<div class="error">Üres mező!</div>';
+                exit();
+            } else if($loginCheck == 'username'){
+                echo '<div class="error">Nincs ilyen felhasználó!</div>';
+                echo '<script>
+                            document.getElementById("uid").style.borderBottomColor = "#F90A0A";
+                            document.getElementById("pwd").style.borderBottomColor = "#F90A0A";
+                      </script>';
+                exit();
+            } else if($loginCheck == 'error'){
+                echo '<div class="error">Téves jelszó!</div>';
+                exit();
+            }
         }
-    }
 
-    if(isset($_GET['signup'])){
-        $signupCheck = $_GET['signup'];
-        if($signupCheck == 'success'){
-            echo '<div style="color: green;">Sikeres regisztráció<br>Jelentkezzen be!</div>';
+        if(isset($_GET['signup'])){
+            $signupCheck = $_GET['signup'];
+            if($signupCheck == 'success'){
+                echo '<div style="color: green;">Sikeres regisztráció<br>Jelentkezzen be!</div>';
+            }
+
         }
 
-    }
-
-
-    ?>
-</form>
+        ?>
+    </form>
 </div>
 
 

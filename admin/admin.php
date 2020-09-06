@@ -51,6 +51,7 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
 
 include '../action.php';
 
+
     $sql = "SELECT * FROM users";
     $result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);

@@ -157,3 +157,11 @@ input[placeholder] {
 .error{
     color: red;
 }
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+input[type=password]:focus {
+  background-color: lightblue;
+}

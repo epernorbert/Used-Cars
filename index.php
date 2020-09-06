@@ -110,7 +110,7 @@ function load_brands(){
 
 <div class="search" align="center" id="search">
 
-    <form action="search.php" method="POST" style="margin: 0;">
+    <form action="search.php" method="GET" style="margin: 0;">
         <div>
          <table>
              <tr>
@@ -130,15 +130,16 @@ function load_brands(){
                 <td>
                     <label>
                         <select id="fueltype" name="fueltype" style="width: 128px; height: 29px;">Üzemanyag:
-                            <option disabled selected value style="display: none">Üzemanyag</option>
+                            <option value="" style="display: none">Üzemanyag</option>
                             <option value="dizel">dizel</option>
                             <option value="benzin">benzin</option>
                             <option value="elektromos">elektromos</option>
                         </select>
                     </label>
                 </td>
+                <input type="hidden" name="page" value="1" >
                 <td>
-                    <button type="submit" name="submit-search" style="width: 127px; height: 28px; background-color: blue; cursor: pointer;">Keresés</button>
+                    <button type="submit" name="submit-search" style="width: 127px; height: 28px; background-color: blue; cursor: pointer; color: white">Keresés</button>
                 </td>
              </tr>
          </table>  

@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: white;
+    background-color: white;    
 }
 
 .navbar{
@@ -70,28 +70,6 @@ body {
     margin: 2% 0 2% 0;
     width: 15%;
 }
-
-/*.navbar_ul {
-
-}
-
-.navbar_li {
-    display: inline;
-}
-
-.navbar_a {
-    text-decoration: none;
-    color: white;
-    margin: 2%;
-    padding: 1%;
-    font-size: 20px;
-}
-
-.navbar_a:hover{
-    border-bottom: 1px solid blue;
-    border-top: 1px solid blue;
- }
-*/
 
 
 .fa {
@@ -165,4 +143,26 @@ body {
 
 input{
     margin-bottom: 4px;
+}
+
+table.car_data tr:nth-child(even) {
+    background-color: #f2f2f2;
+    line-height: 32px;
+}
+
+.car_update input{
+    height: 25px;
+    margin-bottom: 2px;
+}
+
+.car_update select{
+    height: 28px;
+    margin-bottom: 2px;
+}
+
+textarea {
+    margin-top: 20px;
+    width: 170px;
+    height: 140px;
+    resize: none;
 }

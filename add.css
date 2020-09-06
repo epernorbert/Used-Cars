@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background-color: white;
+    background-color: white;    
 }
 
 .navbar{
@@ -137,14 +137,115 @@ body {
 }
 
 input{
-    margin: 10px;
+    margin-top: 10px;
     padding: 3px;
     font-size: 15px;
+    height: 25px;
+    position: relative;
+    right: 5px;
 }
 
 button{
     margin: 10px;
     padding: 3px;
+    font-size: 15px;    
+}
+
+select{
+    height: 35px;
+    width: 202px;
+    font-size: 15px;
+    margin-top: 10px;
+    position: relative;
+    right: 5px;
+}
+
+textarea {
+    margin-top: 10px;
+    width: 196px;
+    height: 140px;
+    resize: none;
+}
+
+input[type="checkbox"]{
+    height: 15px;
+    margin-top: 18px;
+    margin-left: 30px;
+}
+
+
+
+input[type="file"]{
+    color: transparent;
+    width: 190px;
+
+}
+
+
+#container {
+    width:100%;
+    text-align:center;
+    margin-top: 50px;
     font-size: 15px;
 }
 
+
+
+#left:hover{
+    transform: scale(1.1);    
+}
+
+#right:hover{
+    transform: scale(1.1);    
+}
+#center:hover{
+    transform: scale(1.1);    
+}
+
+#left {
+    float:left;    
+    height: 450px;    
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background-color: white; 
+    transition: 0.5s;   
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+#center {
+    display: inline-block;
+    margin:0 auto;
+    height: 450px;
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background-color: white;
+    transition: 0.5s;
+}
+
+#right {    
+    text-align: left;
+    float:right;    
+    height: 450px;
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);    
+    background-color: white;
+    transition: 0.5s;
+}
+
+.star{
+    color: red;
+    position: relative;
+    right: 8px;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+input[type=number]:focus {
+  background-color: lightblue;
+}
+input[type=select]:focus {
+  background-color: lightblue;
+}

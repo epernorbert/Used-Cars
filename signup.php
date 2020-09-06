@@ -39,71 +39,119 @@ session_start();
     <a href="#" class="fa fa-twitter"></a>
 </div><br>
 
+<img src="peugeot_208/login_bg1.jpg" style="position: absolute; left: 0px; top: 129px; z-index: -1; width: 100%; filter: blur(4px);  ">
 
-
-<div align="center" style="margin: 4% 0">
+<div align="center" style="margin: 6% 27%; background-color: white; width: 565px; padding: 10px 6px;">
 <form id="form" action="includes/signup.inc.php" name="form" method="post">
-    <?php
-        if(isset($_GET['first'])){
-            $first = $_GET['first'];
-            echo '<input type="text" name="firfst" id="first" placeholder="Keresztnév" value="'.$first.'"><br>';
-        }
-        else {
-            echo '<input type="text" name="first" id="first" placeholder="Keresztnév" required=""><br>';
-            echo '<div id="first_error"></div>';
-        }
+    <div style="float:left; margin-right: 20px; ">
+        <?php
+            if(isset($_GET['first'])){
+                $first = $_GET['first'];
+                echo '<div>';
+                    echo '<i class="fa fa-user" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px; " ></i>';
+                    echo '<input type="text" name="first" id="first" placeholder="Keresztnév" value="'.$first.'"><br>';
+                echo '</div>';            
+            }
+            else {
+                echo '<div>';
+                    echo '<i class="fa fa-user" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px; " ></i>';
+                    echo '<input type="text" name="first" id="first" placeholder="Keresztnév" required=""><br>';
+                echo '</div>';    
+                echo '<div id="first_error"></div>';
+            }
 
-        if(isset($_GET['last'])){
-            $last = $_GET['last'];
-            echo '<input type="text" name="last" id="last" placeholder="Vezetéknév" value="'.$last.'"><br>';
-        }
-        else {
-            echo '<input type="text" name="last" id="last" placeholder="Vezetéknév" required=""><br>';
-            echo '<div id="last_error"></div>';
-        }
-    ?>
+            if(isset($_GET['last'])){
+                $last = $_GET['last'];
+                echo '<div>';
+                    echo '<i class="fa fa-user" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px;  " ></i>';
+                    echo '<input type="text" name="last" id="last" placeholder="Vezetéknév" value="'.$last.'"><br>';
+                echo '</div>';
+            }
+            else {
+                echo '<div>';
+                    echo '<i class="fa fa-user" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px;  " ></i>';
+                    echo '<input type="text" name="last" id="last" placeholder="Vezetéknév" required=""><br>';
+                echo '</div>';    
+                echo '<div id="last_error"></div>';
+            }
+        ?>
 
-    <input type="text" name="email" id="email" placeholder="E-mail" required=""><br>
-    <div id="email_error"></div>
+        <div>
+            <i class="fa fa-envelope" style="background-color: green; padding: 8px; position: relative; left: 13px; bottom: 1px;  " ></i>
+            <input type="text" name="email" id="email" placeholder="E-mail" required="" style="position: relative; right: 2px;" ><br>
+        </div>
+        <div id="email_error"></div>
 
-    <?php
-        if(isset($_GET['uid'])){
-            $uid = $_GET['uid'];
-            echo '<input type="text" name="uid" id="uid" placeholder="Felhasználónév" value="'.$uid.'"><br>';
-        }
-        else {
-            echo '<input class="uid-class" type="text" name="uid" id="uid" placeholder="Felhasználónév" required=""><br>';
-            echo '<div id="uid_error"></div>';
-            echo '<span id="availability"></span>';
-            echo '<div id="username_error"></div>';
-        }
-    ?>
+        <?php
+            if(isset($_GET['uid'])){
+                $uid = $_GET['uid'];
+                echo '<div>';
+                    echo '<i class="fa fa-user-o" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px;  "></i>';
+                    echo '<input type="text" name="uid" id="uid" placeholder="Felhasználónév" value="'.$uid.'"><br>';
+                echo '</div>';    
+            }
+            else {
+                echo '<div>';
+                    echo '<i class="fa fa-user-o" style="background-color: green; padding: 8px; position: relative; left: 11px; bottom: 1px;  "></i>';
+                    echo '<input class="uid-class" type="text" name="uid" id="uid" placeholder="Felhasználónév" required=""><br>';
+                echo '</div>';    
+                echo '<div id="uid_error"></div>';
+                echo '<span id="availability"></span>';
+                echo '<div id="username_error"></div>';
+            }
+        ?>
 
-    <script>
 
-        $(document).ready(function(){
-            $('#uid').blur(function () {
-                var uid = $(this).val();
-                $.ajax({
-                    url:"check_user_taken.php",
-                    method:"POST",
-                    data:{user_uid:uid},
-                    dataType:"text",
-                    success:function(html){
-                        $('#availability').html(html);
-                    }
+        <script>
+
+            $(document).ready(function(){
+                $('#uid').blur(function () {
+                    var uid = $(this).val();
+                    $.ajax({
+                        url:"check_user_taken.php",
+                        method:"POST",
+                        data:{user_uid:uid},
+                        dataType:"text",
+                        success:function(html){
+                            $('#availability').html(html);
+                        }
+                    });
                 });
             });
-        });
-    </script>
+        </script>
+    </div>
 
-    <input type="password" name="pwd" id="pwd" placeholder="Jelszó" required=""><br>
-    <div id="pwd_error"></div>
-    <input type="password" name="conf_pwd" id="conf_pwd" placeholder="Jelszó ismét" required=""><br>
-    <div id="conf_pwd_error"></div>
-    <input type="number" name="telephone" id="telephone" placeholder="Telefonszám" required="" oninput="telephone_check()"><br>
-    <div id="telephone_error"></div>
-    <button type="submit" name="submit" id="submit" style="width: 202px;cursor: pointer;">Regisztráció</button>
+    <div>
+        <div>
+            <i class="fa fa-key" style="background-color: green; padding: 8px; position: relative; left: 15px; bottom: 1px; "></i>
+            <input type="password" name="pwd" id="pwd" placeholder="Jelszó" required=""><br>
+        <div>
+        <div id="pwd_error"></div>
+        <div>
+            <i class="fa fa-key" style="background-color: green; padding: 8px; position: relative; left: 15px; bottom: 1px; "></i>
+            <input type="password" name="conf_pwd" id="conf_pwd" placeholder="Jelszó ismét" required=""><br>
+        </div>
+        <div id="conf_pwd_error"></div>
+        <div>
+            <i class="fa fa-phone-square" style="background-color: green; padding: 8px; position: relative; left: 15px; bottom: 1px; "></i>
+            <input type="number" name="telephone" id="telephone" placeholder="Telefonszám" required="" oninput="telephone_check()"><br>
+        <div>
+        <div id="telephone_error"></div>
+        <div>
+            <i class="fa fa-building" style="background-color: green; padding: 8px; position: relative; left: 5px; "></i>
+            <select style="width: 202px; height: 35px; margin-top: 10px; " >
+                <option value="" hidden="">Város</option>
+                <option value="Budapest">Budapest</option>
+                <option value="Debrecen">Debrecen</option>
+                <option value="Kecskemét">Kecskemét</option>
+                <option value="Szeged">Szeged</option>            
+                <option value="Szombathely">Szombathely</option>
+            </select>
+        <div>
+    <div>
+    <div style="clear: both;">
+        <button type="submit" name="submit" id="submit" style="width: 202px;cursor: pointer; height: 33px; ">Regisztráció</button>
+    </div>
 </form>
 
     <script type="text/javascript">
