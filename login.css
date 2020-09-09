@@ -3,14 +3,28 @@ body {
     background-color: white;
 }
 
+/*********************/
+
 .navbar{
     box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
     background: #565057;
     padding: 0;
     float: left;
-    margin: 2% 0 0 10%;
-    width: 73%;
+    margin: 2% 0 3% 0;
+    width: 61%;
 }
+
+.navbar_a {
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+/**********************/
 
 .navbar_ol .navbar_ul {
     list-style: none;
@@ -32,15 +46,7 @@ body {
     transition: color 0.1s, background-color 0.1s;
 }
 
-.navbar_a {
-    position: relative;
-    display: block;
-    padding: 10px 5px;
-    margin: 0 20px;
-    font-size: 20px;
-    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
-    color: white;
-}
+
 
 .navbar_a::before {
     content: '';

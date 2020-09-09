@@ -3,15 +3,14 @@ body {
     background-color: white;
 }
 
-.navbar{
-    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
-    background: #565057;
-    padding: 0;
-    float: left;
-    margin: 2% 0 3% 0;
-    width: 61%;
-    font-family: "Times New Roman", Times, serif;
-    height: 75px;
+.navbar_a {
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
 }
 
 .navbar_ol .navbar_ul {
@@ -26,20 +25,23 @@ body {
 
 .navbar_a:hover .navbar_a:focus .navvar_a:active {
     color: #999;
+    text-decoration: none;
 }
 
 .navbar_a {
+    text-decoration: none;
     transition: color 0.1s, background-color 0.1s;
 }
 
-.navbar_a {
-    position: relative;
-    display: block;
-    padding: 10px 5px;
-    margin: 0 15px;
-    font-size: 20px;
-    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
-    color: white;
+.navbar{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background: #565057;
+    padding: 0;
+    float: left;
+    margin: 2% 0 3% 0;
+    width: 61%;
+    font-family: "Times New Roman", Times, serif;
+    height: 75px;
 }
 
 .navbar_a::before {
@@ -50,7 +52,7 @@ body {
     left: 0;
     height: 3px;
     width: 100%;
-    background-color: blue;    
+    background-color: blue;
     transform-origin: right top;
     transform: scale(0, 1);
     transition: color 0.1s,transform 0.2s ease-out;
@@ -58,31 +60,30 @@ body {
 
 .navbar_a:active::before {
     background-color: blue;
-    text-decoration: none;
 }
 
 .navbar_a:hover::before, .navbar_a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
-    text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none;
-  color: white;
+table tr:nth-child(even) {
+    background-color: #f2f2f2;
+    line-height: 32px;    
 }
 
-.navbar_a {
-  color: white;
-  text-decoration: inherit;
+table{
+    font-size: 20px;
 }
 
-.navbar_a:link {
-  color: white;
-  text-decoration: inherit;
+button{
+    height: 28px;
+    font-size: 15px;
+    cursor: pointer;
 }
 
-.navbar_a:hover {
-  color: white;
-  text-decoration: inherit;
-}
+.user_update input{
+    font-size: 17px;
+    margin-bottom: 6px;
+}  
+

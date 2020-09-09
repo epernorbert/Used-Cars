@@ -13,12 +13,12 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
-    <link type="text/css" rel="stylesheet" href="admin.css">
+    <link type="text/css" rel="stylesheet" href="check_advertisemen.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-
+<div> <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%; " src="../peugeot_208/logohd.jpg" height="75"> </div>
 <div class="navbar">
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="../index.php">Kezdőlap</a></li>
@@ -33,12 +33,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
+
 
 <style>
     .uid div{
@@ -73,9 +68,9 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
     echo '<div style="margin: 0 10% 0 10%;">';
 
         echo '<div class="uid" style=" float: left; margin: 0 2% 1% 0; ">' .
-                 '<table>
+                 '<table>                        
                         <tr>
-                           <td>Username: </td>
+                           <td>Felhasználónév: </td>
                            <td class="user-data">'. $row_user['user_uid']. '</td>
                         </tr>
                         <tr>
@@ -96,7 +91,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
                         </tr>
                  </table>';
 
-                  echo '<button onclick="user_update()">Módosít</button>';
+                  echo '<button style="margin-top: 5px;" onclick="user_update()">Módosít</button>';
 
         echo '</div>';
 
@@ -202,9 +197,9 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
                         $resultcheck_img = mysqli_num_rows($result_img);
 
                             while($row_img = mysqli_fetch_assoc($result_img)) {
-                                echo '<div style="float:left; margin: 0 2% 2% 0;"> 
+                                echo '<div style="float:left; margin: 0 1% 1% 0;"> 
                                          <img class="image" src=../uploads/' . $row_img['image_name'] . ' 
-                                         style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;">
+                                         style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 180px; height: 110px;">
                                       </div>';
                             }
 
@@ -235,7 +230,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 <script>
 
     function user_update() {
-        document.getElementById("update").innerHTML = "<form action='admin.update.php?user_id=<?php echo "{$_GET['user_id']}" ?>' method='POST'>" +
+        document.getElementById("update").innerHTML = "<form class='user_update' action='admin.update.php?user_id=<?php echo "{$_GET['user_id']}" ?>' method='POST'>" +
             "<input class='user-input' name='username' type='text' value='<?php echo $GLOBALS['user_uid']; ?>' ><br>" +
             "<input class='user-input' name='first' type='text' value='<?php echo $GLOBALS['user_first']; ?>' ><br>" +
             "<input class='user-input' name='last' type='text' value='<?php echo $GLOBALS['user_last']; ?>' ><br>" +

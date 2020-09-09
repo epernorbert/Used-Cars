@@ -17,8 +17,9 @@ session_start();
 </head>
 <body>
 
+<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
 <div class="navbar">
-    <ul class="navbar_ul">
+    <ul class="navbar_ul" >
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
@@ -33,12 +34,7 @@ session_start();
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
+
 
 </body>
 </html>
@@ -63,6 +59,7 @@ include 'action.php';
     $brands_name =  $row['brands_name'];
 
     // Advanced search
+
     if(isset($_GET['min_price'])){
         $min_price = $_GET['min_price'];            
     } else {
@@ -98,6 +95,63 @@ include 'action.php';
     } else {
         $min_cm3 = "";    
     }
+
+    if(isset($_GET['min_price'])){
+        $min_price = $_GET['min_price'];            
+    } else {
+        $min_price = "";    
+    }
+
+    if(isset($_GET['body_style'])){
+        $body_style = $_GET['body_style'];            
+    } else {
+        $body_style = "";    
+    }
+
+    if(isset($_GET['colour'])){
+        $color = $_GET['colour'];            
+    } else {
+        $color = "";    
+    }
+
+    if(isset($_GET['weight_start'])){
+        $weight_start = $_GET['weight_start'];            
+    } else {
+        $weight_start = "";    
+    }
+
+    if(isset($_GET['weight_end'])){
+        $weight_end = $_GET['weight_end'];            
+    } else {
+        $weight_end = "";    
+    }
+
+    if(isset($_GET['mileage_start'])){
+        $mileage_start = $_GET['mileage_start'];            
+    } else {
+        $mileage_start = "";    
+    }
+
+    if(isset($_GET['mileage_end'])){
+        $mileage_end = $_GET['mileage_end'];            
+    } else {
+        $mileage_end = "";    
+    }
+
+    if(isset($_GET['euro'])){
+        $euro = $_GET['euro'];            
+    } else {
+        $euro = "";    
+    }
+
+    if(isset($_GET['transmission'])){
+        $transmission = $_GET['transmission'];            
+    } else {
+        $transmission = "";    
+    }
+
+
+    
     
     // define how many results you want per page
     $results_per_page = 18;
@@ -114,8 +168,17 @@ include 'action.php';
             (évjárat>='$date_start' OR '$date_start' LIKE '') AND
             (uzemanyag LIKE '$fueltype' OR '$fueltype' LIKE '') AND
             (marka LIKE '$brands_name' OR '$brands_name' LIKE '') AND
-            (tipus LIKE '$type' OR '$type' LIKE '')
+            (tipus LIKE '$type' OR '$type' LIKE '') AND
+            (body_style LIKE '$body_style' OR '$body_style' LIKE '') AND
+            (weight<='$weight_end' OR '$weight_end' LIKE '') AND
+            (weight>='$weight_start' OR '$weight_start' LIKE '') AND            
+            (mileage<='$mileage_end' OR '$mileage_end' LIKE '') AND
+            (mileage>='$mileage_start' OR '$mileage_start' LIKE '') AND
+            (euro LIKE '$euro' OR '$euro' LIKE '') AND
+            (transmission LIKE '$transmission' OR '$transmission' LIKE '') AND
+            (colour LIKE '$color' OR '$color' LIKE '')
             GROUP BY user_id";
+
     $result = mysqli_query($conn, $sql);
     $number_of_results = mysqli_num_rows($result);
 
@@ -144,7 +207,15 @@ include 'action.php';
                 (évjárat>='$date_start' OR '$date_start' LIKE '') AND
                 (uzemanyag LIKE '$fueltype' OR '$fueltype' LIKE '') AND
                 (marka LIKE '$brands_name' OR '$brands_name' LIKE '') AND
-                (tipus LIKE '$type' OR '$type' LIKE '')
+                (tipus LIKE '$type' OR '$type' LIKE '') AND
+                (body_style LIKE '$body_style' OR '$body_style' LIKE '') AND
+                (weight<='$weight_end' OR '$weight_end' LIKE '') AND
+                (weight>='$weight_start' OR '$weight_start' LIKE '') AND  
+                (mileage<='$mileage_end' OR '$mileage_end' LIKE '') AND
+                (mileage>='$mileage_start' OR '$mileage_start' LIKE '') AND   
+                (euro LIKE '$euro' OR '$euro' LIKE '') AND
+                (transmission LIKE '$transmission' OR '$transmission' LIKE '') AND           
+                (colour LIKE '$color' OR '$color' LIKE '')
                 GROUP BY user_id
                 LIMIT " . $this_page_first_result . ',' .  $results_per_page;
 
@@ -184,6 +255,14 @@ include 'action.php';
                             '&min_hp='.$min_hp.
                             '&max_cm3='.$max_cm3.
                             '&min_cm3='.$min_cm3.
+                            '&body_style='.$body_style.
+                            '&colour='.$color.
+                            '&weight_start='.$weight_start.
+                            '&weight_end='.$weight_end.
+                            '&mileage_start='.$mileage_start.
+                            '&mileage_end='.$mileage_end.
+                            '&transmission='.$transmission.
+                            '&euro='.$euro.
                             '&date_end='.$date_end.'  ">' . $page . '</a>  </div>';    
             
         }        

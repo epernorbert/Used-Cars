@@ -20,6 +20,7 @@ if(!isset($_SESSION['u_uid'])){
 
 <body>
 
+<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
 <div class="navbar">
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
@@ -38,12 +39,7 @@ if(!isset($_SESSION['u_uid'])){
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
+
 
 <div class="echo" style="font-size: 20px;">    
     <div style="background-color: grey; display: inline-block; font-size: 24px; padding: 3px; " >Személyes adatok: </div>
@@ -284,7 +280,7 @@ if(!isset($_SESSION['u_uid'])){
 
     <?php
     if(!isset($GLOBALS['car_id'])){
-        echo '<div style="clear: both;">Nincs hírdetése!</div>';
+        echo '<div style="margin: 0 10%; font-size: 20px;  clear: both;">Nincs hírdetése!</div>';
     } else {
         echo '<div style="clear: both;">
                   <div style="background-color: grey; display: inline-block; font-size: 24px; padding: 3px; margin: 0 10%;" >Hírdetés: </div>

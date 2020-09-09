@@ -8,8 +8,8 @@ body {
     background: #565057;
     padding: 0;
     float: left;
-    margin: 2% 0 0 10%;
-    width: 73%;
+    margin: 2% 0 3% 0;
+    width: 61%;
 }
 
 .navbar_ol .navbar_ul {
@@ -36,7 +36,7 @@ body {
     position: relative;
     display: block;
     padding: 10px 5px;
-    margin: 0 20px;
+    margin: 0 15px;
     font-size: 20px;
     transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
     color: white;
@@ -215,34 +215,41 @@ input[name="r"]{
 /******************************************************************/
 
 
-.search{
-    margin: 5% 10% 4% 10%;
-    padding: 15px;
-    background: #565057;;
+.search{    
+    margin: 0 0 4% 0;
     box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
-    
+    background-image: url(peugeot_208/1.jpg);
+    padding: 4% 0;    
 }
 
+@media (min-width: 1600px) {
+    .search {
+        background-image: url(peugeot_208/2.jpg);        
+    }
+
+}
 
 input{
     text-align: center;
-    font-size: 20px;
-    margin: 5px;
-    
+    font-size: 20px;    
+    width: 95%;   
+    margin-bottom: 5%; 
+    height: 28px;
 }
 
-form{
-    margin: 0 10%;
-}
+
 
 select{
     font-size: 19px;
-    margin: 5px;
-
+    width: 100%;
+    margin-bottom: 5%; 
+    height: 33px;
 }
+
 button{
-    font-size: 20px;
-    margin: 5px;
+    font-size: 20px;  
+    margin-bottom: 5%; 
+    height: 32px;
 }
 
 input::-webkit-outer-spin-button,
@@ -321,7 +328,7 @@ input::-webkit-inner-spin-button {
 }
 
 a.newsLink {
-  color: blue;
+  color: black;
   text-decoration: none;
   text-transform: uppercase;
 }
@@ -340,6 +347,10 @@ a.newsLink:active {
 
 .news:hover{
     transform: scale(1.1);
+}
+
+a.advanced:hover , a.advanced:active {
+    color: red;
 }
 
 

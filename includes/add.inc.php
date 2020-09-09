@@ -83,7 +83,7 @@ if(isset($_POST['submit'])){
         mysqli_query($conn, $sql_extras);
     }
 
-    header("Location: ../add.php?insert=succes=$brand=$type");
+    header("Location: ../profile.php?insert=succes=$brand=$type");    
     exit();
 
 } else {

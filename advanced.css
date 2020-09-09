@@ -56,7 +56,6 @@ body {
     transition: color 0.1s,transform 0.2s ease-out;
 }
 
-
 .navbar_a:active::before {
     background-color: blue;
 }
@@ -71,6 +70,7 @@ body {
     margin: 2% 0 2% 0;
     width: 15%;
 }
+
 
 .fa {
     height: 19px;
@@ -137,38 +137,40 @@ body {
     transition: 0.5s;
 }
 
-.index_db{
-    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
-    margin: 0 1% 2% 0;
-    padding: 10px;
-    display: inline-block;
-    width: 150px;
-    height: 150px;
+input{
+    text-align: center;
+    font-size: 18px;    
+    width: 97%;   
+    margin-bottom: 3%; 
+    height: 25px;
 }
 
-.image:hover{
-    transform: scale(1.05);
+
+
+select{
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 5%; 
+    height: 30px;
 }
 
-.pagination {
-  display: inline-block;
+button{
+    font-size: 20px;  
+    margin-bottom: 5%; 
+    height: 32px;
 }
 
-.pagination a {
-  color: black;
-  float: left;
-  padding: 7px 14px;
-  text-decoration: none;
-  transition: background-color .3s;
-  border: 1px solid #ddd;
-  margin: 0 4px;
-  font-size: 18px;
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
 }
 
-.pagination a.active {
-  background-color: #1B2FFF;
-  color: white;
-  border: 1px solid #1B2FFF;
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 15px;
+    text-align: center;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+
+
+

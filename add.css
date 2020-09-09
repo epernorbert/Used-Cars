@@ -8,8 +8,8 @@ body {
     background: #565057;
     padding: 0;
     float: left;
-    margin: 2% 0 0 10%;
-    width: 73%;
+    margin: 0 0 3% 0;
+    width: 61%;
 }
 
 .navbar_ol .navbar_ul {
@@ -36,7 +36,7 @@ body {
     position: relative;
     display: block;
     padding: 10px 5px;
-    margin: 0 20px;
+    margin: 0 15px;
     font-size: 20px;
     transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
     color: white;
@@ -191,16 +191,6 @@ input[type="file"]{
 
 
 
-#left:hover{
-    transform: scale(1.1);    
-}
-
-#right:hover{
-    transform: scale(1.1);    
-}
-#center:hover{
-    transform: scale(1.1);    
-}
 
 #left {
     float:left;    

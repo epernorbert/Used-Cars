@@ -14,7 +14,8 @@ session_start();
 </head>
 <body>
 
-<div class="navbar">
+<div> <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%; " src="peugeot_208/logohd.jpg" height="75"> </div>
+<div class="navbar" style="margin-bottom: 6%;" >
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
@@ -32,16 +33,11 @@ session_start();
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
+
 
 <img src="peugeot_208/login_bg1.jpg" style="position: absolute; left: 0px; top: 129px; z-index: -1; width: 100%; filter: blur(4px);  ">
 
-<div align="center" style="margin: 6% 27%; background-color: white; width: 565px; padding: 10px 6px;">
+<div align="center" style="margin: 3% 27%; background-color: white; display: inline-block; width: 565px; padding: 10px 6px;">
 <form id="form" action="includes/signup.inc.php" name="form" method="post">
     <div style="float:left; margin-right: 20px; ">
         <?php
@@ -122,7 +118,7 @@ session_start();
     </div>
 
     <div>
-        <div>
+        <div >
             <i class="fa fa-key" style="background-color: green; padding: 8px; position: relative; left: 15px; bottom: 1px; "></i>
             <input type="password" name="pwd" id="pwd" placeholder="Jelszó" required=""><br>
         <div>
@@ -139,7 +135,7 @@ session_start();
         <div id="telephone_error"></div>
         <div>
             <i class="fa fa-building" style="background-color: green; padding: 8px; position: relative; left: 5px; "></i>
-            <select style="width: 202px; height: 35px; margin-top: 10px; " >
+            <select style="text-align: center;  font-size: 14px; width: 202px; height: 35px; margin-top: 10px; " >
                 <option value="" hidden="">Város</option>
                 <option value="Budapest">Budapest</option>
                 <option value="Debrecen">Debrecen</option>

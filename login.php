@@ -13,6 +13,7 @@ session_start();
 </head>
 <body>
 
+<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
 <div class="navbar">
     <ul class="navbar_ul">
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
@@ -31,14 +32,9 @@ session_start();
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
 
 
+    
     <img src="peugeot_208/login_bg1.jpg" style="position: absolute; left: 0px; top: 129px; z-index: -1; width: 100%; filter: blur(4px);  ">
     <div align="center" style="margin: 6% 38%;  background-color: white; display: inline-block; width: 290px;  padding: 10px 0 10px 0; ">
     <form action="includes/login.inc.php" method="post">

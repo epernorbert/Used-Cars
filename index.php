@@ -15,9 +15,9 @@ include_once 'action.php';
 </head>
 <body>
 
-
+<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
 <div class="navbar">
-    <ul class="navbar_ul">
+    <ul class="navbar_ul">        
         <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
         <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
         <li class="navbar_li"><a class="navbar_a" href="">Hírek</a></li>
@@ -34,24 +34,19 @@ include_once 'action.php';
         ?>
     </ul>
 </div>
-<div  class="navbar_social">
-    <a href="#" class="fa fa-facebook"></a>
-    <a href="#" class="fa fa-google"></a><br>
-    <a href="#" class="fa fa-instagram"></a>
-    <a href="#" class="fa fa-twitter"></a>
-</div><br>
 
-<div style="clear: both">
+
+<div style="clear: both; margin: 0 10%;" >
     <?php
     if(isset($_SESSION['u_id'])){
         echo '<form action="includes/logout.inc.php" method="POST">
-                  <button type="submit" name="submit" style="float:left; font-size: 15px; cursor:pointer;">Logout</button>
+                  <button type="submit" name="submit" style="float:left; margin-right: 5px; font-size: 15px; cursor:pointer; font-size: 16px;">Kijelentkezés</button>
               </form>';
-        echo '<div style="padding: 5px; font-size: 20px;">' . '<a href="profile.php" style="text-decoration: none; color: blue;">' . $_SESSION['u_uid'] . '</a>'  . '</div>' .
+        echo '<div style="padding: 5px; font-size: 20px;">' . '<a href="profile.php" style="text-decoration: none; color: blue; font-size: 23px;">' . $_SESSION['u_uid'] . '</a>'  . '</div>' .
                   '<style type="text/css"> 
-                    .navbar_social{
-                        margin: 2% 0 0 0;
-                     }               
+                    .navbar{
+                        margin: 2% 0 4px 0;
+                    }               
                 </style>';
     }
 
@@ -74,62 +69,38 @@ function load_brands(){
 ?>
 
 
- <div class="slidershow middle">
-  <div class="slides">
-            <input type="radio" name="r" id="r1" checked>
-            <input type="radio" name="r" id="r2">
-            <input type="radio" name="r" id="r3">
-            <input type="radio" name="r" id="r4">
-            <input type="radio" name="r" id="r5">
-        <div class="slide s1">
-            <img src="peugeot_208/blue_side.jpg" alt="">
-        </div>
-        <div class="slide">
-            <img src="peugeot_208/blue_front.jpg" alt="">
-        </div>
-        <div class="slide">
-              <img src="peugeot_208/blue_back.jpg" alt="">
-        </div>
-        <div class="slide">
-              <img src="peugeot_208/yellow_side.jpg" alt="">
-        </div>
-        <div class="slide">
-             <img src="peugeot_208/yellow_back.jpg" alt="">
-        </div>
-    </div>
-
-     <div class="navigation">
-        <label for="r1" class="bar"></label>
-        <label for="r2" class="bar"></label>
-        <label for="r3" class="bar"></label>
-        <label for="r4" class="bar"></label>
-        <label for="r5" class="bar"></label>
-     </div>
-</div>
+<?php
+    $sql = "SELECT * FROM cars";
+    $result = mysqli_query($conn, $sql);
+    $resultcheck = mysqli_num_rows($result);    
+?> 
 
 
-<div class="search" align="center" id="search">
+<div class="search" id="search">
 
-    <form action="search.php" method="GET" style="margin: 0;">
-        <div>
-         <table>
-             <tr>
-                <td>
-                    <select name="brand" id="brand" style="width: 128px;">
+    <form action="search.php" method="GET">
+        <div style=" border-radius: 10px 10px 0 0;  background-color: white; margin: 0 10%; width: 22%; font-size: 25px; padding: 1% 1% 0 1%;" ><?php echo $resultcheck; ?> autó található az oldalon</div>
+        <div style="font-size: 25px;  margin: 0 10% 0 10%; width: 22%; padding: 1% 1% 0 1%; background-color: white; " >Keressen az ajánlatok között</div>
+        <div  style="background-color: white; display: inline-block; padding: 1%; margin: 0 10%; width: 28%; border-radius: 0 10px 10px 10px; ">        
+         <table>                 
+             <tr>                
+                <td>                    
+                    <select name="brand" id="brand">
                        <option value="">Márka</option>
                            <?php echo load_brands(); ?>
                     </select>
                 </td>
                 <td>
-                    <select name="type" id="type" style="width: 128px;">
+                    <select name="type" id="type" >
                         <option value="">Típus</option>
                     </select>
                 </td>
-                <td><input type="number" name="max_price" placeholder="max ár" id="max_price" onkeypress="return event.charCode >= 48" oninput="check_max_price()" min="1" style="width: 120px"></td>
-                <td><input type="number" name="date_start" placeholder="évjárat(tól)" id="date_start" onkeypress="return event.charCode >= 48" oninput="check_min_year()" style="width: 120px;"></td>
+             </tr>  
+             <tr>
+                <td><input type="number" name="max_price" placeholder="Maximum ár (€)" id="max_price" onkeypress="return event.charCode >= 48" oninput="check_max_price()" min="1"></td>
                 <td>
                     <label>
-                        <select id="fueltype" name="fueltype" style="width: 128px; height: 29px;">Üzemanyag:
+                        <select id="fueltype" name="fueltype">Üzemanyag:
                             <option value="" style="display: none">Üzemanyag</option>
                             <option value="dizel">dizel</option>
                             <option value="benzin">benzin</option>
@@ -137,17 +108,24 @@ function load_brands(){
                         </select>
                     </label>
                 </td>
-                <input type="hidden" name="page" value="1" >
-                <td>
-                    <button type="submit" name="submit-search" style="width: 127px; height: 28px; background-color: blue; cursor: pointer; color: white">Keresés</button>
-                </td>
              </tr>
+             <tr>   
+                <td><input type="number" name="date_start" placeholder="Évjárat (tól)" id="date_start" onkeypress="return event.charCode >= 48" oninput="check_min_year()" ></td>                
+                <td><input type='number' name='mileage_end' id='mileage_end' placeholder='Futott kilóméter (ig)' onkeypress='return event.charCode >= 48'  ></td>
+              </tr>   
+                <input type="hidden" name="page" value="1" >
+                <td colspan="2">
+                    <button type="submit" name="submit-search" style="width: 100%; background-color: blue; cursor: pointer; color: white">Keresés</button>
+                </td>
+                <tr>
+                    <td align="center" colspan="2"  ><a class="advanced" style="text-decoration: none; font-size: 20px; display: inline-block; padding: 5px; padding-bottom: 0; color: black;" href="advanced.php">Részletes keresés</a></td>
+                </tr>
          </table>  
          </div> 
-        <div id="advanced"></div>
+
     </form>
     
-    <button onclick="advanced_search()" style="cursor: pointer;">Részletes keresés</button>
+    
     
 </div>
 
@@ -246,23 +224,6 @@ function load_brands(){
 
 </script>
 
-<script type="text/javascript">
-    function advanced_search(){
-        document.getElementById("advanced").innerHTML = 
-        "<table>"+
-            "<tr>"+
-                "<td><input type='number' name='max_hp' id='max_hp' placeholder='max lóerő' onkeypress='return event.charCode >= 48' oninput='check_max_hp()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_hp' id='min_hp' placeholder='min lóerő' onkeypress='return event.charCode >= 48' oninput='check_min_hp()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_price' id='min_price' placeholder='min ár' onkeypress='return event.charCode >= 48' oninput='check_min_price()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='date_end' id='date_end' placeholder='évjárat(ig)' onkeypress='return event.charCode >= 48' oninput='check_date_end()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='max_cm3' id='max_cm3' placeholder='max köbcenti' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()' style='width: 120px;'></td>"+
-                "<td><input type='number' name='min_cm3' id='min_cm3' placeholder='min köbcenti' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()' style='width: 120px;'></td>"+                                
-            "<tr>"+
-        "</table>"
-
-    }
-
-</script>
 
 
 <div class="top_brands">Népszerű márkák</div>
@@ -278,7 +239,7 @@ function load_brands(){
 </div>
 
 
-<div style="margin: 0 0 0 10%; width: 55%;  float: left;">
+<div style="margin: 0 0 0 10%; width: 55%; float: left;">
     <?php
         $sql = "SELECT c.marka, c.tipus, c.évjárat, c.ar, c.uzemanyag, ci.image_name, c.car_id, ci.car_id from cars c JOIN car_images ci ON c.car_id=ci.car_id GROUP BY user_id ORDER BY c.car_id desc;";
         $result = mysqli_query($conn, $sql);
