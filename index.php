@@ -79,8 +79,8 @@ function load_brands(){
 <div class="search" id="search">
 
     <form action="search.php" method="GET">
-        <div style=" border-radius: 10px 10px 0 0;  background-color: white; margin: 0 10%; width: 22%; font-size: 25px; padding: 1% 1% 0 1%;" ><?php echo $resultcheck; ?> autó található az oldalon</div>
-        <div style="font-size: 25px;  margin: 0 10% 0 10%; width: 22%; padding: 1% 1% 0 1%; background-color: white; " >Keressen az ajánlatok között</div>
+        <div style=" border-radius: 10px 10px 0 0;  background-color: white; margin: 0 10%; width: 20%; font-size: 22px; padding: 1% 1% 0 1%;" ><?php echo $resultcheck; ?> autó található az oldalon</div>
+        <div style="font-size: 22px;  margin: 0 10% 0 10%; width: 20%; padding: 1% 1% 0 1%; background-color: white; " >Keressen az ajánlatok között</div>
         <div  style="background-color: white; display: inline-block; padding: 1%; margin: 0 10%; width: 28%; border-radius: 0 10px 10px 10px; ">        
          <table>                 
              <tr>                
