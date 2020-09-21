@@ -135,7 +135,7 @@ session_start();
         <div id="telephone_error"></div>
         <div>
             <i class="fa fa-building" style="background-color: green; padding: 8px; position: relative; left: 5px; "></i>
-            <select style="text-align: center;  font-size: 14px; width: 202px; height: 35px; margin-top: 10px; " >
+            <select oninput="city_check()" id="city" name="city" style="text-align: center;  font-size: 14px; width: 202px; height: 35px; margin-top: 10px; " >
                 <option value="" hidden="">Város</option>
                 <option value="Budapest">Budapest</option>
                 <option value="Debrecen">Debrecen</option>
@@ -144,6 +144,7 @@ session_start();
                 <option value="Szombathely">Szombathely</option>
             </select>
         <div>
+        <div id="city_error"></div>
     <div>
     <div style="clear: both;">
         <button type="submit" name="submit" id="submit" style="width: 202px;cursor: pointer; height: 33px; ">Regisztráció</button>
@@ -172,6 +173,7 @@ session_start();
             $("#pwd_error").hide();
             $("#conf_pwd_error").hide();
             $("#telephone_error").hide();
+            $("#city_error").hide();
 
 
             var error_fname = false;
@@ -180,6 +182,7 @@ session_start();
             var error_password = false;
             var error_confirm_password = false;
             var error_telephone = false;
+            var error_city = false;
 
 
             $("#first").focusout(function(){
@@ -204,6 +207,10 @@ session_start();
 
             $("#telephone").focusout(function() {
                 check_telephone();
+            });
+
+            $("#city").focusout(function() {
+                check_city();
             });
 
 
@@ -362,6 +369,18 @@ session_start();
                 }
             }
 
+            function check_city(){
+                var city = $("#city").val();
+                if(city === ""){
+                    $("#city").css("border-bottom","2px solid #F90A0A");
+                    $("#city_error").show();
+                    error_telephone = true;
+                } else {
+                    $("#city").css("border-bottom","2px solid #34F458");
+                    $("#city_error").html("");
+                }
+            }
+
 
 
             $("#form").submit(function() {
@@ -371,6 +390,7 @@ session_start();
                 error_password = false;
                 error_confirm_password = false;
                 error_telephone = false;
+                error_city = false;
 
                 check_fname();
                 check_lname();
@@ -378,8 +398,9 @@ session_start();
                 check_password();
                 check_confirm_password();
                 check_telephone();
+                check_city();
 
-                if (error_fname === false && error_lname === false && error_email === false && error_password === false && error_confirm_password === false && error_telephone === false) {
+                if (error_fname === false && error_lname === false && error_email === false && error_password === false && error_confirm_password === false && error_telephone === false && error_city === false) {
                     return true;
                 } else {
                     alert("Kérem megfelelő adatokkal töltse ki a mezőket!");

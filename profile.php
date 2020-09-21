@@ -69,6 +69,10 @@ if(!isset($_SESSION['u_uid'])){
             <td><?php echo $_SESSION['u_telephone']?></td>
         </tr>
         <tr>
+            <td>Város: </td>
+            <td><?php echo $_SESSION['u_city']?></td>
+        </tr>
+        <tr>
             <td>
                 <button style="height: 28px; font-size: 15px; width: 100px; cursor: pointer; " onclick="change()">Módosít</button>
             </td>
@@ -112,7 +116,22 @@ if(!isset($_SESSION['u_uid'])){
 
     <script>
         function change() {
-            document.getElementById("form").innerHTML = "<form action='includes/update.inc.php' method='post' ><br>  <input type='text' name='u_first' value='<?php echo $_SESSION['u_first']; ?>'><br> <input type='text' name='u_last' value='<?php echo $_SESSION['u_last']; ?>'><br> <input type='text' name='u_email' value='<?php echo $_SESSION['u_email']; ?>'><br> <input type='number' name='u_telephone'  value='<?php echo $_SESSION['u_telephone']; ?>'><br> <button style='height: 28px; font-size: 15px; width: 100px; cursor: pointer;' type='submit' name='submit' value='save'>Mentés </form>";
+            document.getElementById("form").innerHTML = 
+                "<form class='personal_data_update' action='includes/update.inc.php' method='post'> " +
+                    "<input style='margin-top: 34px;' type='text' name='u_first' value='<?php echo $_SESSION['u_first']; ?>'> <br>" + 
+                    "<input type='text' name='u_last' value='<?php echo $_SESSION['u_last']; ?>'> <br>" + 
+                    "<input type='text' name='u_email' value='<?php echo $_SESSION['u_email']; ?>'> <br>" + 
+                    "<input type='number' name='u_telephone' value='<?php echo $_SESSION['u_telephone']; ?>'> <br>" + 
+                    "<select id='city' name='city' >" + 
+                        "<option value='<?php echo $_SESSION['u_city']; ?>' ><?php echo $_SESSION['u_city']; ?></option>" +
+                        "<option value='Budapest'>Budapest</option>" +
+                        "<option value='Debrecen'>Debrecen</option>" +
+                        "<option value='Kecskemét'>Kecskemét</option>" +
+                        "<option value='Szeged'>Szeged</option>" +
+                        "<option value='Szombathely'>Szombathely</option>" +
+                    "</select> <br>" +
+                    "<button style='height: 28px; font-size: 15px; width: 100px; cursor: pointer;' type='submit' name='submit' value='save'>Mentés" +                    
+                 "</form>";
         }
     </script>
 

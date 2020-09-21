@@ -50,7 +50,10 @@ include_once 'action.php';
 
     if( $resultcheck > 0){
         while($row = mysqli_fetch_assoc($result)){
-            echo '<div style="margin:  0 10% 0 10%">' . $row['news_title'] . '<br>' . $row['news_text'] . '</div>';
+            echo '<div style="margin: 0 10% 0 10%;">' . 
+                 '<div style=" background-color: #0900ad; font-size: 30px; padding: 9px; color: white; " >' . $row['news_title'] . '</div>' . '<br>' . 
+                $row['news_text'] . 
+            '</div>';
         }
     }
 

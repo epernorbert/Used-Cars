@@ -177,7 +177,7 @@ include 'action.php';
             (euro LIKE '$euro' OR '$euro' LIKE '') AND
             (transmission LIKE '$transmission' OR '$transmission' LIKE '') AND
             (colour LIKE '$color' OR '$color' LIKE '')
-            GROUP BY user_id";
+            GROUP BY user_id ORDER BY cars.car_id DESC";
 
     $result = mysqli_query($conn, $sql);
     $number_of_results = mysqli_num_rows($result);
@@ -216,7 +216,7 @@ include 'action.php';
                 (euro LIKE '$euro' OR '$euro' LIKE '') AND
                 (transmission LIKE '$transmission' OR '$transmission' LIKE '') AND           
                 (colour LIKE '$color' OR '$color' LIKE '')
-                GROUP BY user_id
+                GROUP BY user_id ORDER BY cars.car_id DESC
                 LIMIT " . $this_page_first_result . ',' .  $results_per_page;
 
     $result = mysqli_query($conn, $sql);

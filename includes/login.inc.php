@@ -40,16 +40,17 @@ if(isset($_POST['submit'])){
                     $_SESSION['u_telephone'] = $row['user_telephone'];
                     $_SESSION['u_uid'] = $row['user_uid'];
                     $_SESSION['u_usertype'] = $row['user_usertype'];
+                    $_SESSION['u_city'] = $row['user_city'];
 
                     $GLOBALS['keresztnev'] = $row['user_id'];
 
                     // Check user or admin
                     if($_SESSION['u_usertype'] == 'admin'){
-                        header("Location: ../admin/admin.php");
+                        header("Location: ../admin/admin.php?login=success");
                         exit();
                     } else {
-                    header("Location: ../index.php?login=success");
-                    exit();
+                        header("Location: ../index.php?login=success");
+                        exit();
                     }
                 }
             }

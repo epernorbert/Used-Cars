@@ -13,9 +13,11 @@
 
         $sql = "UPDATE users SET user_uid='{$GLOBALS['user_uid']}', user_first='{$GLOBALS['user_first']}', user_last='{$GLOBALS['user_last']}', user_email='{$GLOBALS['user_email']}', user_usertype='{$GLOBALS['user_usertype']}' WHERE user_id='{$_GET['user_id']}'";
 
-        mysqli_query($conn, $sql);
+        mysqli_query($conn, $sql);   
 
-        header("Location:admin.php");
+        // detect user_id
+        $user_id = $_GET['user_id'];
 
+        header("Location:check_advertisement.php?user_id=$user_id");        
     }
 

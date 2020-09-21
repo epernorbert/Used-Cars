@@ -55,17 +55,16 @@ include_once 'action.php';
 
 
 <?php
-function load_brands(){
-    include 'action.php';
-    $output = '';
-    $sql = "SELECT * FROM car_brands ORDER BY brands_name";
-    $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_array($result)){
-        $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+    function load_brands(){
+        include 'action.php';
+        $output = '';
+        $sql = "SELECT * FROM car_brands ORDER BY brands_name";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_array($result)){
+            $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+        }
+        return $output;
     }
-
-    return $output;
-}
 ?>
 
 
@@ -264,7 +263,7 @@ function load_brands(){
 <div style="margin: 0 10% 5% 0; border: 2px solid black; display: inline-block; width: 23%; height: 538px; float: right;">
     <?php
 
-        $sql = "SELECT news_image, news_title FROM news";
+        $sql = "SELECT news_image, news_title FROM news ORDER BY news_id desc";
         $result = mysqli_query($conn, $sql);
         $resultcheck = mysqli_num_rows($result);
         $newsDisplay = 0;

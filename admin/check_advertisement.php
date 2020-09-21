@@ -128,9 +128,9 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 
                 echo '<div style="clear: both; float: left;">';
 
-                    echo '<table style="float: left; margin: 0 4% 2% 0;">
+                    echo '<table style="float: left; margin: 0 4% 2% 0; width: 50%;">
                 <tr>
-                    <td>Márka: </td>
+                    <td style="width: 80%;" >Márka: </td>
                     <td>'.$row['marka'].'</td>
                 </tr>
                 <tr>
@@ -186,8 +186,10 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
                     <td>'.$row['identification_number'].'</td>
                 </tr>
                 <tr>
-                    <td>Rövid leírás: </td>
-                    <td>'.$row['description'].'</td>
+                    <td  >Rövid leírás: </td>
+                </tr>
+                <tr>                    
+                    <td colspan="2">'.$row['description'].'</td>
                 </tr>
             </table>';
 

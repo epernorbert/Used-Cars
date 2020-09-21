@@ -134,7 +134,7 @@ function load_brands(){
                 var error_image = false;
 
                 function isImage(image) {
-                  const ext = ['.jpg', '.png'];
+                  const ext = ['.jpg', '.png', '.bmp'];
                   return ext.some(el => image.endsWith(el));
                 }
 
@@ -144,8 +144,7 @@ function load_brands(){
                     let fname = files.files.item(i).name;
                     if (!isImage(fname)) {
                       error_image = true;                    
-                      alert("Csak jpg és png formátum engedélyezett!");
-                      //$("#files").css("border-bottom","2px solid #F90A0A");
+                      alert("Csak jpg, png és bmp formátum engedélyezett!");                      
                       return false;
                     } else {
                         error_image = false;
@@ -190,7 +189,7 @@ function load_brands(){
                     <option value='Szürke'>Szürke</option>
                     <option value='Fekete'>Fekete</option>
                     <option value='Lila'>Lila</option>
-                    <option value='Bíbor 5'>Bíbor 5</option>
+                    <option value='Bíbor'>Bíbor</option>
                     <option value='Piros'>Piros</option>
                     <option value='Rózsaszín'>Rózsaszín</option>
                     <option value='Barna'>Barna</option>
