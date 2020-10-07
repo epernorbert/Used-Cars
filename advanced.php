@@ -1,62 +1,63 @@
 <?php
-session_start();
-include_once 'action.php';
+    session_start();
+    include_once 'action.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    
-    <link type="text/css" rel="stylesheet" href="advanced.css">
+    <meta charset="UTF-8">    
+    <link type="text/css" rel="stylesheet" href="css/advanced.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Használtautók</title>
+    <title>RészletesKeresés</title>
 </head>
 <body>
 
-<div> <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%; " src="peugeot_208/logohd.jpg" height="75"> </div>
+<div> 
+    <img class="logo" src="peugeot_208/logohd.jpg" height="75"> 
+</div>
 <div class="navbar">
-    <ul class="navbar_ul">
-        <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#search">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#contact">Kapcsolat</a></li>
+    <ul>
+        <li><a href="index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="news.php">Hírek</a></li>
+        <li><a href="login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
             if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
-                echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
+                echo '<li><a href="add.php">Hírdetés feladás</a></li>';
             } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
-                echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
+                echo '<li><a href="admin/admin.php">Admin</a></li>';
             } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
-                echo '<li class="navbar_li"><a class="navbar_a" href="add_news.php">Hír közzététele</a></li>';
+                echo '<li><a href="add_news.php">Hír közzététele</a></li>';
             }
         ?>
     </ul>
 </div>
 
-
-
-
 <?php
-function load_brands(){
-    include 'action.php';
-    $output = '';
-    $sql = "SELECT * FROM car_brands ORDER BY brands_name";
-    $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_array($result)){
-        $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+
+    function load_brands(){
+        include 'action.php';
+        $output = '';
+        $sql = "SELECT * FROM car_brands ORDER BY brands_name";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_array($result)){
+            $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+        }
+
+        return $output;
     }
 
-    return $output;
-}
 ?>
+
 <div style="margin: 0 10%;">
     <form action="search.php" method="GET"> 
         <div >               
              <table style="width: 58%; float: left;">          
                 <tr>
-                    <td style="margin: 0; position: relative; top: 6px;  background-color: #565057; display: inline-block; padding: 7px 7px 3px 7px; color: white; font-size: 22px;">Általános&nbspadatok</td>
+                    <td class="data">Általános&nbspadatok</td>
                 </tr>
                 <tr>                
                     <td colspan="3" style="border-bottom: 2px solid #565057;"></td>
@@ -85,17 +86,21 @@ function load_brands(){
                     </td>
                 </tr>  
                 <tr>
-                    <td style="margin: 0; position: relative; top: 6px;  background-color: #565057; display: inline-block; padding: 7px 7px 3px 7px; color: white; font-size: 22px;">Finanszírozás</td>
+                    <td class="data">Finanszírozás</td>
                 </tr>
                 <tr>                                                       
                     <td  colspan="2" style="border-bottom: 2px solid #565057;"></td>                
                 </tr>
                 <tr>
-                    <td><input type='number' name='min_price' id='min_price' placeholder='Minimum ár (€)' onkeypress='return event.charCode >= 48' oninput='check_min_price()'></td>        
-                    <td><input type="number" name="max_price" placeholder="Maximum ár (€)" id="max_price" onkeypress="return event.charCode >= 48" oninput="check_max_price()" min="1"></td>
+                    <td>
+                        <input type='number' name='min_price' id='min_price' placeholder='Minimum ár (€)' onkeypress='return event.charCode >= 48' oninput='check_min_price()'>
+                    </td>        
+                    <td>
+                        <input type="number" name="max_price" placeholder="Maximum ár (€)" id="max_price" onkeypress="return event.charCode >= 48" oninput="check_max_price()" min="1">
+                    </td>
                 </tr> 
                 <tr>
-                    <td style="margin: 0; position: relative; top: 6px;  background-color: #565057; display: inline-block; padding: 7px 7px 3px 7px; color: white; font-size: 22px;">Karosszéria</td>
+                    <td class="data">Karosszéria</td>
                 </tr>
                 <tr>                
                     <td colspan="4" style="border-bottom: 2px solid #565057;"></td>
@@ -130,44 +135,64 @@ function load_brands(){
                             <option value='Kék'>Kék</option>
                         </select>
                     </td>
-                    <td ><input type='number' name='weight_start' id="weight_start" placeholder="Súly (tól)"  oninput="weight_input()"></td>
-                    <td><input type='number' name='weight_end' id="weight_end" placeholder="Súly (ig)"  oninput="weight_input()"></td>
+                    <td>
+                        <input type='number' name='weight_start' id="weight_start" placeholder="Súly (tól)" oninput="weight_input()">
+                    </td>
+                    <td>
+                        <input type='number' name='weight_end' id="weight_end" placeholder="Súly (ig)" oninput="weight_input()">
+                    </td>
                 </tr>
                 <tr>
-                    <td style="margin: 0; position: relative; top: 6px;  background-color: #565057; display: inline-block; padding: 7px 7px 3px 7px; color: white; font-size: 22px;">Gyártási év</td>
+                    <td class="data">Gyártási év</td>
                 </tr>
                 <tr>                
                     <td colspan="2" style="border-bottom: 2px solid #565057; font-size: 22px;  "></td>
                 </tr>                
                 <tr>
-                    <td><input type="number" name="date_start" placeholder="Évjárat(tól)" id="date_start" onkeypress="return event.charCode >= 48" oninput="check_min_year()" ></td>
-                    <td><input type='number' name='date_end' id='date_end' placeholder='Évjárat(ig)' onkeypress='return event.charCode >= 48' oninput='check_date_end()' ></td> 
+                    <td>
+                        <input type="number" name="date_start" placeholder="Évjárat(tól)" id="date_start" onkeypress="return event.charCode >= 48" oninput="check_min_year()" >
+                    </td>
+                    <td>
+                        <input type='number' name='date_end' id='date_end' placeholder='Évjárat(ig)' onkeypress='return event.charCode >= 48' oninput='check_date_end()' >
+                    </td> 
                 </tr> 
             </table>
         </div>      
         <table class="engin_data" align="right" style="width: 40%;" >
             <tr>
-                <td style="margin: 0; position: relative; top: 6px;  background-color: #565057; display: inline-block; padding: 7px 7px 3px 7px; color: white; font-size: 22px;">Motor adatok</td>
+                <td class="data">Motor adatok</td>
             </tr>    
             <tr>                
                 <td colspan="4" style="border-bottom: 2px solid #565057; "></td>
             </tr>           
             <tr>
-                <td><input type='number' name='max_hp' id='max_hp' placeholder='Maximum lóerő' onkeypress='return event.charCode >= 48  ' oninput='check_max_hp()'></td>
-                <td><input type='number' name='min_hp' id='min_hp' placeholder='Minimum lóerő' onkeypress='return event.charCode >= 48' oninput='check_min_hp()'></td>
+                <td>
+                    <input type='number' name='max_hp' id='max_hp' placeholder='Maximum lóerő' onkeypress='return event.charCode >= 48  ' oninput='check_max_hp()'>
+                </td>
+                <td>
+                    <input type='number' name='min_hp' id='min_hp' placeholder='Minimum lóerő' onkeypress='return event.charCode >= 48' oninput='check_min_hp()'>
+                </td>
             </tr>
             <tr>    
-                <td><input type='number' name='max_cm3' id='max_cm3' placeholder='Maximum köbcenti' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()'></td>
-                <td><input type='number' name='min_cm3' id='min_cm3' placeholder='Minimum köbcenti' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()'></td>
+                <td>
+                    <input type='number' name='max_cm3' id='max_cm3' placeholder='Maximum köbcenti' onkeypress='return event.charCode >= 48' oninput='check_max_cm3()'>
+                </td>
+                <td>
+                    <input type='number' name='min_cm3' id='min_cm3' placeholder='Minimum köbcenti' onkeypress='return event.charCode >= 48' oninput='check_min_cm3()'>
+                </td>
             </tr>         
             <tr>
-                <td><input type='number' name='mileage_start' id='mileage_start' placeholder='Kilométeróra állása(tól)' onkeypress='return event.charCode >= 48'></td>
-                <td><input type='number' name='mileage_end' id='mileage_end' placeholder='Kilométeróra állása(ig)' onkeypress='return event.charCode >= 48'></td>
+                <td>
+                    <input type='number' name='mileage_start' id='mileage_start' placeholder='Kilométeróra állása(tól)' onkeypress='return event.charCode >= 48'>
+                </td>
+                <td>
+                    <input type='number' name='mileage_end' id='mileage_end' placeholder='Kilométeróra állása(ig)' onkeypress='return event.charCode >= 48'>
+                </td>
             </tr>
             <tr>    
                 <td>                    
                     <select name='euro' id='euro'>
-                        <option value=''  hidden="">Környezetvédelmi osztály</option>
+                        <option value='' hidden="">Környezetvédelmi osztály</option>
                         <option value='euro 1'>Euro 1</option>
                         <option value='euro 2'>Euro 2</option>
                         <option value='euro 3'>Euro 3</option>
@@ -178,7 +203,7 @@ function load_brands(){
                 </td>
                 <td> 
                     <select name='transmission' id='transmission'>
-                        <option value=''  hidden="">Sebességváltó</option>
+                        <option value='' hidden="">Sebességváltó</option>
                         <option value='Manuális - 4'>Manuális - 4</option>
                         <option value='Manuális - 5'>Manuális - 5</option>
                         <option value='Manuális - 6'>Manuális - 6</option>
@@ -191,7 +216,10 @@ function load_brands(){
                 </td>                
             </tr>
                 <tr>
-                    <td colspan="6" align="center" ><button type="submit" name="submit-search" style="width: 50%; margin-bottom: 0; background-color: blue; cursor: pointer; color: white">Keresés</button></td>
+                    <td colspan="6" align="center" >
+                        <button type="submit" name="submit-search">Keresés
+                        </button>
+                    </td>
                 </tr>    
          </table>   
          <input type="hidden" name="page" value="1" >       

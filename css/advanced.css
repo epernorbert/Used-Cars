@@ -1,0 +1,127 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+.logo{
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.navbar{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background: #565057;
+    padding: 0;
+    float: left;
+    margin: 2% 0 3% 0;
+    width: 61%;
+}
+
+.navbar li{
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar a:hover a:focus a:active{
+    color: #999;
+    text-decoration: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+.navbar a::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: blue;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: color 0.1s,transform 0.2s ease-out;
+}
+
+.navbar a:active::before {
+    background-color: blue;
+}
+
+.navbar a:hover::before, .navbar_a:focus::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.fa{
+    height: 19px;
+    padding: 9px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+input{
+    text-align: center;
+    font-size: 18px;    
+    width: 97%;   
+    margin-bottom: 3%; 
+    height: 25px;
+}
+
+select{
+    font-size: 16px;
+    width: 100%;
+    margin-bottom: 5%; 
+    height: 30px;
+}
+
+button{
+    font-size: 20px;  
+    margin-bottom: 5%; 
+    height: 32px;
+    width: 50%; 
+    margin-bottom: 0; 
+    background-color: blue; 
+    cursor: pointer; 
+    color: white
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 15px;
+    text-align: center;
+}
+
+.data{
+    margin: 0; 
+    position: relative; 
+    top: 6px; 
+    background-color: #565057; 
+    display: inline-block; 
+    padding: 7px 7px 3px 7px; 
+    color: white; 
+    font-size: 22px;
+}
+
+
+
+
+

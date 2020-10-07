@@ -1,0 +1,335 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+.logo{
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.navbar{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background: #565057;
+    padding: 0;
+    float: left;
+    margin: 2% 0 3% 0;
+    width: 61%;
+}
+
+.navbar li{
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar a:hover a:focus a:active{
+    color: #999;
+    text-decoration: none;
+}
+
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+.navbar a::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: blue;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: color 0.1s,transform 0.2s ease-out;
+}
+
+.navbar a:active::before {
+    background-color: blue;
+}
+
+.navbar a:hover::before, .navbar_a:focus::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.login{
+    clear: both;  
+    margin: 0 10%;  
+}
+
+.logout{
+    float:left;
+    margin-right: 5px;
+    font-size: 15px;
+    cursor:pointer;
+    font-size: 16px;
+}
+
+.username{
+    padding: 5px;
+    font-size: 20px;
+}
+
+.username a{
+    text-decoration: none;
+    color: blue; font-size: 23px;
+}
+
+.search{    
+    margin: 0 0 4% 0;
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background-image: url(../peugeot_208/1.jpg);
+    padding: 4% 0;    
+}
+
+.number_of_cars{
+    border-radius: 10px 10px 0 0;
+    background-color: white;
+    margin: 0 10%;
+    width: 20%;
+    font-size: 22px;
+    padding: 1% 1% 0 1%;
+}
+
+.car_search{
+    font-size: 22px;
+    margin: 0 10% 0 10%;
+    width: 20%;
+    padding: 1% 1% 0 1%;
+    background-color: white; 
+}
+
+.search_body{
+    background-color: white;
+    display: inline-block;
+    padding: 1%; 
+    margin: 0 10%; 
+    width: 28%; 
+    border-radius: 0 10px 10px 10px; 
+}
+
+.search_button{
+    width: 100%;
+    background-color: blue;
+    cursor: pointer; 
+    color: white;
+}
+
+input{
+    text-align: center;
+    font-size: 18px;    
+    width: 95%;   
+    margin-bottom: 5%; 
+    height: 28px;
+}
+
+select{
+    font-size: 17px;
+    width: 100%;
+    margin-bottom: 5%; 
+    height: 33px;
+}
+
+button{
+    font-size: 18px;  
+    margin-bottom: 2%; 
+    height: 32px;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 16px;
+    text-align: center;
+}
+
+.top_brands{    
+    background-color: blue;
+    color:white;
+    display: inline;
+    margin-left: 10%; 
+    position: relative;
+    bottom: 6px;
+    padding: 7px;
+    letter-spacing: 0.15em;
+    font-size: 20px;    
+    text-align: center;
+}
+
+.brand{
+    font-size: 20px;
+    margin: 0 10% 4% 10%; 
+    border-bottom: 1px solid blue; 
+    border-top: 1px solid blue;
+}
+
+.brand ul {
+    margin: 30px auto 0;
+    margin-bottom: 30px;
+    padding: 0;
+    list-style: none;
+    display: table;
+    width: 600px;
+    text-align: center;
+}
+
+.brand li {
+    display: table-cell;
+    position: relative;
+
+}
+.brand a {
+    color: #fff;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.15em;
+    display: inline-block;
+    padding: 15px 20px;
+    position: relative;
+    color: black;
+}
+
+.brand ul:hover a{
+    filter: blur(3px);
+    opacity: 0.5;
+    transform: scale(0.98);
+}
+
+.brand ul:hover a:hover{
+    transform: scale(1);
+    filter: blur(0px);
+    opacity: 1;
+}
+
+.advertisement{
+    margin: 0 0 0 10%; 
+    width: 55%; 
+    float: left;
+}
+
+.index_db{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    margin: 0 2% 2% 0;
+    padding: 10px;
+    display: inline-block;
+    width: 150px;
+    height: 150px;
+}
+
+.index_db p{
+    margin: 3px 0;
+}
+
+.cars{
+    border: 2px solid black;
+}
+
+.image{
+    display: block; 
+    object-fit: cover;/* nagyítás, egyforma képek */ 
+    width: 146px; 
+    height: 93px;
+}
+
+.image:hover{
+    transform: scale(1.05);
+}
+
+.news_body{
+    margin: 0 10% 5% 0; 
+    border: 2px solid black; 
+    display: inline-block; 
+    width: 23%; 
+    height: 538px; 
+    float: right;
+}
+
+.news{
+    transition: 0.5s;
+    border: 1px solid black; 
+    margin-top: 3px; 
+    display: inline-block; 
+    background-color:white;
+    width: 99%;
+}
+
+.news img{
+    display: block; 
+    object-fit: cover;
+    width: 165px; 
+    height: 102px; 
+    float:left;
+}
+
+a.newsLink {
+  color: black;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+a.newsLink:hover {
+  text-decoration: underline;
+}
+
+a.newsLink:active {
+  color: black;
+}
+
+.news:hover{
+    transform: scale(1.1);
+}
+
+a.advanced:hover , a.advanced:active {
+    color: red;
+}
+
+.footer{
+    clear: both; 
+    margin: 5% 10% 0 10%; 
+    background: rgb(2,0,36);
+    padding: 20px;
+    background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828, #04070d); 
+    height: 450px;
+}
+
+.footer iframe{
+    border:2px solid black;
+}
+
+.contact{
+    text-align: center;
+    padding-top: 10%;
+    color: white;
+}
+
+/*
+* media querys
+*/
+
+
+@media screen and (min-width: 1600px)  {
+    .search {
+        background-image: url(../peugeot_208/2.jpg);                
+    }
+}
+
+
+
+

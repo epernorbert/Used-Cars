@@ -11,47 +11,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="advertisemen.css">
+    <link type="text/css" rel="stylesheet" href="css/advertisemen.css">
     <link type="text/css" rel="stylesheet" href="lightbox-image/lightbox.min.css">
+    <!-- Image zoom  -->
     <script type="text/javascript" src="lightbox-image/lightbox-plus-jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Hirdetés</title>
 </head>
 <body>
 
-<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
+<div> 
+    <img class="logo" src="peugeot_208/logohd.jpg" height="75"> 
+</div>
 <div class="navbar">
-    <ul class="navbar_ul">
-        <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="news.php">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+    <ul>
+        <li><a href="index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="news.php">Hírek</a></li>
+        <li><a href="login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
-        if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
-            echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
-        } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
-            echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
-        } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
-            echo '<li class="navbar_li"><a class="navbar_a" href="add_news.php">Hír közzététele</a></li>';
-        }
+            if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
+                echo '<li><a href="add.php">Hírdetés feladás</a></li>';
+            } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
+                echo '<li><a href="admin/admin.php">Admin</a></li>';
+            } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer'){
+                echo '<li><a href="add_news.php">Hír közzététele</a></li>';
+            }
         ?>
     </ul>
 </div>
-
-
 
 <?php
 
     include 'action.php';
 
     //Car Data
-    $sql = "SELECT * from cars where car_id='{$_GET['car_id']}'";
+    $sql = "SELECT * FROM cars WHERE car_id='{$_GET['car_id']}'";
     $result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
     $row = mysqli_fetch_assoc($result);
     
-    echo '<div style="margin: 0 10% 0 10%;" >';
+    echo '<div style="margin: 0 10% 0 10%;">';
         echo '<div style=" float: left; width: 40%; font-size: 20px; ">';       
             echo'<table class="car_data" >                                    
                     <div style="font-size: 30px; text-align: center; ">
@@ -59,7 +60,7 @@
                     </div>
                         <br> 
                     <div style="border-bottom: 2px solid grey; " >
-                        <div style="background-color: grey; display: inline-block; font-size: 24px; padding: 3px; " >Adatok: </div>
+                        <div class="data" >Adatok: </div>
                     </div>                  
                     <tr>
                         <td style="width: 60%;" >Évjárat: </td>
@@ -108,7 +109,7 @@
                     <tr>
                         <td colspan="2" >
                             <div style="border-bottom: 2px solid grey; " >
-                                <div style="background-color: grey; display: inline-block; font-size: 24px; padding: 3px; ">Rövid leírás: </div>
+                                <div class="data">Rövid leírás: </div>
                             </div>
                         </td>
                     </tr>                   
@@ -129,7 +130,9 @@
         echo '<div style=" float: right; width: 60%">';
             while($row_img = mysqli_fetch_assoc($result_img)) {
                 echo '<div class="gallery">';
-                    echo '<a href="uploads/'.$row_img['image_name'].'" data-lightbox="mygallery" > <img class="image" src=uploads/' .$row_img['image_name']. ' style="float:left; display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 200px; height: 125px; margin: 0 0 2% 2%;"> </a>';
+                    echo '<a href="uploads/'.$row_img['image_name'].'" data-lightbox="mygallery" > 
+                                <img class="image" src=uploads/' .$row_img['image_name']. '> 
+                          </a>';
                 echo '</div>';
 
             }
@@ -141,16 +144,16 @@
         $result_extras = mysqli_query($conn, $sql_extras);
         $resultcheck_extras = mysqli_num_rows($result_extras);        
         
-            echo '<div style=" width:25%;  float: left; margin-left: 10px; margin-right: 10px; margin-top: 19px; padding: 5px; ">';                
+            echo '<div class="extras">';                
                 if($resultcheck_extras != 0){
                     echo '<div style="border-bottom: 2px solid grey;" >';
                         echo '<div style="font-size: 26px; background-color: grey; display: inline-block; padding: 3px; ">Felszereltség: </div>'; 
                     echo '</div>';
                     while($row_extras = mysqli_fetch_assoc($result_extras)){                          
                         echo '<table>
-                                <tr>                                
-                                    <td >'.$row_extras['extras'].'</td>
-                                </tr>                        
+                                    <tr>                                
+                                        <td >'.$row_extras['extras'].'</td>
+                                    </tr>                        
                               </table>';                    
                     }
 
@@ -173,7 +176,7 @@
             echo '<div style=" display: inline-block; width: 25%; padding: 5px; margin-top: 19px; ">';
         }        
             echo '<div style="border-bottom: 2px solid grey;" >';
-                echo '<div style="font-size: 26px; background-color: grey; display: inline-block; padding: 3px; ">Értékesítő adatai: </div>';
+                echo '<div style="font-size: 26px; background-color: grey; display: inline-block; padding: 3px;">Értékesítő adatai: </div>';
             echo '</div>';
             while($row_user = mysqli_fetch_assoc($result_user)){
                 echo '<table>
@@ -194,12 +197,7 @@
 
             echo '</div>';   
 
-        
-
     echo '</div>';
-
-
-        
 
 ?>
 

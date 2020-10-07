@@ -1,5 +1,7 @@
 <?php
 
+// Script ckeck username is already exist in database
+
 include 'action.php';
 
 if(isset($_POST['user_uid'])){

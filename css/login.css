@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    background-color: white;
+}
+
+.logo{
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.navbar{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background: #565057;
+    padding: 0;
+    float: left;
+    margin: 2% 0 3% 0;
+    width: 61%;
+}
+
+.navbar li{
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar a:hover a:focus a:active{
+    color: #999;
+    text-decoration: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+.navbar a::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: blue;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: color 0.1s,transform 0.2s ease-out;
+}
+
+.navbar a:active::before {
+    background-color: blue;
+}
+
+.navbar a:hover::before, .navbar_a:focus::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.fa{
+    height: 19px;
+    padding: 9px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.background{
+    position: absolute; 
+    left: 0px; 
+    top: 129px; 
+    z-index: -1; 
+    width: 100%; 
+    filter: blur(4px);  
+}
+
+.form_main{
+    margin: 6% 38%; 
+    background-color: white; 
+    display: inline-block; 
+    width: 290px; 
+    padding: 10px 0 10px 0; 
+}
+
+.fa-user{
+    background-color: green; 
+    padding: 8px; 
+    position: relative; 
+    left: 8px; 
+    bottom: 1px; 
+}
+
+.username_input{
+    border-bottom: 2px solid #34F458; 
+    height: 25px; 
+    position: relative; 
+    right: 3px;
+}
+
+.fa-key{
+    background-color: green; 
+    padding: 8px; 
+    position: relative; 
+    left: 10px; 
+    bottom: 1px; 
+}
+
+.password_input{
+    height: 25px; 
+    position: relative; 
+    right: 5px; 
+}
+
+.login_button{
+    cursor: pointer; 
+    width: 85%; 
+    position: relative; 
+    right: 3px; 
+    height: 33px;
+}
+
+.signup_button{
+    width: 85%; 
+    position: relative; 
+    right: 3px; 
+    height: 33px; 
+}
+
+.signup_button a{
+    text-decoration: none; 
+    color: black;
+}
+
+input{
+    margin: 10px;
+    padding: 3px;
+    font-size: 15px;
+}
+
+button{
+    margin: 10px;
+    padding: 3px;
+    font-size: 15px;
+}
+
+
+input[placeholder] {
+    text-align: center;
+}
+
+.error{
+    color: red;
+}
+
+input[type=text]:focus {
+  background-color: lightblue;
+}
+
+input[type=password]:focus {
+  background-color: lightblue;
+}

@@ -15,6 +15,7 @@ if(isset($_POST['submit'])){
         $brand_name = $row['brands_name'];
     }
 
+    // Inputs
     $type = mysqli_real_escape_string($conn, $_POST['type']);
     $year = mysqli_real_escape_string($conn, $_POST['year']);
     $price = mysqli_real_escape_string($conn, $_POST['price']);
@@ -30,24 +31,22 @@ if(isset($_POST['submit'])){
     $identification_number = mysqli_real_escape_string($conn, $_POST['identification_number']);
     $description = mysqli_real_escape_string($conn, $_POST['description']);
 
-    //$image = mysqli_real_escape_string($conn, $_POST['files']); //(Nem törlöm lehet kelleni fog)
-
-    //aktuális felhasználó ID(szám). Aki jelenleg be van jelentkezve.
+    // Currenty logged is user ID number
     $user_id = $_SESSION['u_id'];
 
     //Image
     $file = $_FILES['files'];
     $fileName = $_FILES['files']['name'];
 
-    //Error handlers
-    //Empty fields
+    // Error handlers
+    // Empty fields
     if(empty($brand) || empty($type) || empty($year) || empty($price) || empty($fuel) || empty($cm3) || empty($horsepower)|| empty($body_style)|| empty($mileage)|| empty($euro)|| empty($colour)|| empty($transmission)|| empty($weight)){
-        header("Location: ../add.php?empty=fields");
+            header("Location: ../add.php?empty=fields");
 
         exit();
     }
 
-    //Insert car into database
+    // Insert car into database
     $sql = "INSERT INTO cars (user_id, marka, tipus, évjárat, ar, uzemanyag, kobcenti, loero, body_style, mileage, euro, colour, transmission, weight, identification_number, description) VALUE ('$user_id','$brand_name','$type','$year','$price','$fuel','$cm3','$horsepower', '$body_style', '$mileage', '$euro', '$colour', '$transmission', '$weight', '$identification_number', '$description');";
     mysqli_query($conn, $sql);
 

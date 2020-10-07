@@ -1,9 +1,9 @@
 <?php
-//these two lines are due to the back button from advertisemet.php
-//header('Cache-Control: no cache'); //no cache
-//session_cache_limiter('private_no_expire'); // works
-//session_cache_limiter('public'); // works too
-session_start();
+    //these two lines are due to the back button from advertisemet.php
+    //header('Cache-Control: no cache'); //no cache
+    //session_cache_limiter('private_no_expire'); // works
+    //session_cache_limiter('public'); // works too
+    session_start();
 ?>
 
 <!DOCTYPE html>
@@ -11,36 +11,37 @@ session_start();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="search.css">
+    <link type="text/css" rel="stylesheet" href="css/search.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Login</title>
+    <title>Search</title>
 </head>
 <body>
 
-<div > <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
+<div class="logo_div"> 
+    <img class="logo" src="peugeot_208/logohd.jpg" height="75"> 
+</div>
 <div class="navbar">
-    <ul class="navbar_ul" >
-        <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+    <ul>
+        <li><a href="index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="#">Hírek</a></li>
+        <li><a href="login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
-        if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
-            echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
-        } elseif( isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
-            echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
-        }
+            if(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='user'){
+                echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
+            } elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
+                echo '<li class="navbar_li"><a class="navbar_a" href="admin/admin.php">Admin</a></li>';
+            }
         ?>
     </ul>
 </div>
-
 
 </body>
 </html>
 
 <?php
-include 'action.php';
+    include 'action.php';
 ?>
 
 <?php
@@ -150,9 +151,7 @@ include 'action.php';
         $transmission = "";    
     }
 
-
-    
-    
+    // pagination
     // define how many results you want per page
     $results_per_page = 18;
 
@@ -224,57 +223,85 @@ include 'action.php';
 
     if($queryResult > 0){
     
-    echo '<div style="width: 100%; overflow: auto;" >';
-    while($row = mysqli_fetch_assoc($result)){
-            if($row['uzemanyag'] == 'Elektromos'){
-                echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left; background-color: #91D184;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
-             } else {
-                 echo '<div style="margin-left: 10%; margin-right: 9%;">' . '<div class="index_db" style=" float: left;">' . '<p style="margin: 3px 0;" >'  . $row['marka'] . " " . $row['tipus'] . '</p>' . $row['ar'] . "€" . " " . $row['évjárat']  .  '<div style="border: 2px solid black;"> <a href="advertisement.php?car_id='.$row['car_id'].'" > <img class="image" src=uploads/' .$row['image_name']  .' style="display: block; object-fit: cover;/* nagyítás, egyforma képek */ width: 146px; height: 93px;" > </a> </div> ' . '</div>' . '</div>';
+        echo '<div class="advertisement">';
+            while($row = mysqli_fetch_assoc($result)){
+                if($row['uzemanyag'] == 'Elektromos'){
+                   echo '<div class="advertisement_div">' . 
+                            '<div class="index_db" style="background-color: #91D184;">' . 
+                                '<p style="margin: 3px 0;" >'  . 
+                                    $row['marka'] . " " . 
+                                    $row['tipus'] . 
+                                '</p>' . 
+                                $row['ar'] . "€" . " " . 
+                                $row['évjárat']  .  
+                                '<div style="border: 2px solid black;"> 
+                                    <a href="advertisement.php?car_id='.$row['car_id'].'" > 
+                                        <img class="image" src=uploads/' .$row['image_name']  .'>
+                                    </a>
+                                </div> ' . 
+                            '</div>' . 
+                        '</div>';
+                 } else {
+                     echo '<div class="advertisement_div">' . 
+                            '<div class="index_db" style=" float: left;">' . 
+                                '<p style="margin: 3px 0;" >'  . 
+                                    $row['marka'] . " " . 
+                                    $row['tipus'] . 
+                                '</p>' . 
+                                $row['ar'] . "€" . " " . 
+                                $row['évjárat']  .  
+                                '<div style="border: 2px solid black;"> 
+                                    <a href="advertisement.php?car_id='.$row['car_id'].'" > 
+                                        <img class="image" src=uploads/' .$row['image_name']  .'>
+                                    </a>
+                                </div> ' . 
+                            '</div>' . 
+                        '</div>';
+                }
             }
-        }
-    echo '</div>';    
+        echo '</div>';    
 
-    // display the links to the pages
-    echo '<div style="text-align: center; margin: 20px; 0" >';
-        $active="";
-        for ($page=1;$page<=$number_of_pages;$page++) {       
-            if($page == $_GET['page']){
-                $active='class="active"';
-            } else {
-                $active='';
-            }  
-                         
-            echo '<div class="pagination" > <a '.$active.'  href="search.php?page=' . $page . 
-                            '&max_price='.$max_price.
-                            '&date_start='.$date_start.
-                            '&fueltype='.$fueltype.
-                            '&brand='.$brand_id.
-                            '&type='.$type.
-                            '&min_price='.$min_price.
-                            '&max_hp='.$max_hp.
-                            '&min_hp='.$min_hp.
-                            '&max_cm3='.$max_cm3.
-                            '&min_cm3='.$min_cm3.
-                            '&body_style='.$body_style.
-                            '&colour='.$color.
-                            '&weight_start='.$weight_start.
-                            '&weight_end='.$weight_end.
-                            '&mileage_start='.$mileage_start.
-                            '&mileage_end='.$mileage_end.
-                            '&transmission='.$transmission.
-                            '&euro='.$euro.
-                            '&date_end='.$date_end.'  ">' . $page . '</a>  </div>';    
-            
-        }        
-    echo '</div>';
-} else {    
-    echo  '<div>
-                 <script>                                                  
-                          alert("A keresésnek nincs eredménye!");
-                          location.href="index.php";
-                 </script> 
-           </div>';
-}
+        // display the links to the pages
+        echo '<div style="text-align: center; margin: 20px; 0" >';
+            $active="";
+            for ($page=1;$page<=$number_of_pages;$page++) {       
+                if($page == $_GET['page']){
+                    $active='class="active"';
+                } else {
+                    $active='';
+                }  
+                             
+                echo '<div class="pagination" > <a '.$active.'  href="search.php?page=' . $page . 
+                                '&max_price='.$max_price.
+                                '&date_start='.$date_start.
+                                '&fueltype='.$fueltype.
+                                '&brand='.$brand_id.
+                                '&type='.$type.
+                                '&min_price='.$min_price.
+                                '&max_hp='.$max_hp.
+                                '&min_hp='.$min_hp.
+                                '&max_cm3='.$max_cm3.
+                                '&min_cm3='.$min_cm3.
+                                '&body_style='.$body_style.
+                                '&colour='.$color.
+                                '&weight_start='.$weight_start.
+                                '&weight_end='.$weight_end.
+                                '&mileage_start='.$mileage_start.
+                                '&mileage_end='.$mileage_end.
+                                '&transmission='.$transmission.
+                                '&euro='.$euro.
+                                '&date_end='.$date_end.'  ">' . $page . '</a>  </div>';    
+                
+            }        
+        echo '</div>';
+    } else {    
+        echo  '<div>
+                     <script>                                                  
+                              alert("A keresésnek nincs eredménye!");
+                              location.href="index.php";
+                     </script> 
+               </div>';
+    }
 
 ?>
 

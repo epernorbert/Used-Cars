@@ -1,41 +1,41 @@
 <?php
+    session_start();
 
-session_start();
-
-if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
-
-    header("Location: ../index.php?=you=need=to=login");
-
-}?>
+    if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
+        header("Location: ../index.php?=you=need=to=login");
+    }
+?>
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
-    <link type="text/css" rel="stylesheet" href="check_advertisemen.css">
+    <link type="text/css" rel="stylesheet" href="css/check_advertisemen.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 
-<div> <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%; " src="../peugeot_208/logohd.jpg" height="75"> </div>
+<div> 
+    <img class="logo" src="../peugeot_208/logohd.jpg" height="75"> 
+</div>
 <div class="navbar">
-    <ul class="navbar_ul">
-        <li class="navbar_li"><a class="navbar_a" href="../index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="../login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+    <ul>
+        <li><a href="../index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="../news.php">Hírek</a></li>
+        <li><a href="../login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
-        if(isset($_SESSION['u_id'])){
-            echo '<li class="navbar_li"><a class="navbar_a" href="admin.php">Admin</a></li>';
-        }
+            if(isset($_SESSION['u_id'])){
+                echo '<li class="navbar_li"><a class="navbar_a" href="admin.php">Admin</a></li>';
+            }
         ?>
     </ul>
 </div>
 
-
 <style>
+
     .uid div{
         margin-bottom: 8px;
     }
@@ -66,8 +66,8 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
     $GLOBALS['user_usertype'] = $row_user['user_usertype'];
 
     echo '<div style="margin: 0 10% 0 10%;">';
-
         echo '<div class="uid" style=" float: left; margin: 0 2% 1% 0; ">' .
+
                  '<table>                        
                         <tr>
                            <td>Felhasználónév: </td>
@@ -92,7 +92,6 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
                  </table>';
 
                   echo '<button style="margin-top: 5px;" onclick="user_update()">Módosít</button>';
-
         echo '</div>';
 
         echo '<div id="update"></div>';
@@ -104,7 +103,6 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
             $result_news = mysqli_query($conn, $sql_news);
             $resultcheck_news = mysqli_num_rows($result_news);
 
-
             if($resultcheck_news > 0){
                 while($row_news = mysqli_fetch_assoc($result_news)){
                     echo  '<div style="border: 1px solid black; display: inline-block";>
@@ -115,8 +113,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
 
             }
 
-
-        } elseif($GLOBALS['user_usertype'] === 'user') {
+        } elseif ($GLOBALS['user_usertype'] === 'user') {
 
             //Car data
             $sql = "SELECT * from cars WHERE user_id='{$_GET['user_id']}';";
@@ -194,7 +191,7 @@ if(!isset($_SESSION['u_id']) || $_SESSION['u_usertype'] == 'user'){
             </table>';
 
                         //Car images
-                        $sql_img = "select image_name from car_images where car_id='{$row['car_id']}'";
+                        $sql_img = "SELECT image_name FROM car_images WHERE car_id='{$row['car_id']}'";
                         $result_img = mysqli_query($conn, $sql_img);
                         $resultcheck_img = mysqli_num_rows($result_img);
 

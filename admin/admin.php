@@ -1,14 +1,10 @@
 <?php
+    session_start();    
 
-session_start();
-
-include '../action.php';
-
-if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SESSION['u_usertype'] == 'writer'  ){
-    header("Location: ../index.php?ERROR=need=to=login=admin");
-    exit();
-}
-
+    if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SESSION['u_usertype'] == 'writer'  ){
+        header("Location: ../index.php?error=notAdmin");
+        exit();
+    }
 ?>
 
 
@@ -17,7 +13,7 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
 <head>
     <meta charset="UTF-8">
     <title>Admin page</title>
-    <link type="text/css" rel="stylesheet" href="admin.css">
+    <link type="text/css" rel="stylesheet" href="css/admin.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -40,34 +36,34 @@ if(!isset($_SESSION['u_usertype']) || $_SESSION['u_usertype'] == 'user' || $_SES
         } );
     </script>
 
-<div> <img  style="float: left; display: inline-block; margin-top: 2%; margin-left: 10%; " src="../peugeot_208/logohd.jpg" height="75"> </div>
+<div> 
+    <img class="logo" src="../peugeot_208/logohd.jpg" height="75"> 
+</div>
 <div class="navbar">
-    <ul class="navbar_ul">
-        <li class="navbar_li"><a class="navbar_a" href="../index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="../login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+    <ul>
+        <li><a href="../index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="../news.php">Hírek</a></li>
+        <li><a href="../login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
-        if(isset($_SESSION['u_id'])){
-            echo '<li class="navbar_li"><a class="navbar_a" href="admin.php">Admin</a></li>';
-        }
+            if(isset($_SESSION['u_id'])){
+                echo '<li class="navbar_li"><a class="navbar_a" href="admin.php">Admin</a></li>';
+            }
         ?>
     </ul>
 </div>
 
 
-
 <?php
 
 include '../action.php';
-
     
     $sql = "SELECT * FROM users";
     $result = mysqli_query($conn, $sql);
     $resultcheck = mysqli_num_rows($result);
 
-    echo '<div style="margin: 0 10%;">';
+    echo '<div style="margin: 0 10%; margin-bottom: 10px;">';
     echo '<table class="table table-fluid" id="myTable" >    
                     <thead>
                         <tr>
@@ -87,7 +83,10 @@ include '../action.php';
             $i++;
             echo  '<tr>                   
                         <td>'.$i.'</td>
-                        <td style="background-color: green;"><a style="color: black; text-decoration: none;" href=check_advertisement.php?user_id=' . $row['user_id'].'>'.$row['user_id'].'</a></td>
+                        <td style="background-color: green;">
+                            <a style="color: black; text-decoration: none;" href=check_advertisement.php?user_id=' . $row['user_id'].'>'.$row['user_id'].'
+                            </a>
+                        </td>
                         <td>'.$row['user_uid'].'</td>
                         <td>'.$row['user_first'].'</td>
                         <td>'.$row['user_last'].'</td>
@@ -98,11 +97,11 @@ include '../action.php';
 
         }
     }
+
     echo '</div>';
+?> 
 
-
-?><br>
-
+<br>
 
 </body>
 </html>

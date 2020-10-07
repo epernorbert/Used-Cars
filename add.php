@@ -1,41 +1,38 @@
 <?php
-
-session_start();
-if(!isset($_SESSION['u_uid'])){
-    header("Location: index.php?ERROR=need=to=login=user");
-    exit();
-} elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
-    header("Location: index.php?ERROR=you=are=admin");
-    exit();
-} elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer') {
-    header("Location: index.php?ERROR=you=are=writer");
-    exit();
-}
-
+    session_start();
+    if(!isset($_SESSION['u_uid'])){
+        header("Location: index.php?error=signup");
+        exit();
+    } elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='admin') {
+        header("Location: index.php?error=admin");
+        exit();
+    } elseif(isset($_SESSION['u_id']) && $_SESSION['u_usertype']=='writer') {
+        header("Location: index.php?error=writer");
+        exit();
+    }
 ?>
-
 
 <?php
-function load_brands(){
-    include 'action.php';
-    $output = '';
-    $sql = "SELECT * FROM car_brands ORDER BY brands_name";
-    $result = mysqli_query($conn, $sql);
-    while($row = mysqli_fetch_array($result)){
-        $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+    //Load car brands
+    function load_brands(){
+        include 'action.php';
+        $output = '';
+        $sql = "SELECT * FROM car_brands ORDER BY brands_name";
+        $result = mysqli_query($conn, $sql);
+        while($row = mysqli_fetch_array($result)){
+            $output .='<option value="'.$row['brands_id'].'">'.$row['brands_name'].'</option>';
+        }
+
+        return $output;
     }
-
-    return $output;
-}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Hírdetés feladása</title>
-    <link type="text/css" rel="stylesheet" href="add.css">
+    <link type="text/css" rel="stylesheet" href="css/add.css">
     <!-- social media buttons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <!-- Ez már nem tudom miért kell -->
@@ -46,31 +43,28 @@ function load_brands(){
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
     <!-- file upload text hide -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-
 </head>
-
 <body>
 
-
-<div style="position: relative; bottom: 23px;" > <img  style="float: left; display: inline-block; margin-top: 0; margin-left: 10%;" src="peugeot_208/logohd.jpg" height="75"> </div>
-<div style="position: relative; bottom: 23px;" class="navbar">
-    <ul class="navbar_ul">
-        <li class="navbar_li"><a class="navbar_a" href="index.php">Kezdőlap</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Keresés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Hírek</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="login.php">Bejelentkezés</a></li>
-        <li class="navbar_li"><a class="navbar_a" href="#">Kapcsolat</a></li>
+<div class="logo_div"> 
+    <img class="logo" src="peugeot_208/logohd.jpg" height="75"> 
+</div>
+<div class="navbar">
+    <ul>
+        <li><a href="index.php">Kezdőlap</a></li>
+        <li><a href="#">Keresés</a></li>
+        <li><a href="#">Hírek</a></li>
+        <li><a href="login.php">Bejelentkezés</a></li>
+        <li><a href="#">Kapcsolat</a></li>
         <?php
-        if(isset($_SESSION['u_id'])){
-            echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
-        }
+            if(isset($_SESSION['u_id'])){
+                echo '<li class="navbar_li"><a class="navbar_a" href="add.php">Hírdetés feladás</a></li>';
+            }
         ?>
     </ul>
 </div>
 
-
-
-<div style="position: absolute; left: 0px; top: 135px; z-index: -1; width: 100%; height: 300px; background-image: linear-gradient(to bottom, #113c7e, #0b3060, #0c2444, #0d1828, #04070d); "></div>
+<div class="background"></div>
 
 <div style="margin: 0 10% 0 10%">    
     <form action="includes/add.inc.php" method="post" enctype="multipart/form-data" name="vform" id="vform">
@@ -166,7 +160,6 @@ function load_brands(){
                     }               
                 });
                 
-
             </script>
 
             <div id="center" style="width: 25%"> 
@@ -181,7 +174,7 @@ function load_brands(){
                     <option value='euro 4'>Euro 4</option>
                     <option value='euro 5'>Euro 5</option>
                     <option value='euro 6'>Euro 6</option>
-                    </select><br>
+                </select><br>
                 <label class="star" for="colour" >*</label>
                 <select name='colour' id='colour'>
                     <option value=""  hidden="">Szín</option>
@@ -225,8 +218,10 @@ function load_brands(){
                 <div><input type="checkbox" name="chkl[ ]" value="Xenon fényszóró">Xenon fényszóró</div>
                 <div><input type="checkbox" name="chkl[ ]" value="Tolatóradar">Tolatóradar</div>
                 <div><input type="checkbox" name="chkl[ ]" value="Multifunkcionális kormány">Multifunkcionális kormány</div>
-                <div><input type="checkbox" name="chkl[ ]" value="Kartámasz">Kartámasz</div>
-                <div><div><button style=" font-size: 17px; margin: 20px 35px; cursor: pointer; width: 202px; height: 33px;" type="submit" name="submit" id="submit" value="upload">Feltölt</button><br></div>
+                <div><input type="checkbox" name="chkl[ ]" value="Kartámasz">Kartámasz</div>                
+                <div>
+                    <button class="upload" type="submit" name="submit" id="submit" value="upload">Feltölt</button><br>
+                </div>
             </div>
         </div>        
     </form>
@@ -237,7 +232,7 @@ function load_brands(){
 
 <script type="text/javascript">
 
-    //Imputs extensions
+    // imputs regex
 
     function year_input(){
         var year = document.getElementById("year").value;
@@ -328,312 +323,299 @@ function load_brands(){
         }
     }
     
+    $(function () {    
+
+        var error_brand = false;
+        var error_type = false;
+        var error_year = false;            
+        var error_price = false;
+        var error_fuel = false;             
+        var error_cm3 = false;            
+        var error_hp = false;   
+        var error_body_style = false;                              
+        var error_mileage = false;  
+        var error_euro = false;         
+        var error_colour = false;         
+        var error_transmission = false;          
+        var error_weight = false;            
+        var error_id_number = false;              
 
 
+        $("#brand").focusout(function() {
+            check_brand();
+        }); 
 
-    $(function () {
+        $("#type").focusout(function() {
+            check_type();
+        });        
 
-            //$("#error_year").hide();
+        $("#year").focusout(function() {
+            check_year();
+        });
 
-            var error_brand = false;
-            var error_type = false;
-            var error_year = false;            
-            var error_price = false;
-            var error_fuel = false;             
-            var error_cm3 = false;            
-            var error_hp = false;   
-            var error_body_style = false;                              
-            var error_mileage = false;  
-            var error_euro = false;         
-            var error_colour = false;         
-            var error_transmission = false;          
-            var error_weight = false;            
-            var error_id_number = false;              
+        $("#price").focusout(function() {
+            check_price();
+        });
 
+        $("#fuel").focusout(function() {
+            check_fuel();
+        });
 
-            $("#brand").focusout(function() {
-                check_brand();
-            }); 
+        $("#cm3").focusout(function() {
+            check_cm3();
+        });
 
-            $("#type").focusout(function() {
-                check_type();
-            });        
+        $("#hp").focusout(function() {
+            check_hp();
+        });
 
-            $("#year").focusout(function() {
-                check_year();
-            });
+        $("#body_style").focusout(function() {
+            check_body_style();
+        });
 
-            $("#price").focusout(function() {
-                check_price();
-            });
+        $("#mileage").focusout(function() {
+            check_mileage();
+        });
 
-            $("#fuel").focusout(function() {
-                check_fuel();
-            });
+        $("#euro").focusout(function() {
+            check_euro();
+        });
 
-            $("#cm3").focusout(function() {
-                check_cm3();
-            });
+        $("#colour").focusout(function() {
+            check_colour();
+        });
 
-            $("#hp").focusout(function() {
-                check_hp();
-            });
+        $("#transmission").focusout(function() {
+            check_transmission();
+        });            
 
-            $("#body_style").focusout(function() {
-                check_body_style();
-            });
+        $("#weight").focusout(function() {
+            check_weight();
+        });
 
-            $("#mileage").focusout(function() {
-                check_mileage();
-            });
-
-            $("#euro").focusout(function() {
-                check_euro();
-            });
-
-            $("#colour").focusout(function() {
-                check_colour();
-            });
-
-            $("#transmission").focusout(function() {
-                check_transmission();
-            });            
-
-            $("#weight").focusout(function() {
-                check_weight();
-            });
-
-            $("#id_number").focusout(function() {
-                check_id_number();
-            });        
+        $("#id_number").focusout(function() {
+            check_id_number();
+        });        
+    
         
+        function check_brand(){
+            var brand = $("#brand").val();
 
-            
-            function check_brand(){
-                var brand = $("#brand").val();
-
-                if(brand === ''){
-                    $("#brand").css("border-bottom","2px solid #F90A0A");
-                    error_brand = true;
-                } else {
-                    $("#brand").css("border-bottom","2px solid green");
-                    error_brand = false;
-                }
-            }
-
-            function check_type(){
-                var type = $("#type").val();
-
-                if(type === ''){
-                    $("#type").css("border-bottom","2px solid #F90A0A");
-                    error_type = true;
-                } else {
-                    $("#type").css("border-bottom","2px solid green");
-                    error_type = false;
-                }
-            }
-
-            function check_year() {
-                
-                var year = $("#year").val();
-                if(year === ''){
-                    $("#year").css("border-bottom","2px solid #F90A0A");
-                    error_year = true;
-                } else if(year < 1930 || year > new Date().getFullYear() ){
-                    alert("Helytelen évjárat!" + "\n(1930 - " + new Date().getFullYear() + ")");
-                    $("#year").css("border-bottom","2px solid #F90A0A");
-                    error_year = true;
-                } else {                    
-                    $("#year").css("border-bottom","2px solid green");
-                    error_year = false;
-                }
-            }
-
-            function check_price(){
-                var price = $("#price").val();
-
-                if(price === ''){
-                    $("#price").css("border-bottom","2px solid #F90A0A");
-                    error_price = true;
-                } else {
-                    $("#price").css("border-bottom","2px solid green");
-                    error_price = false;
-                }
-            }
-
-            function check_fuel(){
-                var fuel = $("#fuel").val();
-
-                if(fuel === ''){
-                    $("#fuel").css("border-bottom","2px solid #F90A0A");
-                    error_fuel = true;
-                } else {
-                    $("#fuel").css("border-bottom","2px solid green");
-                    error_fuel = false;
-                }
-
-            }
-
-            function check_cm3(){
-                var cm3 = $("#cm3").val();
-
-                if(cm3 === ''){
-                    $("#cm3").css("border-bottom","2px solid #F90A0A");
-                    error_cm3 = true;
-                } else {
-                    $("#cm3").css("border-bottom","2px solid green");
-                    error_cm3 = false;
-                }
-            }
-
-            function check_hp(){
-                var hp = $("#hp").val();
-
-                if(hp === ''){
-                    $("#hp").css("border-bottom","2px solid #F90A0A");
-                    error_hp = true;
-                } else {
-                    $("#hp").css("border-bottom","2px solid green");
-                    error_hp = false;
-                }
-            }
-
-            function check_body_style(){
-                var body_style = $("#body_style").val();
-
-                if(body_style === ''){
-                    $("#body_style").css("border-bottom","2px solid #F90A0A");
-                    error_body_style = true;
-                } else {
-                    $("#body_style").css("border-bottom","2px solid green");
-                    error_body_style = false;
-                }
-            }
-
-            function check_mileage(){
-                var mileage = $("#mileage").val();
-
-                if(mileage === ''){                    
-                    $("#mileage").css("border-bottom","2px solid #F90A0A");
-                    error_mileage = true;
-                } else {                    
-                    $("#mileage").css("border-bottom","2px solid green");
-                    error_mileage = false;
-                }
-            }
-
-            function check_euro(){
-                var euro = $("#euro").val();
-
-                if(euro === ''){
-                    $("#euro").css("border-bottom","2px solid #F90A0A");
-                    error_euro = true;
-                } else {
-                    $("#euro").css("border-bottom","2px solid green");
-                    error_euro = false;
-                }
-            }
-
-            function check_colour(){
-                var colour = $("#colour").val();
-
-                if(colour === ''){
-                    $("#colour").css("border-bottom","2px solid #F90A0A");
-                    error_colour = true;
-                } else {
-                    $("#colour").css("border-bottom","2px solid green");
-                    error_colour = false;
-                }
-            }
-
-            function check_transmission(){
-                var transmission = $("#transmission").val();
-
-                if(transmission === ''){
-                    $("#transmission").css("border-bottom","2px solid #F90A0A");
-                    error_transmission = true;
-                } else {
-                    $("#transmission").css("border-bottom","2px solid green");
-                    error_transmission = false;
-                }
-            }
-
-            function check_weight(){
-                var weight = $("#weight").val();
-
-                if(weight === ''){;
-                    $("#weight").css("border-bottom","2px solid #F90A0A");
-                    error_weight = true;
-                } else {                    
-                    $("#weight").css("border-bottom","2px solid green");
-                    error_weight = false;
-                }
-            }
-
-            function check_id_number(){
-                var id_number = $("#id_number").val();
-
-                if(id_number === ''){
-                    $("#id_number").css("border-bottom","");
-                } else if (id_number.length < 17) {
-                    alert("Helytelen alvázszám formátum!\n(17 karakter szükséges)")
-                    $("#id_number").css("border-bottom","2px solid #F90A0A");
-                    error_id_number = true;
-                } else {
-                    $("#id_number").css("border-bottom","2px solid green");
-                    error_id_number = false;
-                }
-            }
-
-            $("#vform").submit(function() {
-
+            if(brand === ''){
+                $("#brand").css("border-bottom","2px solid #F90A0A");
+                error_brand = true;
+            } else {
+                $("#brand").css("border-bottom","2px solid green");
                 error_brand = false;
+            }
+        }
+
+        function check_type(){
+            var type = $("#type").val();
+
+            if(type === ''){
+                $("#type").css("border-bottom","2px solid #F90A0A");
+                error_type = true;
+            } else {
+                $("#type").css("border-bottom","2px solid green");
                 error_type = false;
-                error_year = false;            
-                error_fuel = false;                             
-                error_body_style = false;                                                
-                error_euro = false;         
-                error_colour = false;         
-                error_transmission = false;                                  
-                error_id_number = false;
-                error_image === false;
+            }
+        }
 
-                check_brand();
-                check_type();
-                check_year();
-                check_price();
-                check_fuel();
-                check_cm3();
-                check_hp();
-                check_body_style();
-                check_mileage();
-                check_euro();
-                check_colour();
-                check_transmission();
-                check_weight();
-                check_id_number();
-                fileValidation();
+        function check_year() {
             
-                
-                if(error_brand === false && error_type === false && error_year === false && error_fuel === false && error_body_style === false && error_euro === false && error_colour === false && error_transmission === false && error_id_number === false && error_image === false && error_image_number === false && error_weight === false) {
-                    alert("A hírdetés feladása sikeres volt!")
-                    return true;
-                } else {
-                    alert("Kérem megfelelő adatokkal töltse ki a mezőket!");
-                    return false;
-                }
+            var year = $("#year").val();
+            if(year === ''){
+                $("#year").css("border-bottom","2px solid #F90A0A");
+                error_year = true;
+            } else if(year < 1930 || year > new Date().getFullYear() ){
+                alert("Helytelen évjárat!" + "\n(1930 - " + new Date().getFullYear() + ")");
+                $("#year").css("border-bottom","2px solid #F90A0A");
+                error_year = true;
+            } else {                    
+                $("#year").css("border-bottom","2px solid green");
+                error_year = false;
+            }
+        }
 
-            });
+        function check_price(){
+            var price = $("#price").val();
+
+            if(price === ''){
+                $("#price").css("border-bottom","2px solid #F90A0A");
+                error_price = true;
+            } else {
+                $("#price").css("border-bottom","2px solid green");
+                error_price = false;
+            }
+        }
+
+        function check_fuel(){
+            var fuel = $("#fuel").val();
+
+            if(fuel === ''){
+                $("#fuel").css("border-bottom","2px solid #F90A0A");
+                error_fuel = true;
+            } else {
+                $("#fuel").css("border-bottom","2px solid green");
+                error_fuel = false;
+            }
+
+        }
+
+        function check_cm3(){
+            var cm3 = $("#cm3").val();
+
+            if(cm3 === ''){
+                $("#cm3").css("border-bottom","2px solid #F90A0A");
+                error_cm3 = true;
+            } else {
+                $("#cm3").css("border-bottom","2px solid green");
+                error_cm3 = false;
+            }
+        }
+
+        function check_hp(){
+            var hp = $("#hp").val();
+
+            if(hp === ''){
+                $("#hp").css("border-bottom","2px solid #F90A0A");
+                error_hp = true;
+            } else {
+                $("#hp").css("border-bottom","2px solid green");
+                error_hp = false;
+            }
+        }
+
+        function check_body_style(){
+            var body_style = $("#body_style").val();
+
+            if(body_style === ''){
+                $("#body_style").css("border-bottom","2px solid #F90A0A");
+                error_body_style = true;
+            } else {
+                $("#body_style").css("border-bottom","2px solid green");
+                error_body_style = false;
+            }
+        }
+
+        function check_mileage(){
+            var mileage = $("#mileage").val();
+
+            if(mileage === ''){                    
+                $("#mileage").css("border-bottom","2px solid #F90A0A");
+                error_mileage = true;
+            } else {                    
+                $("#mileage").css("border-bottom","2px solid green");
+                error_mileage = false;
+            }
+        }
+
+        function check_euro(){
+            var euro = $("#euro").val();
+
+            if(euro === ''){
+                $("#euro").css("border-bottom","2px solid #F90A0A");
+                error_euro = true;
+            } else {
+                $("#euro").css("border-bottom","2px solid green");
+                error_euro = false;
+            }
+        }
+
+        function check_colour(){
+            var colour = $("#colour").val();
+
+            if(colour === ''){
+                $("#colour").css("border-bottom","2px solid #F90A0A");
+                error_colour = true;
+            } else {
+                $("#colour").css("border-bottom","2px solid green");
+                error_colour = false;
+            }
+        }
+
+        function check_transmission(){
+            var transmission = $("#transmission").val();
+
+            if(transmission === ''){
+                $("#transmission").css("border-bottom","2px solid #F90A0A");
+                error_transmission = true;
+            } else {
+                $("#transmission").css("border-bottom","2px solid green");
+                error_transmission = false;
+            }
+        }
+
+        function check_weight(){
+            var weight = $("#weight").val();
+
+            if(weight === ''){;
+                $("#weight").css("border-bottom","2px solid #F90A0A");
+                error_weight = true;
+            } else {                    
+                $("#weight").css("border-bottom","2px solid green");
+                error_weight = false;
+            }
+        }
+
+        function check_id_number(){
+            var id_number = $("#id_number").val();
+
+            if(id_number === ''){
+                $("#id_number").css("border-bottom","");
+            } else if (id_number.length < 17) {
+                alert("Helytelen alvázszám formátum!\n(17 karakter szükséges)")
+                $("#id_number").css("border-bottom","2px solid #F90A0A");
+                error_id_number = true;
+            } else {
+                $("#id_number").css("border-bottom","2px solid green");
+                error_id_number = false;
+            }
+        }
+
+        $("#vform").submit(function() {
+
+            error_brand = false;
+            error_type = false;
+            error_year = false;            
+            error_fuel = false;                             
+            error_body_style = false;                                                
+            error_euro = false;         
+            error_colour = false;         
+            error_transmission = false;                                  
+            error_id_number = false;
+            error_image === false;
+
+            check_brand();
+            check_type();
+            check_year();
+            check_price();
+            check_fuel();
+            check_cm3();
+            check_hp();
+            check_body_style();
+            check_mileage();
+            check_euro();
+            check_colour();
+            check_transmission();
+            check_weight();
+            check_id_number();
+            fileValidation();            
+            
+            if(error_brand === false && error_type === false && error_year === false && error_fuel === false && error_body_style === false && error_euro === false && error_colour === false && error_transmission === false && error_id_number === false && error_image === false && error_image_number === false && error_weight === false) {
+                alert("A hírdetés feladása sikeres volt!")
+                return true;
+            } else {
+                alert("Kérem megfelelő adatokkal töltse ki a mezőket!");
+                return false;
+            }
 
         });
 
-
-
-
+    });
 
 </script>
-
-
 
 <script>
     $(document).ready(function(){

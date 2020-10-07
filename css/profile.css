@@ -1,0 +1,197 @@
+body {
+    margin: 0;
+    background-color: white;    
+}
+
+.logo{
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
+.navbar{
+    box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
+    background: #565057;
+    padding: 0;
+    float: left;
+    margin: 2% 0 3% 0;
+    width: 61%;
+}
+
+.navbar li{
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar a:hover a:focus a:active{
+    color: #999;
+    text-decoration: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+.navbar a::before {
+    content: '';
+    display: block;
+    position: absolute;
+    bottom: 3px;
+    left: 0;
+    height: 3px;
+    width: 100%;
+    background-color: blue;
+    transform-origin: right top;
+    transform: scale(0, 1);
+    transition: color 0.1s,transform 0.2s ease-out;
+}
+
+.navbar a:active::before {
+    background-color: blue;
+}
+
+.navbar a:hover::before, .navbar_a:focus::before {
+    transform-origin: left top;
+    transform: scale(1, 1);
+}
+
+.fa{
+    height: 19px;
+    padding: 9px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
+}
+
+.echo div{
+    margin: 0 10%;    
+}
+
+.personal_data{
+    background-color: grey; 
+    display: inline-block; 
+    font-size: 24px; 
+    padding: 3px; 
+}
+
+.personal_data_echo{
+    border-top: 2px solid grey; 
+    margin: 0 0 0 10%; 
+    padding: 0; 
+    float: left; 
+    font-size: 20px;
+}
+
+input{
+    margin-bottom: 4px;
+}
+
+table.car_data tr:nth-child(even) {
+    background-color: #f2f2f2;
+    line-height: 32px;
+}
+
+.car_update input{
+    height: 24px;
+    margin-bottom: 2px;
+    width: 95%;
+}
+
+.car_update select{
+    height: 26px;
+    margin-bottom: 3px;
+    width: 100%;
+}
+
+textarea {
+    margin-top: 20px;
+    width: 170px;
+    height: 140px;
+    resize: none;
+}
+
+.personal_data_update input , select {
+    height: 18px;
+    margin: 0;
+    margin-top: 2px;
+}
+
+.personal_data_update  select {
+    height: 24px;
+    margin: 0;
+    margin-top: 2px;
+    margin-bottom: 6px;
+}
+
+.advertisement{
+    background-color: grey; 
+    display: inline-block; 
+    font-size: 24px; 
+    padding: 3px; 
+    margin: 0 10%;
+}
+
+.car_data_div{
+    clear: both; 
+    float: left; 
+    margin: 0 2% 0 10%; 
+    width: 35%; 
+    border-top: 2px solid grey; 
+    font-size: 20px;
+}
+
+.short_description{
+    background-color: grey; 
+    display: inline-block; 
+    font-size: 24px; 
+    padding: 3px; 
+}
+
+
+.short_description_div{
+    border-bottom: 2px solid grey; 
+    margin-top: 8px;
+}
+
+.cars_update_button{
+    height: 28px; 
+    font-size: 15px; 
+    width: 100px; 
+    cursor: pointer; 
+}
+
+.confirm_delete{
+    background-color: red; 
+    cursor: pointer; 
+    font-size: 15px; 
+    width: 130px; 
+    height: 28px;
+}
+
+.image{
+    margin-right: 10%;
+}
+
+.image div {
+    display: inline-block; 
+    margin: 0;
+}
+
+.image img{
+    margin-right:10px; 
+    margin-bottom: 7px; 
+    display: block; 
+    object-fit: cover;/* nagyítás, egyforma képek */ 
+    width: 180px; 
+    height: 110px;
+}

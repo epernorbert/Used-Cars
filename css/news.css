@@ -3,6 +3,13 @@ body {
     background-color: white;
 }
 
+.logo{
+    float: left;
+    display: inline-block;
+    margin-top: 2%;
+    margin-left: 10%;
+}
+
 .navbar{
     box-shadow: 14px 14px 36px -10px rgba(0,0,0,0.75);
     background: #565057;
@@ -10,29 +17,21 @@ body {
     float: left;
     margin: 2% 0 3% 0;
     width: 61%;
-    font-family: "Times New Roman", Times, serif;
-    height: 75px;
 }
 
-.navbar_ol .navbar_ul {
-    list-style: none;
-}
-
-.navbar_li {
+.navbar li{
     display: inline-block;
     padding: 0;
     vertical-align: middle;
 }
 
-.navbar_a:hover .navbar_a:focus .navvar_a:active {
+.navbar a:hover a:focus a:active{
     color: #999;
+    text-decoration: none;
 }
 
-.navbar_a {
-    transition: color 0.1s, background-color 0.1s;
-}
-
-.navbar_a {
+.navbar a {
+    text-decoration: none;
     position: relative;
     display: block;
     padding: 10px 5px;
@@ -42,7 +41,7 @@ body {
     color: white;
 }
 
-.navbar_a::before {
+.navbar a::before {
     content: '';
     display: block;
     position: absolute;
@@ -50,39 +49,38 @@ body {
     left: 0;
     height: 3px;
     width: 100%;
-    background-color: blue;    
+    background-color: blue;
     transform-origin: right top;
     transform: scale(0, 1);
     transition: color 0.1s,transform 0.2s ease-out;
 }
 
-.navbar_a:active::before {
+.navbar a:active::before {
     background-color: blue;
-    text-decoration: none;
 }
 
-.navbar_a:hover::before, .navbar_a:focus::before {
+.navbar a:hover::before, .navbar_a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
+}
+
+.fa{
+    height: 19px;
+    padding: 9px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
     text-decoration: none;
 }
 
-a:hover {
-  text-decoration: none;
-  color: white;
+.news_display{
+    margin: 0 10% 0 10%; 
+    clear: both;
 }
 
-.navbar_a {
-  color: white;
-  text-decoration: inherit;
-}
-
-.navbar_a:link {
-  color: white;
-  text-decoration: inherit;
-}
-
-.navbar_a:hover {
-  color: white;
-  text-decoration: inherit;
+.news_display div{
+    background-color: #0900ad; 
+    font-size: 30px; 
+    padding: 9px; 
+    color: white;
 }

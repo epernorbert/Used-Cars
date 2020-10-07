@@ -3,34 +3,11 @@ body {
     background-color: white;
 }
 
-.navbar_a {
-    position: relative;
-    display: block;
-    padding: 10px 5px;
-    margin: 0 15px;
-    font-size: 20px;
-    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
-    color: white;
-}
-
-.navbar_ol .navbar_ul {
-    list-style: none;
-}
-
-.navbar_li {
+.logo{
+    float: left;
     display: inline-block;
-    padding: 0;
-    vertical-align: middle;
-}
-
-.navbar_a:hover .navbar_a:focus .navvar_a:active {
-    color: #999;
-    text-decoration: none;
-}
-
-.navbar_a {
-    text-decoration: none;
-    transition: color 0.1s, background-color 0.1s;
+    margin-top: 2%;
+    margin-left: 10%;
 }
 
 .navbar{
@@ -44,7 +21,29 @@ body {
     height: 75px;
 }
 
-.navbar_a::before {
+.navbar li{
+    display: inline-block;
+    padding: 0;
+    vertical-align: middle;
+}
+
+.navbar a:hover a:focus a:active{
+    color: #999;
+    text-decoration: none;
+}
+
+.navbar a {
+    text-decoration: none;
+    position: relative;
+    display: block;
+    padding: 10px 5px;
+    margin: 0 15px;
+    font-size: 20px;
+    transition: color 0.1s,background-color 0.1s,padding 0.2s ease-in;
+    color: white;
+}
+
+.navbar a::before {
     content: '';
     display: block;
     position: absolute;
@@ -58,13 +57,22 @@ body {
     transition: color 0.1s,transform 0.2s ease-out;
 }
 
-.navbar_a:active::before {
+.navbar a:active::before {
     background-color: blue;
 }
 
-.navbar_a:hover::before, .navbar_a:focus::before {
+.navbar a:hover::before, .navbar_a:focus::before {
     transform-origin: left top;
     transform: scale(1, 1);
+}
+
+.fa{
+    height: 19px;
+    padding: 9px;
+    font-size: 20px;
+    width: 30px;
+    text-align: center;
+    text-decoration: none;
 }
 
 table tr:nth-child(even) {
